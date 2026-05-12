@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lake Bob Sandlin — Trip Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --khaki:     #C8A96E;
+    --tan:       #E8D5A3;
+    --parchment: #F5EDD6;
+    --paper:     #FBF6E9;
+    --forest:    #2C4A1E;
+    --pine:      #3D6B2C;
+    --bark:      #5C3D1E;
+    --rust:      #8B3A0F;
+    --gold:      #B8860B;
+    --ink:       #1A1208;
+    --smoke:     #6B5A3E;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--forest);
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(0,0,0,0.03) 40px, rgba(0,0,0,0.03) 41px),
+      repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(0,0,0,0.02) 40px, rgba(0,0,0,0.02) 41px);
+    min-height: 100vh;
+    padding: 32px 16px 64px;
+    font-family: 'Libre Baskerville', serif;
+  }
+
+  /* OUTER BORDER FRAME */
+  .frame {
+    max-width: 720px;
+    margin: 0 auto;
+    border: 4px solid var(--khaki);
+    outline: 1px solid var(--gold);
+    outline-offset: -8px;
+    background: var(--paper);
+    position: relative;
+    box-shadow: 0 8px 48px rgba(0,0,0,0.6), inset 0 0 60px rgba(200,169,110,0.08);
+  }
+
+  /* Corner decorations */
+  .frame::before, .frame::after {
+    content: '✦';
+    position: absolute;
+    font-size: 18px;
+    color: var(--khaki);
+    z-index: 10;
+  }
+  .frame::before { top: 10px; left: 10px; }
+  .frame::after  { bottom: 10px; right: 10px; }
+
+  .corner-tl, .corner-br {
+    position: absolute;
+    font-size: 18px;
+    color: var(--khaki);
+    z-index: 10;
+  }
+  .corner-tl { top: 10px; right: 10px; }
+  .corner-br { bottom: 10px; left: 10px; }
+
+  .inner {
+    padding: 48px 48px 56px;
+  }
+
+  /* HEADER */
+  .badge-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  .badge {
+    width: 90px;
+    height: 90px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 8px;
+    padding-bottom: 24px;
+    border-bottom: 2px solid var(--khaki);
+    position: relative;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 1px;
+    background: var(--khaki);
+    opacity: 0.5;
+  }
+
+  .troop-label {
+    font-family: 'Special Elite', cursive;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 10px;
+  }
+
+  header h1 {
+    font-family: 'Rye', cursive;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    color: var(--forest);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  header h1 span {
+    color: var(--rust);
+  }
+
+  .header-sub {
+    font-family: 'Special Elite', cursive;
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: var(--smoke);
+    margin-bottom: 14px;
+  }
+
+  .header-badges {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+
+  .info-pill {
+    font-family: 'Special Elite', cursive;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--forest);
+    background: var(--tan);
+    border: 1px solid var(--khaki);
+    padding: 4px 12px;
+    border-radius: 2px;
+  }
+
+  /* SECTION HEADERS */
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 36px 0 16px;
+  }
+
+  .section-head::before, .section-head::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--khaki);
+    opacity: 0.6;
+  }
+
+  .section-label {
+    font-family: 'Special Elite', cursive;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--rust);
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* DAY BLOCKS */
+  .day-block {
+    margin-bottom: 8px;
+  }
+
+  .day-header {
+    font-family: 'Rye', cursive;
+    font-size: 1.15rem;
+    color: var(--forest);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .day-header::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--khaki);
+    opacity: 0.4;
+  }
+
+  /* MEAL CARDS */
+  .meal-card {
+    background: var(--parchment);
+    border: 1px solid var(--khaki);
+    border-left: 4px solid var(--forest);
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    position: relative;
+  }
+
+  .meal-card.restaurant {
+    border-left-color: var(--smoke);
+    background: var(--paper);
+    opacity: 0.85;
+  }
+
+  .meal-card.showcase {
+    border-left-color: var(--rust);
+    background: #FDF3E3;
+  }
+
+  .meal-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+
+  .meal-type-tag {
+    font-family: 'Special Elite', cursive;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: var(--forest);
+    padding: 3px 8px;
+    flex-shrink: 0;
+  }
+
+  .meal-type-tag.rest { background: var(--smoke); }
+  .meal-type-tag.show { background: var(--rust); }
+  .meal-type-tag.des  { background: var(--bark); }
+  .meal-type-tag.quick { background: var(--pine); }
+
+  .meal-name {
+    font-family: 'Rye', cursive;
+    font-size: 1.05rem;
+    color: var(--ink);
+    line-height: 1.25;
+    margin-bottom: 4px;
+  }
+
+  .meal-tagline {
+    font-family: 'Special Elite', cursive;
+    font-size: 10px;
+    color: var(--smoke);
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+  }
+
+  .meal-body {
+    font-size: 0.84rem;
+    line-height: 1.75;
+    color: var(--ink);
+  }
+
+  .meal-body p { margin-bottom: 10px; }
+  .meal-body p:last-child { margin-bottom: 0; }
+
+  /* COOK STEPS */
+  .cook-label {
+    font-family: 'Special Elite', cursive;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 8px;
+    margin-top: 10px;
+  }
+
+  .cook-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+
+  .cook-step {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 10px;
+    align-items: start;
+  }
+
+  .step-num {
+    font-family: 'Special Elite', cursive;
+    font-size: 10px;
+    color: var(--paper);
+    background: var(--forest);
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .step-txt {
+    font-size: 0.83rem;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* STOVE GRID */
+  .stove-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin: 10px 0;
+  }
+
+  .stove-card {
+    background: rgba(44,74,30,0.07);
+    border: 1px solid var(--khaki);
+    padding: 10px 12px;
+  }
+
+  .stove-card-label {
+    font-family: 'Special Elite', cursive;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 5px;
+  }
+
+  .stove-card p {
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: var(--smoke);
+  }
+
+  /* SPICE NOTE */
+  .spice-note {
+    background: rgba(139,58,15,0.06);
+    border: 1px solid rgba(139,58,15,0.25);
+    padding: 8px 12px;
+    margin-top: 10px;
+    font-size: 0.78rem;
+    color: var(--smoke);
+    line-height: 1.5;
+  }
+
+  .spice-note strong {
+    color: var(--rust);
+    font-family: 'Special Elite', cursive;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* FOOTER */
+  footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--khaki);
+    text-align: center;
+  }
+
+  .footer-motto {
+    font-family: 'Rye', cursive;
+    font-size: 1rem;
+    color: var(--forest);
+    margin-bottom: 4px;
+  }
+
+  .footer-sub {
+    font-family: 'Special Elite', cursive;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--smoke);
+  }
+
+  /* KNOT DIVIDER */
+  .knot-divider {
+    text-align: center;
+    font-size: 18px;
+    color: var(--khaki);
+    margin: 4px 0 0;
+    letter-spacing: 6px;
+  }
+
+  @media (max-width: 560px) {
+    .inner { padding: 28px 20px 36px; }
+    .stove-row { grid-template-columns: 1fr; }
+    header h1 { font-size: 1.7rem; }
+  }
+</style>
+</head>
+<body>
+<div class="frame">
+  <span class="corner-tl">✦</span>
+  <span class="corner-br">✦</span>
+
+  <div class="inner">
+
+    <!-- HEADER -->
+    <div class="badge-row">
+      <!-- SVG Scout-style badge -->
+      <svg class="badge" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="45,5 55,30 82,30 60,47 68,75 45,58 22,75 30,47 8,30 35,30" fill="#2C4A1E" stroke="#C8A96E" stroke-width="2"/>
+        <polygon points="45,14 52,32 72,32 56,44 62,65 45,53 28,65 34,44 18,32 38,32" fill="none" stroke="#C8A96E" stroke-width="1" opacity="0.5"/>
+        <text x="45" y="40" text-anchor="middle" font-family="serif" font-size="18" fill="#C8A96E">⛺</text>
+        <text x="45" y="56" text-anchor="middle" font-family="serif" font-size="7" fill="#E8D5A3" letter-spacing="1">BE PREPARED</text>
+      </svg>
+    </div>
+
+    <header>
+      <div class="troop-label">⬥ Official Trip Document ⬥</div>
+      <h1>Lake Bob <span>Sandlin</span></h1>
+      <div class="header-sub">Backpacking Adventure · Titus County, Texas</div>
+      <div class="knot-divider">— ✦ —</div>
+      <div class="header-badges">
+        <span class="info-pill">Feeding 6 People</span>
+        <span class="info-pill">Friday–Sunday</span>
+        <span class="info-pill">3 Backpacking Stoves</span>
+      </div>
+    </header>
+
+    <!-- FRIDAY -->
+    <div class="section-head">
+      <span class="section-label">🌲 Friday — Travel Day</span>
+    </div>
+
+    <div class="day-block">
+      <div class="meal-card restaurant">
+        <div class="meal-top">
+          <span class="meal-type-tag rest">Dinner</span>
+        </div>
+        <div class="meal-name">On the Road</div>
+        <div class="meal-tagline">Restaurant or gas station on the drive out</div>
+        <div class="meal-body">
+          <p>Fuel up before hitting the trail. Find a diner, BBQ joint, or roadside stop en route to Titus County. Tonight's job is simple: arrive, hike in (~1 mile), and set up camp before dark.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SATURDAY -->
+    <div class="section-head">
+      <span class="section-label">☀️ Saturday — Full Day at Camp</span>
+    </div>
+
+    <div class="day-block">
+
+      <!-- SAT BREAKFAST -->
+      <div class="meal-card">
+        <div class="meal-top">
+          <span class="meal-type-tag">Breakfast</span>
+        </div>
+        <div class="meal-name">Cinnamon Apple Porridge</div>
+        <div class="meal-tagline">Warm apple crisp in a camp bowl · One pot per 2 people</div>
+        <div class="meal-body">
+          <p>Rich oats simmered with canned apple pie filling until thick and fragrant. Topped by each person to their liking — granola for crunch, honey and coconut milk for richness. Smells like a bakery in the middle of the woods.</p>
+
+          <div class="cook-label">🔥 How to Cook</div>
+          <div class="cook-steps">
+            <div class="cook-step">
+              <div class="step-num">1</div>
+              <div class="step-txt">Bring water to boil across all 3 stoves. Use one pot per 2 people. Add ½ cup dry quick oats per person and stir.</div>
+            </div>
+            <div class="cook-step">
+              <div class="step-num">2</div>
+              <div class="step-txt">Stir in a generous spoonful of canned apple pie filling per serving plus a pinch of cinnamon. Simmer 2 minutes until thick and glossy.</div>
+            </div>
+            <div class="cook-step">
+              <div class="step-num">3</div>
+              <div class="step-txt">Spoon into bowls. Set out the toppings bar — everyone builds their own bowl.</div>
+            </div>
+          </div>
+
+          <div class="spice-note">
+            <strong>🌶 Spice Dial —</strong> Everything is mild as cooked. Toppings bar: granola, brown sugar, honey, coconut milk drizzle, cinnamon, dried mango strips. All optional, all on the side.
+          </div>
+        </div>
+      </div>
+
+      <!-- SAT LUNCH -->
+      <div class="meal-card">
+        <div class="meal-top">
+          <span class="meal-type-tag">Trail Lunch</span>
+        </div>
+        <div class="meal-name">Italian Wilderness Charcuterie Flatbreads</div>
+        <div class="meal-tagline">No cooking · Packed in zip bags · Eaten on the hike</div>
+        <div class="meal-body">
+          <p>A proper Italian charcuterie spread assembled on a rock mid-trail. Each person packs their own zip bag before heading out. Looks like something from a wine bar. Takes 3 minutes to pack.</p>
+
+          <div class="cook-label">📦 How to Pack & Assemble</div>
+          <div class="cook-steps">
+            <div class="cook-step">
+              <div class="step-num">1</div>
+              <div class="step-txt">Before leaving camp, divide into 5 individual zip bags: a handful of Triscuits, several salami slices, shards of aged gouda, a few sun-dried tomato strips, and 1 tsp of olive tapenade in a small container.</div>
+            </div>
+            <div class="cook-step">
+              <div class="step-num">2</div>
+              <div class="step-txt">On the trail: Triscuit → smear of tapenade → salami → gouda shard → sun-dried tomato. Eat immediately.</div>
+            </div>
+            <div class="cook-step">
+              <div class="step-num">3</div>
+              <div class="step-txt">Optional: drizzle of hot honey over everything. Changes the whole thing.</div>
+            </div>
+          </div>
+
+          <div class="spice-note">
+            <strong>🌶 Spice Dial —</strong> Base is completely mild. Hot honey is the only heat element and is fully optional. Pack it separately so each person decides.
+          </div>
+        </div>
+      </div>
+
+      <!-- SAT DINNER -->
+      <div class="meal-card showcase">
+        <div class="meal-top">
+          <span class="meal-type-tag show">★ Showcase Dinner</span>
+        </div>
+        <div class="meal-name">Thai Coconut Peanut Curry Noodle Bowls</div>
+        <div class="meal-tagline">With crispy caramelized chicken · All 3 stoves running · The main event</div>
+        <div class="meal-body">
+          <p>A rich, fragrant coconut peanut broth with crispy caramelized chicken over ramen noodles. The base is completely mild — the spice station lets each person finish their own bowl however they want. This is the meal everyone will be talking about on the drive home.</p>
+
+          <div class="cook-label">🔥 3-Stove Cook — Run Simultaneously</div>
+          <div class="stove-row">
+            <div class="stove-card">
+              <div class="stove-card-label">🔥 Stove 1 — Broth</div>
+              <p>2 cans coconut milk + 3 tbsp peanut butter + 2 tbsp soy sauce + 1 tbsp brown sugar + 1 tsp garlic powder + juice of 2 limes. Whisk over medium heat until smooth and simmering. No chili in the base.</p>
+            </div>
+            <div class="stove-card">
+              <div class="stove-card-label">🔥 Stove 2 — Noodles</div>
+              <p>Boil ramen noodle bricks in water (discard seasoning packets). Drain. Toss with a few drops of soy sauce and sesame oil to prevent sticking. Hold warm.</p>
+            </div>
+            <div class="stove-card">
+              <div class="stove-card-label">🔥 Stove 3 — Chicken</div>
+              <p>Drain canned chicken. Press into hot oiled pan — don't touch for 3–4 min to form a crust. Flip. Finish with garlic powder + soy + honey glaze. No chili in the cook.</p>
+            </div>
+          </div>
+
+          <div class="cook-label">🥣 Build the Bowl</div>
+          <p style="font-size:0.83rem; color:var(--smoke); line-height:1.7;">Noodles → ladle of coconut peanut broth → crispy chicken crumbled over top → crushed peanuts → green onions → squeeze of lime. Then hit the spice station.</p>
+
+          <div class="spice-note">
+            <strong>🌶 Spice Station — Each Person Finishes Their Own Bowl</strong><br>
+            Chili crisp (Lao Gan Ma) · Sriracha · Extra lime wedges · Extra soy sauce<br>
+            <em style="font-size:0.76rem;">Mild bowl = rich creamy peanut comfort. Full heat bowl = complex Thai curry energy. Same pot of broth for everyone.</em>
+          </div>
+        </div>
+      </div>
+
+      <!-- DESSERT -->
+      <div class="meal-card">
+        <div class="meal-top">
+          <span class="meal-type-tag des">Dessert</span>
+        </div>
+        <div class="meal-name">Nutella Banana Boats</div>
+        <div class="meal-tagline">Foil-steamed molten banana pudding · No dishes</div>
+        <div class="meal-body">
+          <div class="cook-steps">
+            <div class="cook-step">
+              <div class="step-num">1</div>
+              <div class="step-txt">Slice each banana lengthwise through the peel — don't remove the skin.</div>
+            </div>
+            <div class="cook-step">
+              <div class="step-num">2</div>
+              <div class="step-txt">Stuff the slit with Nutella and a generous pinch of mini marshmallows.</div>
+            </div>
+            <div class="cook-step">
+              <div class="step-num">3</div>
+              <div class="step-txt">Wrap tightly in foil. Set on a hot pan for 5 minutes. The banana steams into molten pudding inside the foil. Eat with a spoon, straight from the packet.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SUNDAY -->
+    <div class="section-head">
+      <span class="section-label">🌅 Sunday — Pack Up & Head Home</span>
+    </div>
+
+    <div class="day-block">
+
+      <!-- SUN BREAKFAST -->
+      <div class="meal-card">
+        <div class="meal-top">
+          <span class="meal-type-tag quick">Quick Breakfast</span>
+        </div>
+        <div class="meal-name">Everything Bagel Salami Stacks</div>
+        <div class="meal-tagline">No stoves · No cleanup · Boots already on</div>
+        <div class="meal-body">
+          <p>Zero cooking. Camp is being broken down while everyone eats. Everything packs out in the bags it came in. Done in 10 minutes.</p>
+
+          <div class="cook-steps" style="margin-top:10px;">
+            <div class="cook-step">
+              <div class="step-num">1</div>
+              <div class="step-txt">Mini bagel or Triscuit → squeeze of cream cheese packet → fold of hard salami.</div>
+            </div>
+            <div class="cook-step">
+              <div class="step-num">2</div>
+              <div class="step-txt">Shake everything bagel seasoning over the top. Add a slice of cucumber.</div>
+            </div>
+            <div class="cook-step">
+              <div class="step-num">3</div>
+              <div class="step-txt">Optional hot honey drizzle. Eat standing. Hike out.</div>
+            </div>
+          </div>
+
+          <div class="spice-note">
+            <strong>🌶 Spice Dial —</strong> Hot honey is the only heat. Base is 100% mild. Fully optional.
+          </div>
+        </div>
+      </div>
+
+      <!-- SUN LUNCH -->
+      <div class="meal-card restaurant">
+        <div class="meal-top">
+          <span class="meal-type-tag rest">Lunch</span>
+        </div>
+        <div class="meal-name">On the Road Home</div>
+        <div class="meal-tagline">Restaurant or gas station on the drive back</div>
+        <div class="meal-body">
+          <p>Hike out (~1 mile), load up, and find a burger, taco, or diner stop on the way home. You've earned it.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="knot-divider" style="margin-bottom:16px;">— ✦ —</div>
+      <div class="footer-motto">Be Prepared · Leave No Trace</div>
+      <div class="footer-sub" style="margin-top:6px;">Lake Bob Sandlin · Titus County, TX · All ingredients shelf-stable · No ice required · 6 People</div>
+    </footer>
+
+  </div>
+</div>
+</body>
+</html>
