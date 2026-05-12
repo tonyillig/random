@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeLuca Family Reunion — Big Bear Lake, July 24–27, 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; background: #f5f4f0; color: #1a1a1a; font-size: 16px; line-height: 1.6; }
+
+  .hero { background: #1a3a2a; color: white; padding: 2.5rem 1.5rem 2rem; text-align: center; }
+  .hero h1 { font-size: 1.75rem; font-weight: 600; margin-bottom: 0.4rem; }
+  .hero .sub { font-size: 1rem; color: #a8c5b0; margin-bottom: 1.2rem; }
+  .hero-pills { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .pill { background: rgba(255,255,255,0.12); color: #d4ead9; font-size: 0.78rem; padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); }
+
+  .container { max-width: 680px; margin: 0 auto; padding: 1.25rem 1rem 3rem; }
+
+  .budget-bar { background: white; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; border: 1px solid #e0ddd5; display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+  .budget-item { font-size: 0.82rem; color: #555; }
+  .budget-item strong { color: #1a1a1a; }
+
+  .day-card { background: white; border-radius: 14px; border: 1px solid #e0ddd5; margin-bottom: 1.25rem; overflow: hidden; }
+  .day-header { padding: 1rem 1.25rem 0.75rem; border-bottom: 1px solid #f0ede5; }
+  .day-label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #888; margin-bottom: 2px; }
+  .day-title { font-size: 1.2rem; font-weight: 600; color: #1a1a1a; }
+  .day-theme { font-size: 0.85rem; color: #666; margin-top: 2px; }
+
+  .slot { display: flex; gap: 14px; padding: 0.9rem 1.25rem; border-bottom: 1px solid #f5f3ef; align-items: flex-start; }
+  .slot:last-child { border-bottom: none; }
+  .slot-time { font-size: 0.75rem; color: #999; min-width: 54px; padding-top: 3px; white-space: nowrap; }
+  .slot-body { flex: 1; }
+  .slot-title { font-size: 0.95rem; font-weight: 600; color: #1a1a1a; margin-bottom: 3px; }
+  .slot-desc { font-size: 0.85rem; color: #555; line-height: 1.55; }
+  .slot-cost { display: inline-block; font-size: 0.75rem; color: #3a6e4a; background: #eaf3de; border-radius: 20px; padding: 2px 10px; margin-top: 6px; }
+
+  .option-set { margin-top: 0.75rem; }
+  .option { background: #f9f8f5; border: 1px solid #e8e5de; border-radius: 10px; padding: 0.75rem 1rem; margin-bottom: 0.5rem; }
+  .option-label { font-size: 0.8rem; font-weight: 600; margin-bottom: 6px; }
+  .option-label.rec { color: #185fa5; }
+  .option-label.alt { color: #854f0b; }
+  .option-label.trackA { color: #993c1d; }
+  .option-label.trackB { color: #185fa5; }
+  .pros-cons { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .pros, .cons { flex: 1; min-width: 120px; }
+  .pc-head { font-size: 0.72rem; font-weight: 600; color: #888; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .pc-item { font-size: 0.8rem; color: #555; line-height: 1.5; padding-left: 14px; position: relative; }
+  .pc-item::before { position: absolute; left: 0; font-weight: 700; }
+  .pros .pc-item::before { content: '+'; color: #3a6e4a; }
+  .cons .pc-item::before { content: '–'; color: #993c1d; }
+  .option-cost { font-size: 0.75rem; color: #666; margin-top: 6px; }
+
+  .tag { display: inline-block; font-size: 0.72rem; padding: 2px 8px; border-radius: 20px; margin-right: 4px; margin-bottom: 2px; }
+  .tag-green { background: #eaf3de; color: #3b6d11; }
+  .tag-blue { background: #e6f1fb; color: #185fa5; }
+  .tag-amber { background: #faeeda; color: #854f0b; }
+  .tag-red { background: #fbeaf0; color: #993556; }
+
+  .alert { background: #faeeda; border-left: 3px solid #ef9f27; border-radius: 0 8px 8px 0; padding: 0.6rem 0.9rem; margin-top: 8px; font-size: 0.8rem; color: #633806; line-height: 1.5; }
+
+  .summary-card { background: #1a3a2a; color: white; border-radius: 14px; padding: 1.25rem 1.5rem; margin-top: 1.5rem; }
+  .summary-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.75rem; color: #d4ead9; }
+  .cost-row { display: flex; justify-content: space-between; font-size: 0.85rem; padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.08); color: #c0d9c6; }
+  .cost-row:last-child { border-bottom: none; }
+  .cost-row.total { font-weight: 600; color: white; font-size: 0.95rem; padding-top: 10px; margin-top: 4px; border-top: 1px solid rgba(255,255,255,0.2); border-bottom: none; }
+  .cost-row .label { color: #a8c5b0; }
+
+  .contacts { background: white; border-radius: 12px; border: 1px solid #e0ddd5; padding: 1rem 1.25rem; margin-top: 1rem; }
+  .contacts h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.75rem; color: #1a1a1a; }
+  .contact-item { font-size: 0.82rem; color: #555; padding: 4px 0; border-bottom: 1px solid #f5f3ef; }
+  .contact-item:last-child { border-bottom: none; }
+  .contact-item a { color: #185fa5; text-decoration: none; }
+
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 1.4rem; }
+    .slot { gap: 10px; }
+    .slot-time { min-width: 46px; }
+    .pros-cons { flex-direction: column; gap: 0.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>🏔 DeLuca Family Reunion</h1>
+  <div class="sub">Big Bear Lake, CA &nbsp;·&nbsp; July 24–27, 2026 &nbsp;·&nbsp; 29 people &nbsp;·&nbsp; 3 cabins</div>
+  <div class="hero-pills">
+    <span class="pill">✅ ADA accessible options noted</span>
+    <span class="pill">🍽️ dietary needs considered</span>
+    <span class="pill">👴👧👶 all 3 generations (Boomers · Gen X &amp; Millennials · Gen Z &amp; Alpha)</span>
+    <span class="pill">👨‍🍳 family cooking nights</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="budget-bar">
+    <div class="budget-item">💰 Budget: <strong>~$100/person/day</strong></div>
+    <div class="budget-item">🚗 Vehicles: <strong>6–8</strong></div>
+    <div class="budget-item">🏠 Cabins: <strong>3 (walkable)</strong></div>
+    <div class="budget-item">👥 Adults: <strong>19</strong> &nbsp; Gen Z: <strong>6</strong> &nbsp; Kids 6–12: <strong>2</strong> &nbsp; Toddlers &amp; Babies: <strong>2</strong></div>
+  </div>
+
+  <!-- CABINS -->
+  <div class="day-card" style="border-left: 3px solid #1a3a2a;">
+    <div class="day-header" style="background: #f2f7f4;">
+      <div class="day-label" style="color: #1a3a2a;">🏠 Our Cabins</div>
+      <div class="day-title">Destination Big Bear Rentals</div>
+      <div class="day-theme">3 cabins · walkable to each other · check-in 4 PM Fri · check-out 10 AM Mon · all managed by Destination Big Bear</div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">Cabin 1</div>
+      <div class="slot-body">
+        <div class="slot-title">Geronimo Lodge &nbsp;·&nbsp; <span style="color:#888; font-weight:400;">5 adults · 2 Gen Z · 7 people</span></div>
+        <div class="slot-desc">3,700 sq ft luxury single-story cabin in Upper Moonridge. 5 bedrooms, sleeps 16. <strong>Outdoor:</strong> fully fenced yard, propane BBQ, picnic table, fire pit w/ 8 Adirondack chairs, hot tub, cornhole, ping pong — and a <strong>private pickleball court</strong> + putting green. <strong>Indoor:</strong> dining for 17 (table for 12 + table for 5), game room with pool table, movie theater room, gourmet kitchen with large island. ⭐ The pickleball court will keep teens busy all weekend.</div>
+        <div class="slot-cost"><a href="https://www.airbnb.com/rooms/17333334" style="color:#185fa5;">Airbnb listing</a> &nbsp;·&nbsp; <a href="https://www.destinationbigbear.com/Property_detail_v.aspx?propid=1195" style="color:#185fa5;">Destination Big Bear #1195</a></div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">Cabin 2</div>
+      <div class="slot-body">
+        <div class="slot-title">Snow House &nbsp;·&nbsp; <span style="color:#888; font-weight:400;">3 adults · 1 kid (6–12) · 4 people</span></div>
+        <div class="slot-desc">4-bedroom, 2.5-bath home in Bear Mountain neighborhood, sleeps 12. <strong>Outdoor:</strong> fully fenced half-acre backyard — great for toddlers and kids to run freely — plus back deck with hot tub, firepit, outdoor dining table for 8, and propane grill. <strong>Indoor:</strong> dining for 9 (table for 6 + breakfast bar for 3), wood stove fireplace, Pac-Man arcade table. ⭐ The half-acre fenced yard is perfect for the little ones.</div>
+        <div class="slot-cost"><a href="https://www.airbnb.com/rooms/746227645410044247" style="color:#185fa5;">Airbnb listing</a> &nbsp;·&nbsp; <a href="https://www.destinationbigbear.com/Property_detail_v.aspx?propid=2360" style="color:#185fa5;">Destination Big Bear #2360</a></div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">Cabin 3</div>
+      <div class="slot-body">
+        <div class="slot-title">Dreamwood Lodge &nbsp;·&nbsp; <span style="color:#888; font-weight:400;">10 adults · 4 Gen Z · 2 kids · 1 toddler · 1 baby · 18 people</span></div>
+        <div class="slot-desc">7-bedroom, 6.5-bath cabin near Bear Mountain, sleeps 16. <strong>Outdoor:</strong> furnished deck with mountain views, spacious yard for games &amp; gatherings, charcoal + propane grills, hot tub. <strong>Indoor:</strong> open-concept living with sunken lounge and wood-burning fireplace, upstairs game room with billiards, foosball &amp; poker tables, private movie theater room. ⭐ <strong>Primary hub for the big Italian dinner</strong> — two grills, a large yard, and a furnished deck make this the natural gathering spot for all 27.</div>
+        <div class="slot-cost"><a href="https://www.vrbo.com/786778" style="color:#185fa5;">VRBO listing</a> &nbsp;·&nbsp; <a href="https://www.destinationbigbear.com/Property_detail_v.aspx?propid=842" style="color:#185fa5;">Destination Big Bear #842</a></div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">Rental Co.</div>
+      <div class="slot-body">
+        <div class="slot-title">Destination Big Bear</div>
+        <div class="slot-desc">713 Stocker Rd, Big Bear Lake, CA 92315 · Office hours: Mon–Thu 8AM–8PM, Fri 8AM–10PM, Sat–Sun 8AM–8PM · Emergency maintenance available 24/7. Check in at their office with a matching ID — do not go directly to the cabin.</div>
+        <div class="slot-cost">📞 (909) 752-0234 · info@destinationbigbear.com · <a href="https://www.destinationbigbear.com" style="color:#185fa5;">destinationbigbear.com</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRIDAY -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-label">Friday · July 24</div>
+      <div class="day-title">Arrival Day</div>
+      <div class="day-theme">Settle in, reconnect, easy first dinner out</div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">3–5 PM</div>
+      <div class="slot-body">
+        <div class="slot-title">Check in &amp; unpack</div>
+        <div class="slot-desc">Arrive, claim beds, let the toddlers run. Have snacks and drinks ready at the hub cabin. This is the first time many of you have been together in a while — let the chaos and excitement happen naturally.</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">5–6 PM</div>
+      <div class="slot-body">
+        <div class="slot-title">Grocery run (small team, 2–3 people)</div>
+        <div class="slot-desc">Stock up for Saturday and Sunday cooking nights while everyone else relaxes. Get pastas, seafood, produce, sauces — the cooks should have a plan ready. Everyone else chills at the cabins and reconnects.</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">7–9 PM</div>
+      <div class="slot-body">
+        <div class="slot-title">🍝 Dinner out — De La Nonna's</div>
+        <div class="slot-desc">Waterfront Italian restaurant with a large deck, open until 10 PM. Great for a big group with a menu that works for everyone, and no one has to cook after a travel day. Call ahead to reserve for 29.</div>
+        <span class="tag tag-green">✅ ADA accessible</span>
+        <div class="slot-cost">~$40–55/adult with drinks · fits daily budget</div>
+        <div class="alert">📞 Call ahead to reserve for a large group. Ask about waterfront deck availability.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SATURDAY -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-label">Saturday · July 25</div>
+      <div class="day-title">On the Water</div>
+      <div class="day-theme">Optional morning walk · pontoon boats · pickleball or bowling · family pasta night</div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">8–10 AM</div>
+      <div class="slot-body">
+        <div class="slot-title">Breakfast at your cabin</div>
+        <div class="slot-desc">Everyone eats at their own cabin at their own pace. Stock up on your favorites the night before. Meet up for the marina by 10 AM.</div>
+        <div class="slot-cost">~$5–8/person (per-cabin groceries)</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">Optional</div>
+      <div class="slot-body">
+        <div class="slot-title">🚶 Alpine Pedal Path — if you're up early</div>
+        <div class="slot-desc">A free, fully paved 3.2-mile trail along the north shore of Big Bear Lake. Completely flat with stunning lake and mountain views. Great for an early morning walk before the boats — stroller and accessible friendly.</div>
+        <span class="tag tag-green">✅ ADA accessible · stroller friendly</span>
+        <span class="tag tag-blue">all ages · free</span>
+        <div class="slot-cost">Free · park at Stanfield Cutoff or Juniper Point</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">10 AM–2 PM</div>
+      <div class="slot-body">
+        <div class="slot-title">⛵ Big Bear Marina — Pontoon Boats</div>
+        <div class="slot-desc">Reserve 3 large pontoons (12 person max each) for the whole group on the lake. Flat, stable, and accessible for everyone — toddlers, grandparents, and all abilities. Teens and active adults can add wave runners on the side.</div>
+        <span class="tag tag-green">✅ ADA accessible</span>
+        <span class="tag tag-blue">all ages</span>
+        <div class="option-set">
+          <div class="option">
+            <div class="option-label rec">✅ Recommended — Half Day (4 hrs)</div>
+            <div class="pros-cons">
+              <div class="pros">
+                <div class="pc-head">Pros</div>
+                <div class="pc-item">Leaves afternoon free</div>
+                <div class="pc-item">Less tiring for Boomers &amp; toddlers</div>
+                <div class="pc-item">Lower cost, stays in budget</div>
+              </div>
+              <div class="cons">
+                <div class="pc-head">Cons</div>
+                <div class="pc-item">Feels short on a beautiful day</div>
+              </div>
+            </div>
+            <div class="option-cost">3 large pontoons × $330 + ~$45 fuel each = <strong>~$1,125 total · ~$42/person</strong></div>
+          </div>
+          <div class="option">
+            <div class="option-label alt">Full Day (8 hrs) — alternative</div>
+            <div class="pros-cons">
+              <div class="pros">
+                <div class="pc-head">Pros</div>
+                <div class="pc-item">Max lake time, lazy day vibe</div>
+                <div class="pc-item">Bring a cooler lunch, skip restaurants</div>
+              </div>
+              <div class="cons">
+                <div class="pc-head">Cons</div>
+                <div class="pc-item">Long day for toddlers &amp; older Boomers</div>
+                <div class="pc-item">No time for afternoon activity</div>
+                <div class="pc-item">Near budget ceiling for the day</div>
+              </div>
+            </div>
+            <div class="option-cost">3 large pontoons × $435 + ~$65 fuel each = <strong>~$1,500 total · ~$56/person</strong></div>
+          </div>
+        </div>
+        <div class="alert">📞 Book in advance: Big Bear Marina · (909) 866-3218 · bigbearmarina.com</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">3–5 PM</div>
+      <div class="slot-body">
+        <div class="slot-title">🏓 Afternoon activity — pick one (or split)</div>
+        <div class="slot-desc">Two great options after the boats. The pickleball option is free and keeps everyone at the cabins — ideal for your togetherness priority.</div>
+        <div class="option-set">
+          <div class="option">
+            <div class="option-label rec">✅ Option A — Cabin Pickleball + Games (free, on-site)</div>
+            <div class="slot-desc" style="margin-bottom:6px;">Cabin 1 (Geronimo Lodge) has a private pickleball court. Set up a family tournament — teens vs. Gen X &amp; Millennials, winners play grandparents. While matches run, others spread across Cabin 2 (Pac-Man, yard) and Cabin 3 (billiards, foosball, poker). Hot tubs at all three cabins for whoever wants to decompress. No driving, no tickets, no planning.</div>
+            <span class="tag tag-green">✅ spectators welcome · accessible yards</span>
+            <span class="tag tag-blue">all ages · free</span>
+            <div class="option-cost">Free · all on-site across the 3 cabins</div>
+          </div>
+          <div class="option">
+            <div class="option-label alt">Option B — The Bowling Barn (whole group, off-site)</div>
+            <div class="slot-desc" style="margin-bottom:6px;">16 lanes, arcade, VR room, Alley Oops Sports Bar, full grill. Accessible and all-ages — bumper bowling for toddlers, glow bowling + arcade for teens, bar for adults. Good choice if the weather turns or the group wants a change of scenery after the lake.</div>
+            <span class="tag tag-green">✅ ADA accessible</span>
+            <span class="tag tag-blue">all ages</span>
+            <div class="option-cost">~$10–15/person · 40625 Big Bear Blvd · (909) 878-2695</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">6–8 PM</div>
+      <div class="slot-body">
+        <div class="slot-title">🍝 Big Italian Family Dinner at the Cabins</div>
+        <div class="slot-desc">The family cooks take over. Pasta night — puttanesca, aglio e olio, shrimp scampi, a big salad. Family-style at the hub cabin. This is the heart of the trip.</div>
+        <span class="tag tag-amber">👨‍🍳 family cooks</span>
+        <div class="slot-cost">~$10–15/person groceries</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUNDAY -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-label">Sunday · July 26</div>
+      <div class="day-title">Mountain Adventure Day</div>
+      <div class="day-theme">Pickleball morning · split activities · Skyline at Sundown · movie night at Dreamwood</div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">8–10 AM</div>
+      <div class="slot-body">
+        <div class="slot-title">Breakfast at your cabin</div>
+        <div class="slot-desc">Same as Saturday — everyone eats at their own cabin at their own pace. Meet up for activities by 10 AM.</div>
+        <div class="slot-cost">~$5–8/person (per-cabin groceries)</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">Optional</div>
+      <div class="slot-body">
+        <div class="slot-title">🦁 Big Bear Alpine Zoo — gentle morning detour</div>
+        <div class="slot-desc">A wildlife rehabilitation center housing grizzly bears, snow leopards, mountain lions, bald eagles, wolves, and more. Small, unhurried, and meaningful — all animals are rescued and can't return to the wild. Perfect for families with young kids and grandparents who want a relaxed start before the afternoon activities. Takes 1–2 hours.</div>
+        <span class="tag tag-green">✅ ADA accessible</span>
+        <span class="tag tag-blue">perfect for toddlers &amp; grandparents</span>
+        <div class="slot-cost">~$12–17/adult · under 2 free · group rate (48 hrs notice) · (909) 584-1299 · 42801 Moonridge Rd · open 10 AM–4 PM daily</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">10 AM–2 PM</div>
+      <div class="slot-body">
+        <div class="slot-title">🏔 Afternoon Split Activities (optional — or stay at cabins)</div>
+        <div class="slot-desc">For those who want to get off-site in the afternoon before Skyline at Sundown. With all the cabin amenities available, staying put is a perfectly good option too — especially for grandparents, toddlers, and anyone wanting a hot tub rest before the big evening.</div>
+
+        <div class="option-set">
+          <div class="option">
+            <div class="option-label trackA">Track A — Snow Summit Basecamp</div>
+            <div class="slot-desc" style="margin-bottom:8px;">Best for: kids, grandparents — anyone wanting a relaxed off-site outing</div>
+            <div class="pros-cons">
+              <div class="pros">
+                <div class="pc-head">What's there</div>
+                <div class="pc-item">Fossil finding &amp; gem mining — no restrictions, accessible</div>
+                <div class="pc-item">Scenic Sky Chair — panoramic lake views, relaxed pace</div>
+                <div class="pc-item">Zip line &amp; climbing wall for the 6–12 year old</div>
+                <div class="pc-item">Group discount for 15+ people</div>
+              </div>
+              <div class="cons">
+                <div class="pc-head">Limitations</div>
+                <div class="pc-item">Thrill rides have height/weight minimums</div>
+                <div class="pc-item">Sky Chair — call ahead to confirm accessibility details ✅</div>
+              </div>
+            </div>
+            <div class="option-cost">Adventure Day Pass $39–59 · or single activities $15–27 · (844) 462-2327</div>
+          </div>
+
+          <div class="option">
+            <div class="option-label trackB">Track B — Alpine Slide at Magic Mountain</div>
+            <div class="slot-desc" style="margin-bottom:8px;">Now a secondary option for teens and active Gen X &amp; Millennials who want more thrills after the morning pickleball. Not essential given the on-site entertainment, but still a unique SoCal experience if the energy is there.</div>
+            <div class="pros-cons">
+              <div class="pros">
+                <div class="pc-head">What's there</div>
+                <div class="pc-item">Alpine Slide — SoCal's only authentic bobsled</div>
+                <div class="pc-item">Go-karts, Mineshaft Coaster, water slide, mini golf</div>
+                <div class="pc-item">Unique, memorable for teens</div>
+              </div>
+              <div class="cons">
+                <div class="pc-head">Limitations</div>
+                <div class="pc-item">Chairlift required — not suitable for all mobility levels</div>
+                <div class="pc-item">Toddlers can't do most rides</div>
+                <div class="pc-item">Costs money when cabin games are free</div>
+              </div>
+            </div>
+            <div class="option-cost">~$20–30/person · (909) 866-4626 · 800 Wildrose Ln</div>
+          </div>
+
+          <div class="option">
+            <div class="option-label rec">✅ Track C — Stay at the cabins</div>
+            <div class="slot-desc" style="margin-bottom:8px;">A completely valid choice — especially for grandparents, toddlers, and anyone wanting a restful afternoon. Hot tubs, game rooms, firepits, and the Alpine Pedal Path are all right there. Rest up before Skyline at Sundown.</div>
+            <span class="tag tag-green">✅ ADA accessible</span>
+            <span class="tag tag-blue">all ages · free</span>
+            <div class="option-cost">Free · enjoy the cabins</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">2–4 PM</div>
+      <div class="slot-body">
+        <div class="slot-title">Rest &amp; freshen up at the cabins</div>
+        <div class="slot-desc">Toddlers nap. Everyone gets a break before the evening. Prep for Skyline at Sundown — it's the marquee event of the trip.</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">4:30–8 PM</div>
+      <div class="slot-body">
+        <div class="slot-title">🌄 Skyline at Sundown — WHOLE GROUP</div>
+        <div class="slot-desc">The highlight of the trip. Chairlift up Snow Summit at sunset, mountaintop BBQ buffet with roast tri-tip and grilled salmon, live music, panoramic views of Big Bear Lake and Mt. San Gorgonio. All three generations together on a mountaintop at golden hour. July 26 is an event date.</div>
+        <span class="tag tag-green">✅ ADA accessible — confirm details by phone</span>
+        <span class="tag tag-blue">🐟 salmon on menu</span>
+        <span class="tag tag-amber">⭐ marquee event</span>
+        <div style="font-size:0.85rem; color:#555; margin-top:8px; line-height:1.6;">
+          <strong>Schedule:</strong> Chairlift loads from 4:30 PM · Last chair up 5:30 PM · Dinner 5:30–6:30 PM · Live music 4:45–7:15 PM · Last chair down 7:30 PM
+        </div>
+        <div class="slot-cost">$40–75/adult · $40–50/ages 12 &amp; under · 29 people est. ~$1,500–2,000 total</div>
+        <div class="alert">⚠️ <strong>2026 dates not yet published</strong> — tickets go on sale in May 2026. The 2025 schedule included July 24 &amp; 25, so late July dates are very likely but not confirmed. Check bigbearmountainresort.com starting May 2026 and book as soon as dates drop. Non-refundable once purchased. Call (844) 462-2327 to confirm ADA chairlift details ✅ before buying.</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">8:30–10 PM</div>
+      <div class="slot-body">
+        <div class="slot-title">🌙 Late cabin hang — dessert, stories + movie night at Dreamwood</div>
+        <div class="slot-desc">Come back to the cabins. Dessert and family stories around the fire pit. Then split naturally — some stay outside under the stars, others head into Cabin 3's private movie theater for a film. Toddlers are in bed. The teens will disappear to the game room. The adults get the night. This is where the real reunion magic happens.</div>
+        <span class="tag tag-amber">🎬 movie theater at Cabin 3 (Dreamwood Lodge)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MONDAY -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-label">Monday · July 27</div>
+      <div class="day-title">Pack Up &amp; Head Home</div>
+      <div class="day-theme">Final breakfast, pack out by 10 AM</div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">7–9 AM</div>
+      <div class="slot-body">
+        <div class="slot-title">Breakfast — at your cabin or gather at Cabin 3</div>
+        <div class="slot-desc">Eat at your own cabin, or drift over to Dreamwood Lodge for an informal send-off spread. Either way — pack between bites and say what you mean to say to the people you don't see enough.</div>
+        <div class="slot-cost">~$5–8/person (per-cabin groceries)</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">9–10 AM</div>
+      <div class="slot-body">
+        <div class="slot-title">Clean up, load cars, goodbyes</div>
+        <div class="slot-desc">Check out by 10 AM sharp. Group photo in the driveway. See everyone at the next one.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BAD WEATHER -->
+  <div class="day-card" style="border-left: 3px solid #ef9f27;">
+    <div class="day-header" style="background: #fffbf2;">
+      <div class="day-label" style="color: #854f0b;">☁️ Bad-weather alternatives</div>
+      <div class="day-title">If it rains or storms</div>
+      <div class="day-theme">July afternoons in the mountains can bring brief thunderstorms — have a backup ready</div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">All day</div>
+      <div class="slot-body">
+        <div class="slot-title">🎳 The Bowling Barn</div>
+        <div class="slot-desc">The single best rain fallback for the whole group. 16 lanes, arcade, VR, bar, and grill — you could spend 3–4 hours here easily. Fully indoors, accessible, all ages. If the boats get rained out, pivot here immediately.</div>
+        <span class="tag tag-green">✅ ADA accessible</span>
+        <span class="tag tag-blue">all ages</span>
+        <div class="slot-cost">(909) 878-2695 · 40625 Big Bear Blvd · open daily 10 AM–10:30 PM</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">Teens &amp; adults</div>
+      <div class="slot-body">
+        <div class="slot-title">🎬 Movie theater + game rooms at the cabins</div>
+        <div class="slot-desc">You have a private movie theater at Cabin 3 (Dreamwood), billiards, foosball and poker there too, pool table and pickleball at Cabin 1, and Pac-Man arcade at Cabin 2. On a rainy day, your own cabins are genuinely the best entertainment option — free, no driving, and everyone stays together. Fire up a movie for the little ones, run a billiards tournament for the teens and adults.</div>
+        <span class="tag tag-green">✅ ADA accessible</span>
+        <span class="tag tag-blue">all ages · free</span>
+        <div class="slot-cost">Free · on-site across all 3 cabins</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">If you want out</div>
+      <div class="slot-body">
+        <div class="slot-title">🔐 Escape Rooms — Mountain Room Escapes</div>
+        <div class="slot-desc">If the group wants to get off-site, Mountain Room Escapes has mountain-themed rooms for up to 8 players. Good for teens and Gen X &amp; Millennial adults as a competitive side trip. Book ahead; walk-ins are limited.</div>
+        <span class="tag tag-amber">teens + adults</span>
+        <div class="slot-cost">(877) 584-6427 · 40588 Village Dr · open daily 8 AM–midnight</div>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">Low-key option</div>
+      <div class="slot-body">
+        <div class="slot-title">🏘 Big Bear Village stroll</div>
+        <div class="slot-desc">Pine Knot Village is a short covered-walkway, shop-lined stretch with ice cream, fudge, galleries, and casual restaurants. Zero planning, no tickets, completely accessible. Good for a brief weather break or when the group just needs something unstructured. Pair with coffee and a browse.</div>
+        <span class="tag tag-green">✅ ADA accessible</span>
+        <span class="tag tag-blue">all ages · free</span>
+      </div>
+    </div>
+
+    <div class="slot">
+      <div class="slot-time">At the cabins</div>
+      <div class="slot-body">
+        <div class="slot-title">🃏 Cabin games + cooking day</div>
+        <div class="slot-desc">Don't underestimate this one. If it's a rainy afternoon, pull everyone into the hub cabin. Cards, board games, a big pot of Sunday gravy on the stove, the kids running around — this is genuinely what family reunions are for. A surprise rainy day can become the most-remembered part of the trip.</div>
+        <span class="tag tag-amber">👨‍🍳 family cooks</span>
+        <div class="slot-cost">Free · just needs good company and groceries already in the fridge</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COST SUMMARY -->
+  <div class="summary-card">
+    <h3>Estimated Cost Per Adult</h3>
+    <div class="cost-row"><span class="label">Fri · De La Nonna's dinner</span><span>~$45</span></div>
+    <div class="cost-row"><span class="label">Sat · Pontoon boats (half day, split 27 ways)</span><span>~$42</span></div>
+    <div class="cost-row"><span class="label">Sat · Bowling Barn</span><span>~$15</span></div>
+    <div class="cost-row"><span class="label">Sat · Cabin pasta dinner (groceries)</span><span>~$12</span></div>
+    <div class="cost-row"><span class="label">Sun · Basecamp activities (optional · Alpine Slide secondary)</span><span>~$0–50</span></div>
+    <div class="cost-row"><span class="label">Sun · Skyline at Sundown</span><span>~$55–75</span></div>
+    <div class="cost-row"><span class="label">Sun/Mon · Cabin meals (groceries)</span><span>~$15</span></div>
+    <div class="cost-row total"><span>Total estimate (per adult)</span><span>~$175–220 over 3.5 days</span></div>
+    <div style="font-size:0.78rem; color:#a8c5b0; margin-top:8px;">≈ $58–73/day · well within $100/day budget ✓ &nbsp; Kids cost less on most activities. Pickleball + cabin games replace ~$700–1,350 in Alpine Slide tickets.</div>
+  </div>
+
+  <!-- CONTACTS -->
+  <div class="contacts">
+    <h3>📞 Key Contacts &amp; Links</h3>
+    <div class="contact-item"><strong>De La Nonna's</strong> — <a href="https://www.delanonna.com/big-bear-lake-ca">delanonna.com</a> — call to reserve for large group</div>
+    <div class="contact-item"><strong>Big Bear Marina</strong> — <a href="https://www.bigbearmarina.com">(909) 866-3218</a> — reserve pontoons well in advance</div>
+    <div class="contact-item"><strong>The Bowling Barn</strong> — <a href="https://bowlingbarn.com">(909) 878-2695</a> — 40625 Big Bear Blvd</div>
+    <div class="contact-item"><strong>Alpine Slide at Magic Mountain</strong> — <a href="https://alpineslidebigbear.com">(909) 866-4626</a> — 800 Wildrose Ln</div>
+    <div class="contact-item"><strong>Snow Summit Basecamp</strong> — <a href="https://www.bigbearmountainresort.com/things-to-do/basecamp-activities">(844) 462-2327</a> — group discount 15+ people</div>
+    <div class="contact-item"><strong>Skyline at Sundown</strong> — <a href="https://www.bigbearmountainresort.com/things-to-do/skyline-at-sundown">(844) 462-2327</a> — non-refundable, book early ✅ confirm ADA details by phone</div>
+    <div class="contact-item"><strong>Destination Big Bear</strong> (rental co.) — <a href="https://www.destinationbigbear.com">(909) 752-0234</a> — 713 Stocker Rd · check in at office · 24/7 emergency maintenance</div>
+    <div class="contact-item"><strong>Alpine Pedal Path</strong> — free · park at Stanfield Cutoff on North Shore Dr · no booking needed</div>
+    <div class="contact-item"><strong>Big Bear Alpine Zoo</strong> — <a href="https://bigbearzoo.org">(909) 584-1299</a> — 42801 Moonridge Rd · group rate with 48 hrs notice</div>
+    <div class="contact-item"><strong>Mountain Room Escapes</strong> — <a href="https://www.bigbear.com/directory/mountain-room-escapes/">(877) 584-6427</a> — 40588 Village Dr · book ahead</div>
+  </div>
+
+  <div style="text-align:center; font-size:0.8rem; color:#999; margin-top:2rem; padding-bottom:1rem;">
+    Made with ❤️ for the DeLuca Family Reunion &nbsp;·&nbsp; Big Bear Lake &nbsp;·&nbsp; July 2026</div>
+
+</div>
+</body>
+</html>
