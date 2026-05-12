@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pages</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0E0E0E;
+    --surface: #161616;
+    --border: #2A2A2A;
+    --text: #E8E4DE;
+    --sub: #6B6560;
+    --accent: #E8920A;
+    --accent-dim: rgba(232,146,10,0.12);
+    --green: #4A9E5C;
+    --green-dim: rgba(74,158,92,0.1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 64px 24px 80px;
+  }
+
+  .page {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  header {
+    margin-bottom: 56px;
+  }
+
+  .site-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sub);
+    margin-bottom: 12px;
+  }
+
+  header h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+
+  header p {
+    font-size: 0.9rem;
+    color: var(--sub);
+    line-height: 1.6;
+    max-width: 420px;
+  }
+
+  /* SECTION */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sub);
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* PAGE CARDS */
+  .pages-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .page-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s, background 0.15s;
+    cursor: pointer;
+  }
+
+  .page-card:hover {
+    border-color: var(--accent);
+    background: #1A1A1A;
+  }
+
+  .page-card:hover .page-arrow {
+    color: var(--accent);
+    transform: translateX(3px);
+  }
+
+  .page-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    width: 36px;
+    text-align: center;
+  }
+
+  .page-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .page-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .page-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--sub);
+    letter-spacing: 0.05em;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .page-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 3px;
+    background: var(--accent-dim);
+    color: var(--accent);
+    border: 1px solid rgba(232,146,10,0.2);
+    flex-shrink: 0;
+  }
+
+  .page-arrow {
+    color: var(--sub);
+    transition: color 0.15s, transform 0.15s;
+    flex-shrink: 0;
+  }
+
+  /* FOOTER */
+  footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--sub);
+    letter-spacing: 0.08em;
+  }
+
+  .footer-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--sub);
+  }
+
+  .footer-count span {
+    color: var(--accent);
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="site-label">github pages · index</div>
+    <h1>Pages</h1>
+    <p>A collection of random documents, trip plans, tools, and whatever else ends up here.</p>
+  </header>
+
+  <div class="section-label">All Pages</div>
+
+  <div class="pages-list">
+
+    <a class="page-card" href="lake-bob-sandlin-trip-plan.html">
+      <div class="page-icon">🏕️</div>
+      <div class="page-info">
+        <div class="page-title">Lake Bob Sandlin — Trip Plan & Menu</div>
+        <div class="page-meta">
+          <span>May 2026</span>
+          <span>Titus County, TX</span>
+          <span>Fri–Sun · 6 People</span>
+        </div>
+      </div>
+      <span class="page-tag">Trip</span>
+      <svg class="page-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+  </div>
+
+  <footer>
+    <p>github.com</p>
+    <div class="footer-count"><span>1</span> page</div>
+  </footer>
+
+</div>
+</body>
+</html>
