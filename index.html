@@ -9,13 +9,32 @@
   :root {
     --bg: #0E0E0E;
     --surface: #161616;
+    --surface-hover: #1A1A1A;
     --border: #2A2A2A;
     --text: #E8E4DE;
     --sub: #6B6560;
-    --accent: #E8920A;
-    --accent-dim: rgba(232,146,10,0.12);
-    --green: #4A9E5C;
-    --green-dim: rgba(74,158,92,0.1);
+    --sub-dim: #4A4540;
+
+    /* Tag palette — add more variants as categories grow */
+    --tag-trip: #E8920A;
+    --tag-trip-bg: rgba(232,146,10,0.12);
+    --tag-trip-border: rgba(232,146,10,0.25);
+
+    --tag-family: #C77DBB;
+    --tag-family-bg: rgba(199,125,187,0.12);
+    --tag-family-border: rgba(199,125,187,0.25);
+
+    --tag-tool: #4A9E5C;
+    --tag-tool-bg: rgba(74,158,92,0.12);
+    --tag-tool-border: rgba(74,158,92,0.25);
+
+    --tag-doc: #6B9BD1;
+    --tag-doc-bg: rgba(107,155,209,0.12);
+    --tag-doc-border: rgba(107,155,209,0.25);
+
+    --tag-misc: #A89B8C;
+    --tag-misc-bg: rgba(168,155,140,0.12);
+    --tag-misc-border: rgba(168,155,140,0.25);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,13 +48,13 @@
   }
 
   .page {
-    max-width: 640px;
+    max-width: 720px;
     margin: 0 auto;
   }
 
   /* HEADER */
   header {
-    margin-bottom: 56px;
+    margin-bottom: 40px;
   }
 
   .site-label {
@@ -59,33 +78,129 @@
     font-size: 0.9rem;
     color: var(--sub);
     line-height: 1.6;
-    max-width: 420px;
+    max-width: 460px;
   }
 
-  /* SECTION */
-  .section-label {
+  /* FILTER BAR */
+  .filter-bar {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+
+  .search-wrap {
+    flex: 1;
+    min-width: 200px;
+    position: relative;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--sub-dim);
+    pointer-events: none;
+  }
+
+  #search {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px 10px 36px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  #search:focus {
+    border-color: var(--sub);
+  }
+
+  #search::placeholder {
+    color: var(--sub-dim);
+  }
+
+  .filter-chips {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .chip {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    border-radius: 6px;
+    background: var(--surface);
+    color: var(--sub);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .chip:hover {
+    color: var(--text);
+    border-color: var(--sub-dim);
+  }
+
+  .chip.active {
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
+  }
+
+  /* CATEGORY GROUP */
+  .category {
+    margin-bottom: 32px;
+  }
+
+  .category.hidden {
+    display: none;
+  }
+
+  .category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .category-label {
     font-family: 'DM Mono', monospace;
     font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--sub);
-    margin-bottom: 12px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border);
   }
 
-  /* PAGE CARDS */
+  .category-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--sub-dim);
+  }
+
   .pages-list {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
   }
 
+  /* PAGE CARDS */
   .page-card {
     display: flex;
     align-items: center;
     gap: 16px;
-    padding: 16px 18px;
+    padding: 14px 18px;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 8px;
@@ -95,20 +210,24 @@
     cursor: pointer;
   }
 
+  .page-card.hidden {
+    display: none;
+  }
+
   .page-card:hover {
-    border-color: var(--accent);
-    background: #1A1A1A;
+    border-color: var(--sub);
+    background: var(--surface-hover);
   }
 
   .page-card:hover .page-arrow {
-    color: var(--accent);
+    color: var(--text);
     transform: translateX(3px);
   }
 
   .page-icon {
     font-size: 1.4rem;
     flex-shrink: 0;
-    width: 36px;
+    width: 32px;
     text-align: center;
   }
 
@@ -142,23 +261,39 @@
     font-size: 9px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    padding: 2px 7px;
+    padding: 3px 8px;
     border-radius: 3px;
-    background: var(--accent-dim);
-    color: var(--accent);
-    border: 1px solid rgba(232,146,10,0.2);
     flex-shrink: 0;
   }
 
+  .page-tag[data-tag="trip"]   { color: var(--tag-trip);   background: var(--tag-trip-bg);   border: 1px solid var(--tag-trip-border); }
+  .page-tag[data-tag="family"] { color: var(--tag-family); background: var(--tag-family-bg); border: 1px solid var(--tag-family-border); }
+  .page-tag[data-tag="tool"]   { color: var(--tag-tool);   background: var(--tag-tool-bg);   border: 1px solid var(--tag-tool-border); }
+  .page-tag[data-tag="doc"]    { color: var(--tag-doc);    background: var(--tag-doc-bg);    border: 1px solid var(--tag-doc-border); }
+  .page-tag[data-tag="misc"]   { color: var(--tag-misc);   background: var(--tag-misc-bg);   border: 1px solid var(--tag-misc-border); }
+
   .page-arrow {
-    color: var(--sub);
+    color: var(--sub-dim);
     transition: color 0.15s, transform 0.15s;
     flex-shrink: 0;
   }
 
+  /* EMPTY STATE */
+  .empty-state {
+    display: none;
+    text-align: center;
+    padding: 48px 24px;
+    color: var(--sub);
+    font-size: 0.9rem;
+  }
+
+  .empty-state.visible {
+    display: block;
+  }
+
   /* FOOTER */
   footer {
-    margin-top: 64px;
+    margin-top: 56px;
     padding-top: 24px;
     border-top: 1px solid var(--border);
     display: flex;
@@ -182,7 +317,7 @@
   }
 
   .footer-count span {
-    color: var(--accent);
+    color: var(--text);
     font-weight: 500;
   }
 </style>
@@ -196,44 +331,148 @@
     <p>A collection of random documents, trip plans, tools, and whatever else ends up here.</p>
   </header>
 
-  <div class="section-label">All Pages</div>
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <div class="search-wrap">
+      <svg class="search-icon" width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M11 11l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <input id="search" type="text" placeholder="Search pages..." autocomplete="off">
+    </div>
+    <div class="filter-chips" id="filter-chips">
+      <button class="chip active" data-filter="all">All</button>
+      <button class="chip" data-filter="trip">Trips</button>
+      <button class="chip" data-filter="family">Family</button>
+    </div>
+  </div>
 
-  <div class="pages-list">
+  <!--
+    PAGES CONFIG
+    To add a page:
+      1. Drop a .card into the matching category, OR add a new category section.
+      2. Use data-tag for color (trip | family | tool | doc | misc) and add a chip above if it's a new category.
+      3. data-search holds extra terms for the search box (lowercase).
+  -->
 
-    <a class="page-card" href="lake-bob-sandlin-trip-plan.html">
-      <div class="page-icon">🏕️</div>
-      <div class="page-info">
-        <div class="page-title">Lake Bob Sandlin — Trip Plan & Menu</div>
-        <div class="page-meta">
-          <span>May 2026</span>
-          <span>Titus County, TX</span>
-          <span>Fri–Sun · 6 People</span>
-        </div>
+  <div id="pages-root">
+
+    <!-- TRIPS -->
+    <section class="category" data-category="trip">
+      <div class="category-header">
+        <span class="category-label">Trips</span>
+        <span class="category-count">1</span>
       </div>
-      <span class="page-tag">Trip</span>
-      <svg class="page-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
+      <div class="pages-list">
 
-    <a class="page-card" href="deluca-reunion.html">
-      <div class="page-icon">👨‍👩‍👧‍👦</div>
-      <div class="page-info">
-        <div class="page-title">DeLuca Family Reunion — Plan</div>
-        <div class="page-meta">
-          <span>2026</span>
-          <span>Family Reunion</span>
-        </div>
+        <a class="page-card" data-tag="trip"
+           data-search="lake bob sandlin titus county texas camping fishing"
+           href="lake-bob-sandlin-trip-plan.html">
+          <div class="page-icon">🏕️</div>
+          <div class="page-info">
+            <div class="page-title">Lake Bob Sandlin — Trip Plan &amp; Menu</div>
+            <div class="page-meta">
+              <span>May 2026</span>
+              <span>Titus County, TX</span>
+              <span>Fri–Sun · 6 People</span>
+            </div>
+          </div>
+          <span class="page-tag" data-tag="trip">Trip</span>
+          <svg class="page-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+
       </div>
-      <span class="page-tag">Family</span>
-      <svg class="page-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
+    </section>
 
+    <!-- FAMILY -->
+    <section class="category" data-category="family">
+      <div class="category-header">
+        <span class="category-label">Family</span>
+        <span class="category-count">1</span>
+      </div>
+      <div class="pages-list">
+
+        <a class="page-card" data-tag="family"
+           data-search="deluca reunion family gathering"
+           href="Deluca-Reunion.html">
+          <div class="page-icon">👨‍👩‍👧‍👦</div>
+          <div class="page-info">
+            <div class="page-title">DeLuca Family Reunion — Plan</div>
+            <div class="page-meta">
+              <span>2026</span>
+              <span>Family Reunion</span>
+            </div>
+          </div>
+          <span class="page-tag" data-tag="family">Family</span>
+          <svg class="page-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+
+      </div>
+    </section>
+
+  </div>
+
+  <!-- EMPTY STATE -->
+  <div class="empty-state" id="empty-state">
+    No pages match your filter.
   </div>
 
   <footer>
     <p>github.com</p>
-    <div class="footer-count"><span>2</span> pages</div>
+    <div class="footer-count"><span id="visible-count">2</span> / <span id="total-count">2</span> pages</div>
   </footer>
 
 </div>
+
+<script>
+  const searchInput = document.getElementById('search');
+  const chips = document.querySelectorAll('.chip');
+  const cards = document.querySelectorAll('.page-card');
+  const categories = document.querySelectorAll('.category');
+  const emptyState = document.getElementById('empty-state');
+  const visibleCount = document.getElementById('visible-count');
+  const totalCount = document.getElementById('total-count');
+
+  totalCount.textContent = cards.length;
+
+  let activeFilter = 'all';
+
+  function applyFilters() {
+    const q = searchInput.value.trim().toLowerCase();
+    let shown = 0;
+
+    cards.forEach(card => {
+      const tag = card.dataset.tag;
+      const haystack = (card.dataset.search || '') + ' ' + card.textContent.toLowerCase();
+      const matchesFilter = activeFilter === 'all' || tag === activeFilter;
+      const matchesSearch = !q || haystack.includes(q);
+      const visible = matchesFilter && matchesSearch;
+      card.classList.toggle('hidden', !visible);
+      if (visible) shown++;
+    });
+
+    // Hide empty categories
+    categories.forEach(cat => {
+      const visibleCards = cat.querySelectorAll('.page-card:not(.hidden)');
+      const countEl = cat.querySelector('.category-count');
+      cat.classList.toggle('hidden', visibleCards.length === 0);
+      if (countEl) countEl.textContent = visibleCards.length;
+    });
+
+    visibleCount.textContent = shown;
+    emptyState.classList.toggle('visible', shown === 0);
+  }
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      activeFilter = chip.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  searchInput.addEventListener('input', applyFilters);
+</script>
 </body>
 </html>
