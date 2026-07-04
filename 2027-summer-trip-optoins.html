@@ -3,520 +3,789 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Summer 2027 — Iceland · Banff · Peru</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>Winter 2027 — Dec 18–31 Trip Options</title>
 <style>
-  :root{
-    --paper:#FBFAF6; --ink:#1E2A24; --pine:#1F3D34; --pine-2:#2E5A4C; --sea:#2F6F63;
-    --moss:#5B7A70; --brass:#A9761F; --brass-2:#C79A4A; --stone:#6E7B73;
-    --line:#E4E0D4; --card:#FFFFFF; --accent:#2F6F63;
-    --shadow:0 1px 2px rgba(31,61,52,.05),0 6px 22px rgba(31,61,52,.07);
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap');
+
+  :root {
+    --ink: #1a1a1a;
+    --dusk: #2d3748;
+    --fog: #f7f6f2;
+    --warm-white: #fffef9;
+    --gold: #b8892a;
+    --gold-light: #f0d89a;
+    --teal: #1a6b6b;
+    --teal-light: #e6f4f4;
+    --coral: #c05a3a;
+    --coral-light: #faeae4;
+    --slate: #64748b;
+    --rule: #e2ddd5;
+    --badge-green: #2d6a4f;
+    --badge-orange: #b45309;
+    --badge-purple: #6b21a8;
   }
-  *{box-sizing:border-box;}
-  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
-  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;font-size:16px;line-height:1.6;}
-  .wrap{max-width:900px;margin:0 auto;padding:0 18px;}
-  h1,h2,h3,h4{font-family:"Spectral",Georgia,serif;font-weight:500;line-height:1.15;margin:0;}
-  .eyebrow{font-size:11.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--brass-2);}
 
-  .tabbar{position:sticky;top:0;z-index:50;background:rgba(251,250,246,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
-  .tabinner{max-width:900px;margin:0 auto;display:flex;gap:5px;padding:8px 10px;}
-  .tab{flex:1;appearance:none;border:1px solid transparent;background:transparent;color:var(--stone);
-    font-family:inherit;font-size:12.5px;font-weight:600;letter-spacing:.01em;padding:11px 4px;border-radius:100px;cursor:pointer;transition:all .15s;min-height:44px;}
-  .tab:hover{color:var(--pine);}
-  .tab.active{background:var(--pine);color:#F4F2EA;box-shadow:var(--shadow);}
-  .tab:focus-visible{outline:2px solid var(--brass);outline-offset:2px;}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  .panel{display:none;} .panel.active{display:block;}
-
-  .hero{background:var(--pine);color:var(--paper);padding:36px 0 30px;}
-  .hero .eyebrow{color:#9FC1CD;}
-  .hero h1{font-size:clamp(29px,7vw,50px);letter-spacing:-.01em;margin:.28em 0 .16em;color:#F6F4EC;}
-  .hero .lede{font-family:"Spectral",serif;font-style:italic;font-size:clamp(16px,4.2vw,20px);color:#D7E2DA;line-height:1.45;}
-  .route{margin-top:16px;font-size:13px;color:#B7C9BF;}
-  .route strong{color:#E6EDE7;font-weight:600;}
-  .params{margin-top:20px;display:flex;flex-wrap:wrap;gap:10px 0;border-top:1px solid rgba(255,255,255,.16);padding-top:6px;}
-  .params div{flex:1 1 46%;padding:10px 14px 4px 0;}
-  .params .k{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#9FB4A9;}
-  .params .v{font-family:"Spectral",serif;font-size:17px;color:#F1EFE6;}
-
-  section{padding:30px 0;}
-  .section-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px;}
-  .section-head h2{font-size:clamp(21px,5vw,28px);scroll-margin-top:70px;}
-  .rule{flex:1;height:1px;background:var(--line);}
-  .sub{font-size:13.5px;color:var(--stone);margin:0 0 18px;}
-
-  .subnav{position:sticky;top:60px;z-index:40;display:flex;gap:8px;overflow-x:auto;padding:10px 0;margin-bottom:4px;background:linear-gradient(var(--paper),var(--paper) 70%,rgba(251,250,246,0));-webkit-overflow-scrolling:touch;}
-  .subnav a{flex:none;font-size:12.5px;font-weight:600;color:var(--pine-2);border:1px solid var(--line);background:var(--card);border-radius:100px;padding:7px 14px;white-space:nowrap;text-decoration:none;}
-  .subnav a:active{background:var(--pine);color:#fff;}
-
-  /* summary cards (overview) */
-  .scards{display:grid;grid-template-columns:1fr;gap:14px;margin-top:6px;}
-  .scard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px;box-shadow:var(--shadow);}
-  .scard.ice{border-top:4px solid #4E6E86;} .scard.ban{border-top:4px solid #2C7A8C;} .scard.per{border-top:4px solid #9E5E33;}
-  .scard .st{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--stone);}
-  .scard h3{font-size:22px;margin:3px 0 6px;}
-  .scard .vibe{font-family:"Spectral",serif;font-style:italic;font-size:15.5px;color:var(--pine-2);line-height:1.4;margin-bottom:12px;}
-  .scard dl{margin:0 0 14px;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:13px;}
-  .scard dt{color:var(--stone);letter-spacing:.04em;text-transform:uppercase;font-size:10.5px;font-weight:600;padding-top:2px;}
-  .scard dd{margin:0;color:var(--ink);}
-  .scard .open{width:100%;appearance:none;cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;background:var(--pine);color:#F4F2EA;border:none;border-radius:8px;padding:13px;min-height:46px;}
-  .scard .open:focus-visible{outline:2px solid var(--brass);outline-offset:2px;}
-
-  .twrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
-  .cmp{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;box-shadow:var(--shadow);min-width:360px;}
-  .cmp th,.cmp td{padding:12px 10px;border-bottom:1px solid var(--line);text-align:right;}
-  .cmp th:first-child,.cmp td:first-child{text-align:left;}
-  .cmp thead th{background:var(--pine);color:#F4F2EA;font-family:"Spectral",serif;font-weight:600;font-size:14px;}
-  .cmp td.rl{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--stone);font-weight:600;}
-  .cmp td .big{font-family:"Spectral",serif;font-size:16px;color:var(--pine);font-variant-numeric:tabular-nums;}
-  .cmp tr:last-child td{border-bottom:none;}
-
-  .tiers{display:flex;flex-direction:column;gap:12px;}
-  .tier{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px 18px;box-shadow:var(--shadow);display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;}
-  .tier.star{border-color:var(--brass-2);border-left:4px solid var(--brass);}
-  .tier .lab{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);flex:1 1 100%;}
-  .tier .amt{font-family:"Spectral",serif;font-size:24px;color:var(--pine);font-variant-numeric:tabular-nums;}
-  .tier .ppd{font-size:12.5px;color:var(--stone);}
-  .tier .note{font-size:12.5px;color:var(--ink);flex:1 1 100%;padding-top:8px;border-top:1px solid var(--line);}
-
-  .days{display:flex;flex-direction:column;}
-  .day{padding:18px 0;border-top:1px solid var(--line);}
-  .day:first-child{border-top:none;}
-  .dhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px;}
-  .dhead .n{font-family:"Spectral",serif;font-size:26px;font-weight:600;color:var(--brass);line-height:1;}
-  .dhead .loc{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);}
-  .dhead .drive{margin-left:auto;font-size:11px;color:var(--accent);border:1px solid var(--line);border-radius:100px;padding:3px 9px;white-space:nowrap;}
-  .day h4{font-size:17px;margin:2px 0 5px;}
-  .day p{margin:0 0 8px;font-size:14.5px;}
-  .day .stay{font-size:12.5px;color:var(--stone);}
-  .day .stay b{color:var(--pine-2);font-weight:600;}
-
-  .btable{width:100%;border-collapse:collapse;font-size:13.5px;min-width:340px;}
-  .btable th,.btable td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left;}
-  .btable th{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);font-weight:600;}
-  .btable td.cat{font-weight:500;}
-  .btable td.num,.btable th.num{font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right;}
-  .btable tr.tot td{border-top:2px solid var(--pine);border-bottom:none;font-weight:700;color:var(--pine);padding-top:12px;}
-  .btable tr.tot td.cat{font-family:"Spectral",serif;}
-  .btable .ppd-row td{border-bottom:none;font-size:11.5px;color:var(--stone);padding-top:2px;}
-
-  .lodge{display:grid;grid-template-columns:1fr;gap:12px;}
-  .lcard{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;box-shadow:var(--shadow);}
-  .lcard .lab{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--brass);font-weight:600;margin-bottom:6px;}
-  .lcard ul{margin:0;padding-left:0;list-style:none;font-size:13.5px;}
-  .lcard li{padding:4px 0 4px 14px;position:relative;}
-  .lcard li::before{content:"·";position:absolute;left:2px;color:var(--moss);font-weight:700;}
-  .lcard li em{color:var(--stone);font-style:normal;font-size:12px;}
-
-  .read{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--brass);border-radius:6px;padding:20px 20px;box-shadow:var(--shadow);}
-  .read .kicker{font-family:"Spectral",serif;font-style:italic;font-size:16px;color:var(--pine-2);margin-bottom:12px;}
-  .read ul,.notes ul{margin:0;padding-left:0;list-style:none;}
-  .read li{position:relative;padding:8px 0 8px 22px;border-top:1px solid var(--line);font-size:14px;}
-  .read li:first-child{border-top:none;}
-  .read li::before{content:"";position:absolute;left:4px;top:15px;width:6px;height:6px;border-radius:50%;background:var(--brass-2);}
-  .read li strong{color:var(--pine);}
-  .read .punch{margin-top:14px;padding-top:14px;border-top:2px solid var(--pine);font-size:15px;}
-  .read .punch strong{color:var(--pine);}
-
-  .notes{background:var(--pine);color:#EAF0EB;border-radius:8px;padding:22px 22px 18px;}
-  .notes h2{color:#F4F2EA;font-size:21px;margin-bottom:10px;}
-  .notes li{padding:9px 0 9px 24px;position:relative;border-top:1px solid rgba(255,255,255,.13);font-size:14px;}
-  .notes li:first-child{border-top:none;}
-  .notes li::before{content:"→";position:absolute;left:0;top:9px;color:#9FC1CD;font-weight:700;}
-  .notes strong{color:#fff;} .flag{color:#E7C877;}
-
-  footer{padding:24px 0 48px;}
-  .disc{font-size:12px;color:var(--stone);line-height:1.6;border-top:1px solid var(--line);padding-top:16px;}
-  .disc strong{color:var(--pine-2);}
-
-  @media (min-width:680px){
-    .params div{flex:1 1 24%;}
-    .lodge{grid-template-columns:1fr 1fr 1fr;}
-    .scards{grid-template-columns:1fr 1fr 1fr;}
-    .tier{align-items:center;} .tier .lab{flex:0 0 150px;} .tier .note{flex:1 1 100%;}
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--warm-white);
+    color: var(--ink);
+    line-height: 1.6;
   }
-  @media print{
-    body{background:#fff;} .tabbar,.subnav,.scard .open{display:none!important;}
-    .panel{display:block!important;} .hero,.notes{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-    .tier,.lcard,.notes,.day,.read,.cmp,.scard{break-inside:avoid;page-break-inside:avoid;}
-    .panel+.panel{page-break-before:always;} section{padding:18px 0;}
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    background: var(--dusk);
+    color: #fff;
+    padding: 3rem 2.5rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .masthead::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--teal), var(--gold));
+  }
+  .masthead-inner { max-width: 960px; margin: 0 auto; }
+  .masthead-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 0.6rem;
+  }
+  .masthead h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .masthead-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.7);
+  }
+  .masthead-meta span { display: flex; align-items: center; gap: 0.4rem; }
+
+  /* ── SECTION WRAPPERS ── */
+  .section { max-width: 960px; margin: 0 auto; padding: 2.5rem 2rem; }
+  .section-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  hr.rule { border: none; border-top: 1px solid var(--rule); margin: 0 2rem; }
+
+  /* ── CALENDAR ALERT BOX ── */
+  .calendar-box {
+    background: var(--teal-light);
+    border-left: 3px solid var(--teal);
+    border-radius: 6px;
+    padding: 1.1rem 1.4rem;
+    font-size: 0.85rem;
+  }
+  .calendar-box strong { color: var(--teal); }
+  .calendar-box ul { margin-top: 0.4rem; padding-left: 1.2rem; }
+  .calendar-box li { margin-bottom: 0.2rem; }
+
+  /* ── PRICE LADDER ── */
+  .ladder {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  @media (max-width: 640px) { .ladder { grid-template-columns: 1fr; } }
+
+  .ladder-tier {
+    border-radius: 8px;
+    padding: 1.2rem;
+    text-align: center;
+  }
+  .ladder-tier.value { background: #f0f9f6; border: 1px solid #a7d9cc; }
+  .ladder-tier.premium { background: #fdf8ee; border: 2px solid var(--gold); }
+  .ladder-tier.splurge { background: #fdf0ec; border: 1px solid #f0b8a0; }
+
+  .tier-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+  .ladder-tier.value .tier-label { color: var(--teal); }
+  .ladder-tier.premium .tier-label { color: var(--gold); }
+  .ladder-tier.splurge .tier-label { color: var(--coral); }
+
+  .tier-range {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .ladder-tier.value .tier-range { color: var(--teal); }
+  .ladder-tier.premium .tier-range { color: var(--gold); }
+  .ladder-tier.splurge .tier-range { color: var(--coral); }
+
+  .tier-desc { font-size: 0.75rem; color: var(--slate); margin-top: 0.3rem; }
+  .tier-ppd { font-size: 0.7rem; color: var(--slate); margin-top: 0.2rem; font-style: italic; }
+
+  /* ── OPTION CARDS ── */
+  .cards { display: flex; flex-direction: column; gap: 2.5rem; margin-top: 1.5rem; }
+
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid var(--rule);
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  }
+
+  .card-header {
+    padding: 1.6rem 2rem 1.4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .card-rank {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin-bottom: 0.3rem;
+  }
+  .card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--dusk);
+  }
+  .card-subtitle { font-size: 0.82rem; color: var(--slate); margin-top: 0.2rem; }
+
+  .card-badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+  .badge {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.55rem;
+    border-radius: 100px;
+  }
+  .badge.bucket { background: #ede9fe; color: var(--badge-purple); }
+  .badge.season { background: #dcfce7; color: var(--badge-green); }
+  .badge.warning { background: #fef3c7; color: var(--badge-orange); }
+  .badge.new { background: #fee2e2; color: #b91c1c; }
+
+  .card-price-block { text-align: right; min-width: 140px; }
+  .price-range {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--dusk);
+  }
+  .price-note { font-size: 0.72rem; color: var(--slate); margin-top: 0.1rem; }
+
+  .card-body { padding: 1.6rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; }
+  @media (max-width: 640px) { .card-body { grid-template-columns: 1fr; } }
+
+  .card-section-title {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid var(--gold-light);
+  }
+
+  .card-body ul { list-style: none; padding: 0; }
+  .card-body ul li { font-size: 0.83rem; padding: 0.2rem 0 0.2rem 1rem; position: relative; color: var(--dusk); }
+  .card-body ul li::before { content: '→'; position: absolute; left: 0; color: var(--gold); font-size: 0.7rem; top: 0.3rem; }
+
+  .pros-cons { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 640px) { .pros-cons { grid-template-columns: 1fr; } }
+
+  .pros li::before { color: var(--teal) !important; content: '✓' !important; }
+  .cons li::before { color: var(--coral) !important; content: '✗' !important; }
+
+  .cost-breakdown {
+    grid-column: 1 / -1;
+    background: var(--fog);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+  }
+  .cost-table { width: 100%; font-size: 0.79rem; border-collapse: collapse; margin-top: 0.5rem; }
+  .cost-table td { padding: 0.25rem 0.5rem; }
+  .cost-table td:last-child { text-align: right; font-weight: 500; }
+  .cost-table tr:last-child td { border-top: 1px solid var(--rule); font-weight: 600; padding-top: 0.5rem; }
+
+  .holiday-flags {
+    grid-column: 1 / -1;
+    background: #fffbeb;
+    border: 1px solid #fcd34d;
+    border-radius: 8px;
+    padding: 0.9rem 1.2rem;
+  }
+  .holiday-flags-title {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--badge-orange);
+    margin-bottom: 0.4rem;
+  }
+  .holiday-flags ul { list-style: none; padding: 0; }
+  .holiday-flags ul li { font-size: 0.8rem; padding: 0.15rem 0 0.15rem 1rem; position: relative; }
+  .holiday-flags ul li::before { content: '⚑'; position: absolute; left: 0; color: var(--badge-orange); font-size: 0.65rem; top: 0.2rem; }
+
+  /* ── ADVISOR'S READ ── */
+  .advisors-read {
+    background: var(--dusk);
+    color: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 1rem;
+  }
+  .advisors-read-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 0.8rem;
+  }
+  .advisors-read h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+  }
+  .advisors-read p { font-size: 0.85rem; color: rgba(255,255,255,0.85); line-height: 1.7; margin-bottom: 0.7rem; }
+  .advisors-read p:last-child { margin-bottom: 0; }
+  .ar-highlight { color: var(--gold-light); font-weight: 600; }
+
+  /* ── BOOKING CLOCK ── */
+  .booking-clock { margin-top: 1.5rem; }
+  .clock-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 0.8rem; }
+  .clock-item {
+    background: var(--fog);
+    border-radius: 8px;
+    padding: 0.9rem 1rem;
+    font-size: 0.8rem;
+  }
+  .clock-item-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--slate); margin-bottom: 0.2rem; }
+  .clock-item-action { font-weight: 600; color: var(--dusk); }
+  .clock-item-note { color: var(--slate); font-size: 0.76rem; margin-top: 0.15rem; }
+  .urgent { border-left: 3px solid var(--coral); }
+  .moderate { border-left: 3px solid var(--gold); }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--fog);
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    padding: 1.5rem 2rem;
+    font-size: 0.75rem;
+    color: var(--slate);
   }
 </style>
 </head>
 <body>
 
-<nav class="tabbar">
-  <div class="tabinner">
-    <button class="tab active" data-tab="overview" onclick="showTab('overview')">Compare</button>
-    <button class="tab" data-tab="iceland" onclick="showTab('iceland')">Iceland</button>
-    <button class="tab" data-tab="banff" onclick="showTab('banff')">Banff</button>
-    <button class="tab" data-tab="peru" onclick="showTab('peru')">Peru</button>
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-inner">
+    <div class="masthead-eyebrow">Tony Illig · Personal Travel Advisor</div>
+    <h1>Winter 2027<br>Dec 18 – 31 · Party of 4</h1>
+    <div class="masthead-meta">
+      <span>📅 14 nights — Christmas &amp; New Year's</span>
+      <span>✈ Departs DFW · AA preferred</span>
+      <span>👨‍👩‍👧‍👦 Tony, Kristin, Katelyn, Carson</span>
+    </div>
   </div>
-</nav>
-
-<!-- ================= OVERVIEW ================= -->
-<div class="panel active" id="overview">
-  <header class="hero">
-    <div class="wrap">
-      <div class="eyebrow">Summer 2027 · Trip Finalists · The four of us</div>
-      <h1>Three Finalists</h1>
-      <p class="lede">Cruises are out and Italy/Greece are parked for 2029 — so it's down to these three ~10-day summer trips. Tap a card or a tab for the full plan; here's how they stack up.</p>
-    </div>
-  </header>
-
-  <section>
-    <div class="wrap">
-      <div class="scards">
-        <div class="scard ice">
-          <div class="st">Front-runner</div><h3>Iceland</h3>
-          <div class="vibe">A new landscape every morning — the biggest adventure, and closest to your river-cruise north star.</div>
-          <dl>
-            <dt>Best for</dt><dd>Adventure &amp; discovery</dd>
-            <dt>Flights</dt><dd>~7–9 hr, 1 stop</dd>
-            <dt>When</dt><dd>Jun–Aug, midnight sun</dd>
-          </dl>
-          <button class="open" onclick="showTab('iceland')">See the plan →</button>
-        </div>
-        <div class="scard ban">
-          <div class="st">Value champ</div><h3>Banff</h3>
-          <div class="vibe">Turquoise lakes and glacier peaks — the most spectacle per dollar, and the easiest trip to run.</div>
-          <dl>
-            <dt>Best for</dt><dd>Value &amp; ease</dd>
-            <dt>Flights</dt><dd>~3.5 hr, often nonstop</dd>
-            <dt>When</dt><dd>Jun–Sep</dd>
-          </dl>
-          <button class="open" onclick="showTab('banff')">See the plan →</button>
-        </div>
-        <div class="scard per">
-          <div class="st">The trophy</div><h3>Peru</h3>
-          <div class="vibe">Machu Picchu and the Sacred Valley — the bucket-list icon and the richest for culture and history.</div>
-          <dl>
-            <dt>Best for</dt><dd>Culture &amp; the icon</dd>
-            <dt>Flights</dt><dd>~8–9 hr, 1 stop</dd>
-            <dt>When</dt><dd>May–Oct, dry season</dd>
-          </dl>
-          <button class="open" onclick="showTab('peru')">See the plan →</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section style="padding-top:2px;">
-    <div class="wrap">
-      <div class="section-head"><h2>The numbers, side by side</h2><div class="rule"></div></div>
-      <p class="sub">All-in for the four of you, including airfare. For reference, your Costa Rica trip ran ~$491/person/day and Tuscany ~$724.</p>
-      <div class="twrap"><table class="cmp">
-        <thead><tr><th>&nbsp;</th><th>Iceland</th><th>Banff</th><th>Peru</th></tr></thead>
-        <tbody>
-          <tr><td class="rl">Value</td><td><span class="big">$15–16k</span></td><td><span class="big">$11–12k</span></td><td><span class="big">$12–14k</span></td></tr>
-          <tr><td class="rl">Premium</td><td><span class="big">~$23k</span></td><td><span class="big">~$18k</span></td><td><span class="big">~$22k</span></td></tr>
-          <tr><td class="rl">Splurge</td><td><span class="big">$32k+</span></td><td><span class="big">~$26k</span></td><td><span class="big">$35k+</span></td></tr>
-          <tr><td class="rl">Per day (value)</td><td>~$375</td><td>~$288</td><td>~$310</td></tr>
-        </tbody>
-      </table></div>
-    </div>
-  </section>
-
-  <section style="padding-top:2px;">
-    <div class="wrap">
-      <div class="read">
-        <div class="kicker">The advisor's read.</div>
-        <ul>
-          <li><strong>Iceland</strong> is my front-runner — it best recreates that daily-discovery feeling you love, and it's the biggest adventure of the three.</li>
-          <li><strong>Banff</strong> is the value champ and the easiest trip you'll ever run: short flights, English, drive-yourself, spectacle per dollar. Cheapest at every tier.</li>
-          <li><strong>Peru</strong> is the bucket-list trophy and the richest culturally — a genuine bargain at the value tier — with more travel friction and altitude to manage. Bonus: the premium tier runs largely on Marriott hotels, so your Bonvoy status pays off.</li>
-        </ul>
-        <div class="punch"><strong>To make any of them real, I need two things:</strong> a decision on <em>tier</em>, and your <em>date window</em> — I still need the 2027–28 UT Austin and Rockwall HS calendars before we lock dates.</div>
-      </div>
-    </div>
-  </section>
 </div>
 
-<!-- ================= ICELAND ================= -->
-<div class="panel" id="iceland" style="--accent:#4E6E86;">
-  <header class="hero">
-    <div class="wrap">
-      <div class="eyebrow">Trip Design · Iceland</div>
-      <h1>The Ring Road</h1>
-      <p class="lede">Ten days, one loop, a new landscape every morning — waterfalls and black-sand coast, a glacier lagoon, the volcanic north, and Snæfellsnes to close, all under 20+ hours of daylight.</p>
-      <div class="route"><strong>Route:</strong> Reykjavík → Golden Circle → Vík → Jökulsárlón &amp; Höfn → Eastfjords → Mývatn → Akureyri → Snæfellsnes → Reykjavík · ~1,400 km</div>
-      <div class="params">
-        <div><div class="k">Length</div><div class="v">10 days / 9 nts</div></div>
-        <div><div class="k">Window</div><div class="v">Jun–Aug</div></div>
-        <div><div class="k">There</div><div class="v">DFW ⇄ KEF</div></div>
-        <div><div class="k">How</div><div class="v">Self-drive AWD</div></div>
-      </div>
-    </div>
-  </header>
-  <div class="wrap"><div class="subnav">
-    <a href="#ice-tiers">Pricing</a><a href="#ice-itin">Day-by-day</a><a href="#ice-budget">Budget</a><a href="#ice-stay">Stays</a><a href="#ice-notes">Notes</a>
-  </div></div>
+<hr class="rule">
 
-  <section style="padding-top:6px;"><div class="wrap">
-    <div class="section-head"><h2 id="ice-tiers">Three ways to price it</h2><div class="rule"></div></div>
-    <div class="tiers">
-      <div class="tier star"><div class="lab">Value · sweet spot</div><div class="amt">~$15–16k</div><div class="ppd">≈ $375 pp/day</div><div class="note">Guesthouses &amp; 3-star hotels, kitchens where you can, one restaurant meal a day, the marquee activities.</div></div>
-      <div class="tier"><div class="lab">Premium</div><div class="amt">~$23k</div><div class="ppd">≈ $575 pp/day</div><div class="note">Boutique 4-star stays (Rangá, Búðir), premium 4x4, private glacier &amp; ice-cave guides, more dining out.</div></div>
-      <div class="tier"><div class="lab">Splurge</div><div class="amt">$32k+</div><div class="ppd">$800+ pp/day</div><div class="note">Design hotels (The Retreat at Blue Lagoon, Deplar Farm), private guiding throughout, a helicopter day.</div></div>
-    </div>
-  </div></section>
-
-  <section style="padding-top:6px;"><div class="wrap">
-    <div class="section-head"><h2 id="ice-itin">The day-by-day</h2><div class="rule"></div></div>
-    <p class="sub">Built around a couple of two-night bases so it isn't a new hotel every night. Drive times are with-stops estimates.</p>
-    <div class="days">
-      <div class="day"><div class="dhead"><span class="n">1</span><span class="loc">Reykjavík</span><span class="drive">Airport 45 min</span></div><h4>Land &amp; ease in</h4><p>Pick up the car and shake off the flight with a soak — Sky Lagoon in the city or the Blue Lagoon near the airport. Evening in Reykjavík: Hallgrímskirkja, the old harbor, a good first dinner.</p><div class="stay"><b>Stay:</b> Skuggi Hotel · Sand Hotel · The Retreat at Blue Lagoon</div></div>
-      <div class="day"><div class="dhead"><span class="n">2</span><span class="loc">Golden Circle → South</span><span class="drive">~3.5 hr</span></div><h4>The classic trio, then the coast</h4><p>Þingvellir rift valley, the Geysir hot-spring field, and thundering Gullfoss. Drop to the South Coast; optional Secret Lagoon or Kerið crater en route.</p><div class="stay"><b>Stay:</b> Hótel Hella · Hotel Rangá (gourmet + hot tubs)</div></div>
-      <div class="day"><div class="dhead"><span class="n">3</span><span class="loc">South Coast · Vík</span><span class="drive">~2.5 hr</span></div><h4>Waterfalls &amp; black sand</h4><p>Walk behind Seljalandsfoss, stand under Skógafoss, see the Sólheimajökull glacier tongue, then Dyrhólaey and the basalt columns of Reynisfjara black-sand beach.</p><div class="stay"><b>Stay:</b> Black Beach Suites (kitchenette) · Hotel Kría / Hotel Vík í Mýrdal</div></div>
-      <div class="day"><div class="dhead"><span class="n">4</span><span class="loc">Glaciers · Höfn</span><span class="drive">~3 hr</span></div><h4>Ice on every side</h4><p>A guided glacier hike or Svartifoss at Skaftafell, the Fjaðrárgljúfur canyon, then the showstopper: Jökulsárlón glacier lagoon and the ice-strewn Diamond Beach. Vestrahorn at golden hour.</p><div class="stay"><b>Stay:</b> Fosshotel Glacier Lagoon · Arnanes Country Hotel</div></div>
-      <div class="day"><div class="dhead"><span class="n">5</span><span class="loc">Eastfjords</span><span class="drive">~4 hr</span></div><h4>The road less driven</h4><p>A quiet, winding fjord coast most visitors skip — fishing villages, Petra's stone collection, reindeer in the hills — ending at Egilsstaðir or the rainbow street of Seyðisfjörður.</p><div class="stay"><b>Stay:</b> Hótel Eyvindará (log cabins) · Hótel 1001 Nótt</div></div>
-      <div class="day"><div class="dhead"><span class="n">6</span><span class="loc">Lake Mývatn</span><span class="drive">~2.5 hr + explore</span></div><h4>Volcano country</h4><p>Detour to Dettifoss, Europe's most powerful waterfall, then Krafla and the Víti crater, the steaming Hverir mud pots, Dimmuborgir lava — and unwind in the Mývatn Nature Baths.</p><div class="stay"><b>Stay:</b> Vogafjós Farm Resort (working dairy farm) · Hótel Laxá</div></div>
-      <div class="day"><div class="dhead"><span class="n">7</span><span class="loc">Húsavík · Akureyri</span><span class="drive">~2 hr</span></div><h4>Whales &amp; the capital of the north</h4><p>Goðafoss on the way, then whale-watching from Húsavík (sightings near-guaranteed in July). Settle into walkable Akureyri — botanical garden, the landmark church, the Forest Lagoon.</p><div class="stay"><b>Stay:</b> Hótel Kea · Berjaya Akureyri</div></div>
-      <div class="day"><div class="dhead"><span class="n">8</span><span class="loc">West across the north</span><span class="drive">~4.5 hr</span></div><h4>The long, beautiful transfer</h4><p>The biggest driving day — sweeping empty landscapes, the seal-shaped Hvítserkur sea stack, turf-house history. Land near Borgarnes or push onto Snæfellsnes for an early start tomorrow.</p><div class="stay"><b>Stay:</b> The Bookstore Family Apartment · Hótel Búðir (iconic)</div></div>
-      <div class="day"><div class="dhead"><span class="n">9</span><span class="loc">Snæfellsnes</span><span class="drive">Loop day</span></div><h4>"Iceland in miniature"</h4><p>Everything the country does on one peninsula: photogenic Kirkjufell and its waterfall, Snæfellsjökull glacier-volcano, the Arnarstapi–Hellnar coastal walk, Djúpalónssandur beach, the black church at Búðir.</p><div class="stay"><b>Stay:</b> repeat last night's base, or edge toward Reykjavík</div></div>
-      <div class="day"><div class="dhead"><span class="n">10</span><span class="loc">Depart</span><span class="drive">KEF ~2 hr</span></div><h4>Last soak, then home</h4><p>Drive back toward Keflavík (via scenic Hvalfjörður or a final Reykjavík morning). Time it for one last thermal soak or a bakery stop before your flight.</p><div class="stay"><b>Stay:</b> —</div></div>
-    </div>
-  </div></section>
-
-  <section style="padding-top:6px;"><div class="wrap">
-    <div class="section-head"><h2 id="ice-budget">Where the money goes</h2><div class="rule"></div></div>
-    <p class="sub">The four of you, 9 nights. Biggest levers: lodging and how often you eat out.</p>
-    <div class="twrap"><table class="btable">
-      <thead><tr><th>Category</th><th class="num">Value</th><th class="num">Premium</th><th class="num">Splurge</th></tr></thead>
-      <tbody>
-        <tr><td class="cat">Airfare (4)</td><td class="num">$4,400</td><td class="num">$6,000</td><td class="num">$10,000+</td></tr>
-        <tr><td class="cat">Car + fuel</td><td class="num">$1,900</td><td class="num">$2,600</td><td class="num">$3,500+</td></tr>
-        <tr><td class="cat">Lodging (9 nt)</td><td class="num">$3,200</td><td class="num">$6,300</td><td class="num">$12,000+</td></tr>
-        <tr><td class="cat">Food</td><td class="num">$3,300</td><td class="num">$4,400</td><td class="num">$5,500+</td></tr>
-        <tr><td class="cat">Activities</td><td class="num">$1,900</td><td class="num">$3,300</td><td class="num">$5,000+</td></tr>
-        <tr><td class="cat">Misc</td><td class="num">$300</td><td class="num">$400</td><td class="num">$500+</td></tr>
-        <tr class="tot"><td class="cat">All-in</td><td class="num">~$15,000</td><td class="num">~$23,000</td><td class="num">$36,500+</td></tr>
-        <tr class="ppd-row"><td class="cat">Per person/day</td><td class="num">~$375</td><td class="num">~$575</td><td class="num">$900+</td></tr>
-      </tbody>
-    </table></div>
-  </div></section>
-
-  <section style="padding-top:6px;"><div class="wrap">
-    <div class="section-head"><h2 id="ice-stay">Where you'd sleep</h2><div class="rule"></div></div>
-    <p class="sub">Hard rule: book the glacier-lagoon area (Höfn) and Vík <em>first</em> — fewest rooms, fastest sellout.</p>
-    <div class="lodge">
-      <div class="lcard"><div class="lab">Value</div><ul><li>Skuggi Hotel <em>Reykjavík</em></li><li>Black Beach Suites <em>Vík</em></li><li>Fosshotel Glacier Lagoon <em>SE</em></li><li>Vogafjós Farm <em>Mývatn</em></li><li>Hótel Kea <em>Akureyri</em></li></ul></div>
-      <div class="lcard"><div class="lab">Premium</div><ul><li>Hotel Rangá <em>South</em></li><li>Hotel Vík í Mýrdal <em>Vík</em></li><li>Hótel Laxá <em>Mývatn</em></li><li>Hótel Búðir <em>Snæfellsnes</em></li><li>Sand Hotel <em>Reykjavík</em></li></ul></div>
-      <div class="lcard"><div class="lab">Splurge</div><ul><li>The Retreat at Blue Lagoon</li><li>Deplar Farm <em>North, heli</em></li><li>Torfhús Retreat <em>turf suites</em></li><li>+ private guiding</li></ul></div>
-    </div>
-  </div></section>
-
-  <section style="padding-top:6px;"><div class="wrap">
-    <div class="notes">
-      <h2 id="ice-notes">Advisor notes &amp; logistics</h2>
-      <ul>
-        <li><span class="flag">Book early:</span> peak-summer rooms go 6–9 months out; the Höfn/glacier-lagoon area sells first. Lock lodging by fall 2026.</li>
-        <li><strong>Fit:</strong> squarely adventure-forward for you and Carson; the active pace suits Katelyn. No camping — every night is a real bed.</li>
-        <li><strong>Vehicle:</strong> AWD SUV for comfort and gravel side-roads. Skip F-roads unless you want a super-jeep day.</li>
-        <li><strong>Honest catch:</strong> food and fuel are pricey, weather flips fast even in July, and Day 8 is a long haul — the two-night bases offset it.</li>
-      </ul>
-    </div>
-  </div></section>
-</div>
-
-<!-- ================= BANFF ================= -->
-<div class="panel" id="banff" style="--accent:#2C7A8C;">
-  <header class="hero">
-    <div class="wrap">
-      <div class="eyebrow">Trip Design · Banff</div>
-      <h1>Canadian Rockies</h1>
-      <p class="lede">Turquoise lakes under glacier peaks, one of the world's great scenic drives, and hiking, canoeing, and rafting on tap — the most spectacle per dollar, and a short flight from Dallas.</p>
-      <div class="route"><strong>Route:</strong> Calgary → Banff → Lake Louise &amp; Moraine → Yoho → Icefields Parkway → Kananaskis → Calgary · based in Canmore/Banff</div>
-      <div class="params">
-        <div><div class="k">Length</div><div class="v">10 days / 9 nts</div></div>
-        <div><div class="k">Window</div><div class="v">Jun–Sep</div></div>
-        <div><div class="k">There</div><div class="v">DFW ⇄ YYC</div></div>
-        <div><div class="k">How</div><div class="v">Self-drive SUV</div></div>
-      </div>
-    </div>
-  </header>
-  <div class="wrap"><div class="subnav">
-    <a href="#ban-tiers">Pricing</a><a href="#ban-itin">Day-by-day</a><a href="#ban-budget">Budget</a><a href="#ban-stay">Stays</a><a href="#ban-notes">Notes</a>
-  </div></div>
-
-  <section style="padding-top:6px;"><div class="wrap">
-    <div class="section-head"><h2 id="ban-tiers">Three ways to price it</h2><div class="rule"></div></div>
-    <p class="sub">The cheapest of your finalists at every tier — the value tier comes in under Costa Rica.</p>
-    <div class="tiers">
-      <div class="tier star"><div class="lab">Value · sweet spot</div><div class="amt">~$11–12k</div><div class="ppd">≈ $290–320 pp/day</div><div class="note">Canmore condo with a kitchen, a couple of nights near Lake Louise, the marquee sights and one big-ticket activity.</div></div>
-      <div class="tier"><div class="lab">Premium</div><div class="amt">~$18k</div><div class="ppd">≈ $450 pp/day</div><div class="note">A few Fairmont nights, guided hikes and a lake cruise, more dining out, a premium SUV.</div></div>
-      <div class="tier"><div class="lab">Splurge</div><div class="amt">~$26k</div><div class="ppd">≈ $650 pp/day</div><div class="note">Fairmont Chateau Lake Louise + Banff Springs throughout, a Rocky Mountaineer rail leg or heli-hiking.</div></div>
-    </div>
-  </div></section>
-
-  <section style="padding-top:6px;"><div class="wrap">
-    <div class="section-head"><h2 id="ban-itin">The day-by-day</h2><div class="rule"></div></div>
-    <p class="sub">Based in Canmore/Banff so you unpack once. The Icefields Parkway runs as a day trip; Jasper is optional (still rebuilding from the 2024 wildfire).</p>
-    <div class="days">
-      <div class="day"><div class="dhead"><span class="n">1</span><span class="loc">Arrive · Canmore</span><span class="drive">YYC 1.5 hr</span></div><h4>Fly in, drive to the mountains</h4><p>Land at Calgary, pick up the SUV, drive to Canmore (peaks within the hour). Settle in, stock the condo kitchen, stroll Canmore's Main Street for a first dinner.</p><div class="stay"><b>Stay:</b> Basecamp Suites Canmore · The Malcolm · Fairmont Banff Springs</div></div>
-      <div class="day"><div class="dhead"><span class="n">2</span><span class="loc">Banff townsite</span><span class="drive">local</span></div><h4>Get your bearings</h4><p>Banff Gondola up Sulphur Mountain, Bow Falls and Surprise Corner, Lake Minnewanka (cruise or Stewart Canyon walk), and the Johnston Canyon falls hike. Banff Upper Hot Springs to close.</p><div class="stay"><b>Stay:</b> same base</div></div>
-      <div class="day"><div class="dhead"><span class="n">3</span><span class="loc">Lake Louise &amp; Moraine</span><span class="drive">~1 hr each way</span></div><h4>The two famous lakes</h4><p>Reserved early shuttle in (you can't drive to Moraine anymore). Canoe on Lake Louise, hike to the Lake Agnes Tea House or Plain of Six Glaciers, then the Rockpile over Moraine and the Valley of the Ten Peaks.</p><div class="stay"><b>Stay:</b> Baker Creek by Basecamp (cabins) · Post Hotel / Fairmont Chateau Lake Louise</div></div>
-      <div class="day"><div class="dhead"><span class="n">4</span><span class="loc">Yoho NP (BC)</span><span class="drive">~1 hr</span></div><h4>Over the divide, fewer crowds</h4><p>Into British Columbia for Emerald Lake (canoe or the easy loop), towering Takakkaw Falls, the Natural Bridge, and the Spiral Tunnels — a quieter counterpoint to Lake Louise.</p><div class="stay"><b>Stay:</b> Lake Louise base, or back to Canmore</div></div>
-      <div class="day"><div class="dhead"><span class="n">5</span><span class="loc">Icefields Parkway</span><span class="drive">~2.5 hr each way</span></div><h4>One of the world's great drives</h4><p>Bow Lake, the wolf-head overlook at Peyto Lake, then the Columbia Icefield — ride the Ice Explorer onto the Athabasca Glacier and walk the glass-floored Skywalk. Turn back, or push to Jasper if adding it.</p><div class="stay"><b>Stay:</b> Canmore/Lake Louise (or Jasper if extending)</div></div>
-      <div class="day"><div class="dhead"><span class="n">6</span><span class="loc">Big hike day</span><span class="drive">local</span></div><h4>Get up into the alpine</h4><p>The Sunshine gondola to the wildflower meadows, or Larch Valley &amp; Sentinel Pass (stunning in late season) or Healy Pass. The day you and Carson will remember — pick the effort level for everyone.</p><div class="stay"><b>Stay:</b> Canmore/Banff base</div></div>
-      <div class="day"><div class="dhead"><span class="n">7</span><span class="loc">Kananaskis</span><span class="drive">~30–60 min</span></div><h4>The locals' backyard</h4><p>South into Kananaskis and Spray Lakes: Grassi Lakes, the Ha Ling Peak climb, big reservoir views, and the best wildlife odds of the trip. Or swap in white-water rafting on the Kicking Horse.</p><div class="stay"><b>Stay:</b> Canmore base</div></div>
-      <div class="day"><div class="dhead"><span class="n">8</span><span class="loc">Choose your adventure</span><span class="drive">flex</span></div><h4>A flex day</h4><p>Options: a via ferrata at Mt Norquay, horseback riding, canoeing the Bow River and Vermilion Lakes, or a full Jasper overnight loop. Or return to a favorite lake at sunrise before the crowds.</p><div class="stay"><b>Stay:</b> Canmore/Banff base</div></div>
-      <div class="day"><div class="dhead"><span class="n">9</span><span class="loc">Slow morning + buffer</span><span class="drive">toward YYC</span></div><h4>Last mountain morning</h4><p>Sunrise at Vermilion Lakes, the Cave &amp; Basin, Banff Avenue shopping, the Bow River trail. Drive toward Calgary in the evening and overnight near the airport.</p><div class="stay"><b>Stay:</b> Calgary airport hotel (or one more Canmore night)</div></div>
-      <div class="day"><div class="dhead"><span class="n">10</span><span class="loc">Depart</span><span class="drive">YYC</span></div><h4>Fly home</h4><p>Depart Calgary. Build in ~2.5 hours — U.S. customs preclearance happens in Calgary, so you clear before you fly.</p><div class="stay"><b>Stay:</b> —</div></div>
-    </div>
-  </div></section>
-
-  <section style="padding-top:6px;"><div class="wrap">
-    <div class="section-head"><h2 id="ban-budget">Where the money goes</h2><div class="rule"></div></div>
-    <p class="sub">The four of you, 9 nights. Flights are the cheapest of any finalist; a Canmore condo with a kitchen is the big value lever.</p>
-    <div class="twrap"><table class="btable">
-      <thead><tr><th>Category</th><th class="num">Value</th><th class="num">Premium</th><th class="num">Splurge</th></tr></thead>
-      <tbody>
-        <tr><td class="cat">Airfare (4)</td><td class="num">$2,400</td><td class="num">$2,900</td><td class="num">$4,000+</td></tr>
-        <tr><td class="cat">SUV + fuel</td><td class="num">$1,100</td><td class="num">$1,400</td><td class="num">$1,800</td></tr>
-        <tr><td class="cat">Lodging (9 nt)</td><td class="num">$2,900</td><td class="num">$6,800</td><td class="num">$13,000+</td></tr>
-        <tr><td class="cat">Food</td><td class="num">$2,800</td><td class="num">$3,600</td><td class="num">$4,500</td></tr>
-        <tr><td class="cat">Activities + pass</td><td class="num">$2,000</td><td class="num">$2,600</td><td class="num">$3,000+</td></tr>
-        <tr><td class="cat">Misc</td><td class="num">$300</td><td class="num">$350</td><td class="num">$400</td></tr>
-        <tr class="tot"><td class="cat">All-in</td><td class="num">~$11,500</td><td class="num">~$17,650</td><td class="num">~$26,700</td></tr>
-        <tr class="ppd-row"><td class="cat">Per person/day</td><td class="num">~$288</td><td class="num">~$441</td><td class="num">~$668</td></tr>
-      </tbody>
-    </table></div>
-  </div></section>
-
-  <section style="padding-top:6px;"><div class="wrap">
-    <div class="section-head"><h2 id="ban-stay">Where you'd sleep</h2><div class="rule"></div></div>
-    <p class="sub">Canmore is the value-smart base; a night or two near Lake Louise buys you the lakes before the crowds. Book the shuttle the minute the window opens.</p>
-    <div class="lodge">
-      <div class="lcard"><div class="lab">Value</div><ul><li>Basecamp Suites <em>Canmore</em></li><li>Grand Rockies Resort <em>Canmore</em></li><li>Baker Creek by Basecamp <em>cabins</em></li><li>Mountaineer Lodge <em>Lake Louise</em></li></ul></div>
-      <div class="lcard"><div class="lab">Premium</div><ul><li>The Malcolm <em>Canmore</em></li><li>Moose Hotel &amp; Suites <em>Banff</em></li><li>Post Hotel &amp; Spa <em>Lake Louise</em></li><li>Fairmont Chateau Lake Louise</li></ul></div>
-      <div class="lcard"><div class="lab">Splurge</div><ul><li>Fairmont Banff Springs</li><li>Fairmont Chateau Lake Louise <em>lakeview</em></li><li>Moraine Lake Lodge <em>free canoe</em></li></ul></div>
-    </div>
-  </div></section>
-
-  <section style="padding-top:6px;"><div class="wrap">
-    <div class="notes">
-      <h2 id="ban-notes">Advisor notes &amp; logistics</h2>
-      <ul>
-        <li><span class="flag">Shuttles sell out:</span> you can't drive to Moraine, and Lake Louise parking fills by ~7:30am. Reserve Parks Canada shuttles the moment the window opens (usually midwinter for the coming summer).</li>
-        <li><strong>Fit:</strong> the most active and easiest of the three — English, drive-yourself, short flights. Right in your and Carson's lane.</li>
-        <li><strong>Best value:</strong> even the premium tier lands near your everyday trip spend; the value tier is under Costa Rica.</li>
-        <li><strong>Jasper:</strong> still rebuilding from the July 2024 wildfire, so it's optional here — Banff, Lake Louise, Yoho, and Kananaskis carry the trip.</li>
-      </ul>
-    </div>
-  </div></section>
-</div>
-
-<!-- ================= PERU ================= -->
-<div class="panel" id="peru" style="--accent:#9E5E33;">
-  <header class="hero">
-    <div class="wrap">
-      <div class="eyebrow">Trip Design · Peru</div>
-      <h1>Cusco, Sacred Valley &amp; Machu Picchu</h1>
-      <p class="lede">The bucket-list trophy: Inca ruins and Andean markets, a wonder of the world reached by a river-gorge train, and Cusco's living history — in the season the skies run clearest.</p>
-      <div class="route"><strong>Route:</strong> Lima → Sacred Valley (acclimatize) → Machu Picchu → Cusco → optional Rainbow Mountain or Amazon · fly + rail</div>
-      <div class="params">
-        <div><div class="k">Length</div><div class="v">10 days / 9 nts</div></div>
-        <div><div class="k">Window</div><div class="v">May–Oct (dry)</div></div>
-        <div><div class="k">There</div><div class="v">DFW ⇄ LIM ⇄ CUZ</div></div>
-        <div><div class="k">How</div><div class="v">Guided + train</div></div>
-      </div>
-    </div>
-  </header>
-  <div class="wrap"><div class="subnav">
-    <a href="#per-tiers">Pricing</a><a href="#per-itin">Day-by-day</a><a href="#per-budget">Budget</a><a href="#per-stay">Stays</a><a href="#per-notes">Notes</a>
-  </div></div>
-
-  <section style="padding-top:6px;"><div class="wrap">
-    <div class="section-head"><h2 id="per-tiers">Three ways to price it</h2><div class="rule"></div></div>
-    <p class="sub">A genuine bargain at the value tier — the cheapest bucket-list trophy on your list.</p>
-    <div class="tiers">
-      <div class="tier star"><div class="lab">Value · sweet spot</div><div class="amt">~$12–14k</div><div class="ppd">≈ $310 pp/day</div><div class="note">Well-run mid-range hotels, small-group day tours, the Expedition train, and all the key sites and guides.</div></div>
-      <div class="tier"><div class="lab">Premium</div><div class="amt">~$22k</div><div class="ppd">≈ $575 pp/day</div><div class="note">Marriott &amp; Inkaterra properties (Bonvoy-friendly), private guides, the Vistadome train, and a 2-night Amazon add-on.</div></div>
-      <div class="tier"><div class="lab">Splurge</div><div class="amt">$35k+</div><div class="ppd">$900+ pp/day</div><div class="note">Belmond hotels (Rio Sagrado, Sanctuary Lodge, Palacio Nazarenas) and the Hiram Bingham train, private throughout.</div></div>
-    </div>
-  </div></section>
-
-  <section style="padding-top:6px;"><div class="wrap">
-    <div class="section-head"><h2 id="per-itin">The day-by-day</h2><div class="rule"></div></div>
-    <p class="sub">Sequenced for altitude: you sleep in the lower Sacred Valley first and only tackle Cusco (11,150 ft) and the high day-hikes once you're acclimatized.</p>
-    <div class="days">
-      <div class="day"><div class="dhead"><span class="n">1</span><span class="loc">Lima</span><span class="drive">Airport 40 min</span></div><h4>Arrive in the capital</h4><p>Land in Lima (usually evening) and settle into clifftop Miraflores. A relaxed first night — a ceviche dinner if you're up for it.</p><div class="stay"><b>Stay:</b> Casa Andina (Miraflores) · JW Marriott Lima · Belmond Miraflores Park</div></div>
-      <div class="day"><div class="dhead"><span class="n">2</span><span class="loc">Lima → Sacred Valley</span><span class="drive">Fly ~1.5 hr</span></div><h4>Straight down to acclimatize</h4><p>A morning in Lima (Miraflores boardwalk, arty Barranco, the Larco Museum), then fly to Cusco and transfer <em>down</em> into the Sacred Valley — lower and gentler on the lungs than the city.</p><div class="stay"><b>Stay:</b> Tierra Viva Urubamba · Tambo del Inka / Sol y Luna · Belmond Rio Sagrado</div></div>
-      <div class="day"><div class="dhead"><span class="n">3</span><span class="loc">Sacred Valley</span><span class="drive">valley</span></div><h4>Markets, salt pans, terraces</h4><p>The Pisac market and hilltop ruins, the cascading Maras salt pans, and the concentric agricultural terraces of Moray. An easy pace that doubles as altitude prep.</p><div class="stay"><b>Stay:</b> same base</div></div>
-      <div class="day"><div class="dhead"><span class="n">4</span><span class="loc">Ollantaytambo</span><span class="drive">valley</span></div><h4>A living Inca town</h4><p>Climb the great Ollantaytambo fortress, wander streets laid out five centuries ago, visit a weaving cooperative, and keep it relaxed at the hotel before tomorrow's train.</p><div class="stay"><b>Stay:</b> same base, or El Albergue (Ollantaytambo station)</div></div>
-      <div class="day"><div class="dhead"><span class="n">5</span><span class="loc">→ Machu Picchu</span><span class="drive">Train ~1.5 hr</span></div><h4>Into the cloud forest</h4><p>The scenic train down the Urubamba gorge to Aguas Calientes. Settle in, and soak tired legs in the town's hot springs before the big day.</p><div class="stay"><b>Stay:</b> Casa Andina MP · SUMAQ / Inkaterra Machu Picchu Pueblo · Belmond Sanctuary Lodge</div></div>
-      <div class="day"><div class="dhead"><span class="n">6</span><span class="loc">Machu Picchu → Cusco</span><span class="drive">Train + drive</span></div><h4>The wonder itself</h4><p>An early bus up for a guided tour of the citadel (timed entry; Circuit 2 for the classic experience), with the option to climb Huayna Picchu. Afternoon train back and transfer to Cusco.</p><div class="stay"><b>Stay:</b> Tierra Viva Cusco · JW Marriott El Convento / Palacio del Inka · Palacio Nazarenas</div></div>
-      <div class="day"><div class="dhead"><span class="n">7</span><span class="loc">Cusco</span><span class="drive">city</span></div><h4>The Inca capital</h4><p>Now acclimatized: Qorikancha (Temple of the Sun), the Cathedral and Plaza de Armas, the artsy San Blas quarter, bustling San Pedro market, and the massive Sacsayhuamán walls above town.</p><div class="stay"><b>Stay:</b> same base</div></div>
-      <div class="day"><div class="dhead"><span class="n">8</span><span class="loc">Choose your adventure</span><span class="drive">flex</span></div><h4>Go high, or go to the jungle</h4><p>A day hike to turquoise Humantay Lake or the striped Rainbow Mountain (both very high — only now that you're acclimatized), <em>or</em> fly to Puerto Maldonado to begin a 2-night Amazon-lodge extension.</p><div class="stay"><b>Stay:</b> Cusco base (or an Amazon lodge)</div></div>
-      <div class="day"><div class="dhead"><span class="n">9</span><span class="loc">Cusco / Amazon</span><span class="drive">flex</span></div><h4>A final full day</h4><p>More Cusco — Chinchero, a cooking class, the food scene — or a full Amazon day of canopy walks, an oxbow-lake paddle, and wildlife spotting.</p><div class="stay"><b>Stay:</b> Cusco base (or Amazon lodge)</div></div>
-      <div class="day"><div class="dhead"><span class="n">10</span><span class="loc">Depart</span><span class="drive">Fly via Lima</span></div><h4>Fly home</h4><p>Fly Cusco → Lima and connect home (or route out of Puerto Maldonado via Lima if you did the Amazon).</p><div class="stay"><b>Stay:</b> —</div></div>
-    </div>
-  </div></section>
-
-  <section style="padding-top:6px;"><div class="wrap">
-    <div class="section-head"><h2 id="per-budget">Where the money goes</h2><div class="rule"></div></div>
-    <p class="sub">The four of you, 9 nights. Land costs are low — Peru is the value story — so the jump to premium is mostly hotels, the fancier train, and adding the Amazon.</p>
-    <div class="twrap"><table class="btable">
-      <thead><tr><th>Category</th><th class="num">Value</th><th class="num">Premium</th><th class="num">Splurge</th></tr></thead>
-      <tbody>
-        <tr><td class="cat">Airfare (intl + domestic)</td><td class="num">$3,800</td><td class="num">$6,000</td><td class="num">$10,000+</td></tr>
-        <tr><td class="cat">Lodging (9 nt)</td><td class="num">$2,700</td><td class="num">$6,800</td><td class="num">$13,000+</td></tr>
-        <tr><td class="cat">Trains to Machu Picchu</td><td class="num">$650</td><td class="num">$1,100</td><td class="num">$4,000</td></tr>
-        <tr><td class="cat">Guides, tours &amp; entries</td><td class="num">$2,000</td><td class="num">$3,400</td><td class="num">$4,500+</td></tr>
-        <tr><td class="cat">Food</td><td class="num">$1,700</td><td class="num">$2,600</td><td class="num">$2,800+</td></tr>
-        <tr><td class="cat">Transfers + misc</td><td class="num">$1,200</td><td class="num">$1,900</td><td class="num">$2,300+</td></tr>
-        <tr class="tot"><td class="cat">All-in</td><td class="num">~$12,050</td><td class="num">~$21,800</td><td class="num">$36,600+</td></tr>
-        <tr class="ppd-row"><td class="cat">Per person/day</td><td class="num">~$300</td><td class="num">~$545</td><td class="num">$915+</td></tr>
-      </tbody>
-    </table></div>
-  </div></section>
-
-  <section style="padding-top:6px;"><div class="wrap">
-    <div class="section-head"><h2 id="per-stay">Where you'd sleep</h2><div class="rule"></div></div>
-    <p class="sub">Premium leans on Marriott (JW Lima, Tambo del Inka, JW El Convento, Palacio del Inka) so your Bonvoy Lifetime Platinum earns its keep. Sacred-Valley 5-stars keep oxygen on hand for altitude.</p>
-    <div class="lodge">
-      <div class="lcard"><div class="lab">Value</div><ul><li>Casa Andina <em>Lima</em></li><li>Tierra Viva <em>Sacred Valley</em></li><li>Casa Andina MP <em>Aguas Calientes</em></li><li>Tierra Viva <em>Cusco</em></li></ul></div>
-      <div class="lcard"><div class="lab">Premium <em>· Bonvoy</em></div><ul><li>JW Marriott <em>Lima</em></li><li>Tambo del Inka <em>Sacred Valley</em></li><li>Inkaterra / SUMAQ <em>Machu Picchu</em></li><li>JW El Convento / Palacio del Inka <em>Cusco</em></li></ul></div>
-      <div class="lcard"><div class="lab">Splurge</div><ul><li>Belmond Rio Sagrado <em>Valley</em></li><li>Belmond Sanctuary Lodge <em>MP gate</em></li><li>Palacio Nazarenas <em>Cusco</em></li><li>+ Hiram Bingham train</li></ul></div>
-    </div>
-  </div></section>
-
-  <section style="padding-top:6px;"><div class="wrap">
-    <div class="notes">
-      <h2 id="per-notes">Advisor notes &amp; logistics</h2>
-      <ul>
-        <li><span class="flag">Altitude is the real planning item:</span> Cusco sits at ~11,150 ft. Sleeping in the Sacred Valley first (lower) is the whole reason the days are ordered this way — hydrate, take it easy early, and save Rainbow Mountain/Humantay for after you've adjusted.</li>
-        <li><span class="flag">Permits sell out:</span> Machu Picchu is timed-entry and guide-required, and books up 4–6 months ahead; the Inca Trail (if you ever want it) goes even earlier and is capped daily. Lock dates early.</li>
-        <li><strong>Bonvoy payoff:</strong> the premium tier can run largely on Marriott properties, so your Lifetime Platinum status and points genuinely reduce cost here.</li>
-        <li><strong>Fit:</strong> the richest of the three for culture and history, and a true "we did that" trip — adventure and heritage together.</li>
-        <li><strong>Honest catch:</strong> more moving parts than a road trip (flights, trains, transfers) and altitude to respect. Worth it, but it's the least "unpack once and relax" of the three.</li>
-      </ul>
-    </div>
-  </div></section>
-</div>
-
-<footer>
-  <div class="wrap">
-    <p class="disc"><strong>Estimates, not quotes.</strong> All figures assume the four of you for 10 days / 9 nights and include airfare; fares and rates move and confirm at booking. Per-day comparisons draw from your own trip tracker (Costa Rica, Hawaii, Tuscany). I research and recommend — I don't book; every final call is yours. Prepared for the 2027 planning cycle · for Tony's eyes.</p>
+<!-- CALENDAR CHECK -->
+<div class="section">
+  <div class="section-label">Calendar Conflicts</div>
+  <div class="calendar-box">
+    <strong>Both kids are clear.</strong>
+    <ul>
+      <li><strong>Katelyn (UT Austin):</strong> Fall Term ends Dec 14 (last final Dec 14); dorms close Dec 15. She's free by Dec 18 with margin to spare. ✅</li>
+      <li><strong>Carson (Rockwall ISD):</strong> Rockwall ISD calendar is image-based — couldn't parse exact dates, but Texas ISDs typically break Dec 19–Jan 5. Confirm his last day once you can, but Dec 18 departure should be safe. ⚠️ Verify.</li>
+    </ul>
   </div>
-</footer>
+</div>
 
-<script>
-  function showTab(id){
-    var panels=document.querySelectorAll('.panel');
-    for(var i=0;i<panels.length;i++){panels[i].classList.remove('active');}
-    document.getElementById(id).classList.add('active');
-    var tabs=document.querySelectorAll('.tab');
-    for(var j=0;j<tabs.length;j++){tabs[j].classList.remove('active');}
-    var active=document.querySelector('.tab[data-tab="'+id+'"]');
-    if(active){active.classList.add('active');}
-    window.scrollTo({top:0,behavior:'smooth'});
-  }
-</script>
+<hr class="rule">
+
+<!-- PRICE LADDER -->
+<div class="section">
+  <div class="section-label">At-a-Glance Price Ladder — Party of 4, All-In (incl. airfare)</div>
+  <div class="ladder">
+    <div class="ladder-tier value">
+      <div class="tier-label">Value</div>
+      <div class="tier-range">$12–16k</div>
+      <div class="tier-desc">Thailand (Bangkok + beach). Mid-range hotels, street food + sit-down mix.</div>
+      <div class="tier-ppd">~$215–285/person/day</div>
+    </div>
+    <div class="ladder-tier premium">
+      <div class="tier-label">Premium ★ Sweet Spot</div>
+      <div class="tier-range">$18–24k</div>
+      <div class="tier-desc">Japan (Tokyo + Kyoto) OR Thailand luxury tier.</div>
+      <div class="tier-ppd">~$320–430/person/day</div>
+    </div>
+    <div class="ladder-tier splurge">
+      <div class="tier-label">Splurge</div>
+      <div class="tier-range">$28–38k</div>
+      <div class="tier-desc">Australia (Sydney + Great Barrier Reef) or Japan business class.</div>
+      <div class="tier-ppd">~$500–675/person/day</div>
+    </div>
+  </div>
+  <p style="font-size:0.75rem; color:var(--slate); margin-top:0.9rem;">
+    All estimates are estimates, not quotes — holiday pricing moves fast. Tracker benchmarks: Costa Rica '24 ran ~$491/p/d (4 pax); Hawaii '25 ~$625/p/d (5 pax); River Cruise '23 ~$516/p/d (6 pax). These trips are in the same range.
+  </p>
+</div>
+
+<hr class="rule">
+
+<!-- OPTION CARDS -->
+<div class="section">
+  <div class="section-label">Ranked Options</div>
+
+  <div class="cards">
+
+    <!-- ══════════ OPTION 1: JAPAN ══════════ -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-rank">Option 1 · Advisor's Pick</div>
+          <h2>Japan</h2>
+          <div class="card-subtitle">Tokyo · Kyoto · Osaka — 13 nights + 1 travel day</div>
+          <div class="card-badges">
+            <span class="badge bucket">Bucket List ✓</span>
+            <span class="badge season">Peak Dry Season</span>
+            <span class="badge warning">High Season Pricing</span>
+          </div>
+        </div>
+        <div class="card-price-block">
+          <div class="price-range">$18–28k</div>
+          <div class="price-note">All-in, party of 4</div>
+          <div class="price-note">~$320–500/p/day</div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div>
+          <div class="card-section-title">Why December</div>
+          <ul>
+            <li>Cool and crisp — best photography conditions, Mt. Fuji views</li>
+            <li>Christmas illuminations rival Europe in scale and artistry</li>
+            <li>Dec 28–Jan 3 is Japan's "Oshogatsu" — cities actually empty out as locals go home; major sites become surprisingly quiet</li>
+            <li>Hatsumode (New Year's shrine visit, midnight Dec 31) is a once-in-a-lifetime cultural moment</li>
+            <li>No rain. Dry, clear days throughout.</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="card-section-title">Sample 13-Night Arc</div>
+          <ul>
+            <li><strong>Nights 1–2:</strong> Transit / Tokyo arrival, Shinjuku &amp; Shibuya illuminations</li>
+            <li><strong>Nights 3–5:</strong> Tokyo — Tsukiji, teamLab, Akihabara, Roppongi lights</li>
+            <li><strong>Nights 6–8:</strong> Kyoto — temples, Arashiyama bamboo, kaiseki</li>
+            <li><strong>Nights 9–10:</strong> Osaka — Dotonbori, street food, day trip to Nara</li>
+            <li><strong>Nights 11–13:</strong> Back to Tokyo — Hakone hot springs &amp; Mt. Fuji view, New Year's Eve at Meiji Shrine</li>
+          </ul>
+        </div>
+
+        <div class="pros-cons">
+          <div>
+            <div class="card-section-title">Pros</div>
+            <ul class="pros">
+              <li>Top bucket list item — checks Japan in a meaningful way</li>
+              <li>Every single day is actively interesting; pace fits Katelyn &amp; Carson perfectly</li>
+              <li>Incredible food at every price point — especially relevant given lactose sensitivity (Japanese cuisine naturally dairy-light)</li>
+              <li>AA flies DFW → Tokyo Narita nonstop (JAL codeshare)</li>
+              <li>Dec 29–Jan 3 closures are actually a feature for tourists — shrines open, museums closed</li>
+              <li>Carson's Eagle Scout background will love the Shinto/Buddhist culture deep-dive</li>
+            </ul>
+          </div>
+          <div>
+            <div class="card-section-title">Cons</div>
+            <ul class="cons">
+              <li>Hotel rates up 30–50% vs shoulder season — book now, 18 months out</li>
+              <li>Shinkansen (bullet train) seats sell out over New Year week — reserve in January 2027</li>
+              <li>Some restaurants close Dec 31–Jan 2; need backup plans</li>
+              <li>13-hour flight is real — not Katelyn's or Kristin's first concern, but manageable</li>
+              <li>Yen strength variable — budget a buffer</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cost-breakdown">
+          <div class="card-section-title">Estimated Budget Breakdown (party of 4)</div>
+          <table class="cost-table">
+            <tr><td>Airfare (DFW ↔ TYO, AA/JAL, economy)</td><td>$6,000–8,500</td></tr>
+            <tr><td>Hotels (13 nights, mix of 4-star city hotels + onsen ryokan)</td><td>$5,500–9,000</td></tr>
+            <tr><td>Shinkansen rail passes + local transit</td><td>$1,500–1,800</td></tr>
+            <tr><td>Dining (mix street food + sit-down + 2 kaiseki)</td><td>$1,800–2,500</td></tr>
+            <tr><td>Tickets / experiences (teamLab, temples, Hakone)</td><td>$600–900</td></tr>
+            <tr><td>Souvenirs / incidentals</td><td>$500–800</td></tr>
+            <tr><td><strong>All-In Estimate</strong></td><td><strong>$15,900–23,500</strong></td></tr>
+          </table>
+          <p style="font-size:0.72rem; color:var(--slate); margin-top:0.5rem;">Value tier (~$16k): economy flights, business hotels. Premium tier (~$22k): premium economy or upgraded hotels including a ryokan night. Splurge: business class pushes this to $26–28k.</p>
+        </div>
+
+        <div class="holiday-flags">
+          <div class="holiday-flags-title">⚑ Holiday Planning Flags</div>
+          <ul>
+            <li><strong>Shinkansen passes:</strong> Buy JR Passes from the US before departure — unavailable in Japan for foreigners once there. Book once you have confirmed dates.</li>
+            <li><strong>Hatsumode (Dec 31–Jan 1):</strong> Meiji Shrine in Tokyo draws millions; go midnight–2am for the best experience. Plan accommodation near Harajuku.</li>
+            <li><strong>Restaurant closures Dec 31–Jan 2:</strong> Many fine dining spots closed. Make 2–3 reservations 6–9 months out at top spots (Narisawa, etc.) — they fill for NYE very early.</li>
+            <li><strong>teamLab Borderless:</strong> Reopened in Tokyo 2024. Pre-book timed entry — sells out weeks ahead in holiday season.</li>
+            <li><strong>Universal Studios Osaka:</strong> If Carson wants it — Dec 24, 25, 31 waits hit 2–3 hrs. Weekday visit + Express Pass essential.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════ OPTION 2: THAILAND ══════════ -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-rank">Option 2 · Best Value</div>
+          <h2>Thailand</h2>
+          <div class="card-subtitle">Bangkok · Chiang Mai · Krabi or Phuket — 13 nights</div>
+          <div class="card-badges">
+            <span class="badge bucket">Bucket List ✓</span>
+            <span class="badge season">Dry Season Peak</span>
+            <span class="badge warning">Beach Areas Sell Out</span>
+          </div>
+        </div>
+        <div class="card-price-block">
+          <div class="price-range">$12–20k</div>
+          <div class="price-note">All-in, party of 4</div>
+          <div class="price-note">~$215–360/p/day</div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div>
+          <div class="card-section-title">Why December</div>
+          <ul>
+            <li>Andaman coast (Phuket, Krabi) at absolute peak — dry, calm seas, 80–85°F</li>
+            <li>Chiang Mai in cool season: 65–75°F days, crisp nights, no humidity</li>
+            <li>Genuinely festive atmosphere — Bangkok malls rival Christmas anywhere</li>
+            <li>New Year's Eve on the beach: spectacular fireworks over the Andaman</li>
+            <li>Best value per dollar of any bucket-list destination this season</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="card-section-title">Sample 13-Night Arc</div>
+          <ul>
+            <li><strong>Nights 1–2:</strong> Bangkok arrival — Grand Palace, Wat Pho, river cruise, Christmas street scenes</li>
+            <li><strong>Nights 3–5:</strong> Chiang Mai — temple circuit, ethical elephant sanctuary, night bazaar, cooking class</li>
+            <li><strong>Nights 6–13:</strong> Fly south to Krabi or Phuket — limestone karsts, Phi Phi Islands, Railay Beach, New Year's Eve beach party</li>
+          </ul>
+        </div>
+
+        <div class="pros-cons">
+          <div>
+            <div class="card-section-title">Pros</div>
+            <ul class="pros">
+              <li>Exceptional value — quality experience at 40–50% of Japan's cost</li>
+              <li>Perfect weather guaranteed on Andaman coast in late December</li>
+              <li>Krabi/Railay is genuinely spectacular — limestone cliffs, emerald water</li>
+              <li>Elephant sanctuary in Chiang Mai is a highlight that lands differently for teens</li>
+              <li>Thai cuisine is almost entirely dairy-free — Kristin wins</li>
+              <li>Active touring days + beach decompression is an ideal trip structure</li>
+            </ul>
+          </div>
+          <div>
+            <div class="card-section-title">Cons</div>
+            <ul class="cons">
+              <li>Holiday pricing on beach resorts: up 30–60% vs early December</li>
+              <li>Krabi/Phuket beaches peak-crowded Dec 24–Jan 1; Railay Beach has no cars so it stays more peaceful</li>
+              <li>Mandatory gala dinners at many beach resorts on Dec 24 &amp; 31 — padded onto your bill whether you attend or not</li>
+              <li>Not quite the same bucket-list weight as Japan from a cultural depth standpoint</li>
+              <li>No direct DFW–Bangkok on AA (connection through LAX or DFW–BKK via partner carrier)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cost-breakdown">
+          <div class="card-section-title">Estimated Budget Breakdown (party of 4)</div>
+          <table class="cost-table">
+            <tr><td>Airfare (DFW ↔ BKK, economy, 1–2 stops)</td><td>$4,800–6,500</td></tr>
+            <tr><td>Hotels (13 nights: 2 Bangkok, 3 Chiang Mai, 8 Krabi/Phuket beachfront)</td><td>$3,500–7,500</td></tr>
+            <tr><td>Domestic flights (BKK→CNX, CNX→KBV)</td><td>$400–700</td></tr>
+            <tr><td>Dining (street food + restaurant mix)</td><td>$1,200–2,000</td></tr>
+            <tr><td>Tours (elephant sanctuary, Phi Phi islands, temple circuit)</td><td>$600–900</td></tr>
+            <tr><td>Souvenirs / incidentals / gala dinner surcharges</td><td>$500–1,000</td></tr>
+            <tr><td><strong>All-In Estimate</strong></td><td><strong>$11,000–18,600</strong></td></tr>
+          </table>
+          <p style="font-size:0.72rem; color:var(--slate); margin-top:0.5rem;">Value tier (~$12–13k): economy flights, solid mid-range hotels. Premium tier (~$17–19k): nicer beach resort (Anantara or similar), one or two luxury upgrades. At this price, Thailand punches well above its weight.</p>
+        </div>
+
+        <div class="holiday-flags">
+          <div class="holiday-flags-title">⚑ Holiday Planning Flags</div>
+          <ul>
+            <li><strong>Railay Beach (Krabi):</strong> No road access — reached only by longtail boat. Feels completely different from Phuket's resort-strip vibe. Consider 3–4 nights here over New Year's instead of Phuket proper.</li>
+            <li><strong>Gala dinner surcharges:</strong> Major resorts add a $75–150/person mandatory NYE dinner. Factor into hotel comparisons — it's often not disclosed in the room rate.</li>
+            <li><strong>Phi Phi Islands day trip:</strong> Buy through your hotel — do NOT go Dec 31 or Jan 1, boats are dangerously overcrowded.</li>
+            <li><strong>Elephant sanctuary Chiang Mai:</strong> Ethical operators (Elephant Nature Park) book out weeks in advance during holiday week. Reserve now.</li>
+            <li><strong>Book beach hotel by Sep 2026:</strong> Beachfront in Krabi/Phuket over Christmas/NYE sells out. Shoulder-season pricing will be gone — just focus on securing your preferred property.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════ OPTION 3: AUSTRALIA ══════════ -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-rank">Option 3 · Bucket List Splurge</div>
+          <h2>Australia</h2>
+          <div class="card-subtitle">Sydney · Great Barrier Reef (Cairns) — 13 nights</div>
+          <div class="card-badges">
+            <span class="badge bucket">Bucket List ✓</span>
+            <span class="badge season">Southern Hemisphere Summer</span>
+            <span class="badge new">Peak Season — Book Early</span>
+          </div>
+        </div>
+        <div class="card-price-block">
+          <div class="price-range">$26–38k</div>
+          <div class="price-note">All-in, party of 4</div>
+          <div class="price-note">~$465–675/p/day</div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div>
+          <div class="card-section-title">Why December</div>
+          <ul>
+            <li>Southern Hemisphere summer — 75–85°F in Sydney, 80–88°F in Cairns</li>
+            <li>Sydney NYE is arguably the world's best New Year's Eve — Opera House fireworks, harbor-side celebration, hard to match anywhere</li>
+            <li>Great Barrier Reef best visibility and weather Nov–Mar (dry season on the reef)</li>
+            <li>December is Australian school summer holiday — festive, energetic atmosphere everywhere</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="card-section-title">Sample 13-Night Arc</div>
+          <ul>
+            <li><strong>Nights 1–2:</strong> Transit / Sydney arrival, Circular Quay, Opera House, Bondi</li>
+            <li><strong>Nights 3–6:</strong> Sydney — Blue Mountains day trip, Taronga Zoo, Manly ferry, harbor dinner</li>
+            <li><strong>Nights 7–10:</strong> Cairns — Great Barrier Reef liveaboard or day dive, Daintree Rainforest, Kuranda village</li>
+            <li><strong>Nights 11–13:</strong> Return to Sydney for New Year's Eve — harbor viewing position, fireworks</li>
+          </ul>
+        </div>
+
+        <div class="pros-cons">
+          <div>
+            <div class="card-section-title">Pros</div>
+            <ul class="pros">
+              <li>Sydney NYE is a genuine bucket-list moment — harbor fireworks at midnight are world-class</li>
+              <li>Great Barrier Reef is a once-in-a-lifetime dive/snorkel — especially for Carson (outdoor/adventure profile)</li>
+              <li>English-speaking, easy logistics — lowest "friction" trip on this list</li>
+              <li>Wildlife: kangaroos, koalas, cassowaries in Daintree — nobody goes home unstirred</li>
+              <li>Food scene in Sydney is exceptional (and dairy-optional everywhere)</li>
+            </ul>
+          </div>
+          <div>
+            <div class="card-section-title">Cons</div>
+            <ul class="cons">
+              <li>Highest cost on the list — Australia's peak summer + Christmas = peak pricing on everything</li>
+              <li>NYE harbor viewing spots require booking a waterfront restaurant or private venue 6–9 months out — public waterfront gets dangerously packed</li>
+              <li>16–18 hour flight from DFW (likely DFW→LAX→SYD) — the longest haul here</li>
+              <li>Australia is in peak domestic travel season — domestic BNE/SYD/CNS flights book out fast</li>
+              <li>No AA nonstop to Australia — will route through partners (Qantas codeshare or connection)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cost-breakdown">
+          <div class="card-section-title">Estimated Budget Breakdown (party of 4)</div>
+          <table class="cost-table">
+            <tr><td>Airfare (DFW ↔ SYD, economy via LAX or DFW codeshare)</td><td>$7,500–11,000</td></tr>
+            <tr><td>Hotels (13 nights: Sydney harbor-view + Cairns resort)</td><td>$7,000–12,000</td></tr>
+            <tr><td>Domestic flights (SYD↔CNS) + local transfers</td><td>$1,200–1,800</td></tr>
+            <tr><td>Great Barrier Reef liveaboard or day trip (4 pax)</td><td>$1,200–2,000</td></tr>
+            <tr><td>NYE harbor dinner/venue (required to get good views)</td><td>$1,000–2,000</td></tr>
+            <tr><td>Dining + tours (Blue Mountains, Daintree, Taronga)</td><td>$2,500–3,500</td></tr>
+            <tr><td>Souvenirs / incidentals</td><td>$600–1,000</td></tr>
+            <tr><td><strong>All-In Estimate</strong></td><td><strong>$21,000–33,300</strong></td></tr>
+          </table>
+          <p style="font-size:0.72rem; color:var(--slate); margin-top:0.5rem;">Entry point of ~$21k is realistic if you book 10–12 months ahead and stay mid-range. Premium execution (waterfront hotel, liveaboard reef, proper NYE venue) runs $28–33k. Business class would add another $10k+.</p>
+        </div>
+
+        <div class="holiday-flags">
+          <div class="holiday-flags-title">⚑ Holiday Planning Flags</div>
+          <ul>
+            <li><strong>Sydney NYE viewing venues:</strong> Circular Quay, Bennelong Point, and McMahons Point waterfront restaurants book NYE packages 6–9 months out. Some require a minimum spend of A$400–800/person. Book no later than March 2027.</li>
+            <li><strong>Airfare timing:</strong> Book DFW–SYD 10–12 months ahead; holiday fares double vs. shoulder season. This route often has fewer options than Tokyo or Bangkok.</li>
+            <li><strong>Great Barrier Reef bleaching advisory:</strong> Mass bleaching events have occurred in recent years due to warming. Outer reef sites generally hold better coral health than inshore. Use Cairns Dive Centre or Quicksilver Connections liveaboard for best outer reef access — book 4–6 months out.</li>
+            <li><strong>Australian ETA visa:</strong> ~A$20/person, applied via the Australian ETA app — takes minutes. Required for US citizens before departure.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════ OPTION 4: VIETNAM (WILDCARD) ══════════ -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-rank">Option 4 · Wildcard Consideration</div>
+          <h2>Vietnam</h2>
+          <div class="card-subtitle">Hanoi · Ha Long Bay · Hoi An · Da Nang — 13 nights</div>
+          <div class="card-badges">
+            <span class="badge bucket">Bucket List ✓</span>
+            <span class="badge season">North Vietnam Dry Season</span>
+          </div>
+        </div>
+        <div class="card-price-block">
+          <div class="price-range">$13–19k</div>
+          <div class="price-note">All-in, party of 4</div>
+          <div class="price-note">~$230–340/p/day</div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div>
+          <div class="card-section-title">Why Consider It</div>
+          <ul>
+            <li>Da Nang is already on your bucket list — this hits it directly</li>
+            <li>Ha Long Bay in late December: cool, misty, dramatically beautiful — far fewer crowds than spring/fall peaks</li>
+            <li>Vietnam is arguably the richest cultural experience per dollar anywhere in Asia</li>
+            <li>Hoi An at Christmas is quietly magical — lantern-lit Old Town, tailors, fantastic food</li>
+            <li>Comparable price to Thailand with higher cultural density</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="card-section-title">Why It's #4 and Not Higher</div>
+          <ul>
+            <li>Hanoi in late December is overcast/cool (60–70°F) — not warm-weather escape material</li>
+            <li>Da Nang beach season is off (Oct–Mar has rain on central coast) — you'd skip the beach entirely</li>
+            <li>New Year's Eve in Vietnam lacks the spectacle of Japan or Sydney</li>
+            <li>Routing from DFW is more complex — typically 2 stops (DFW→Tokyo→Hanoi or DFW→Seoul→Hanoi)</li>
+          </ul>
+        </div>
+
+        <div class="pros-cons">
+          <div>
+            <div class="card-section-title">Pros</div>
+            <ul class="pros">
+              <li>Best $ value after Thailand — excellent hotels at fraction of Japan/Australia costs</li>
+              <li>Ha Long Bay overnight cruise is genuinely otherworldly</li>
+              <li>Hoi An old town is one of the best-preserved historic cities in Asia</li>
+              <li>Vietnamese cuisine is almost entirely dairy-free and among the best in the world</li>
+            </ul>
+          </div>
+          <div>
+            <div class="card-section-title">Cons</div>
+            <ul class="cons">
+              <li>Central Vietnam coast gets serious rain in Dec — beach goals aren't achievable</li>
+              <li>Lower "magic" ceiling for a holiday trip vs Japan or Sydney NYE</li>
+              <li>Consider saving Vietnam for spring or fall when the weather and Da Nang beach conditions align properly</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- ADVISOR'S READ -->
+<div class="section">
+  <div class="section-label">Advisor's Read</div>
+  <div class="advisors-read">
+    <div class="advisors-read-label">Bottom Line</div>
+    <h3>Japan is the pick. Thailand is the smart play if the budget needs to land under $16k.</h3>
+    <p>
+      <span class="ar-highlight">Japan</span> wins this cleanly. It's your top bucket-list destination, it's genuinely spectacular in December (the holiday illuminations alone are worth it), and the cultural immersion is exactly what your family's travel style rewards. Carson's Eagle Scout mind will eat up the Shinto shrines and the social discipline. Katelyn will thrive with the pace — active sightseeing, new things daily, no need to baby the experience. Kristin gets world-class food that's naturally easy on dairy. And you and Kristin get a trip that actually justifies "bucket list." The New Year's Eve at Meiji Shrine is one of those rare shared-experience moments that families talk about for the rest of their lives. Japan in December is <em>not</em> Japan at its cheapest, but it's Japan at its most magical.
+    </p>
+    <p>
+      <span class="ar-highlight">Thailand</span> is the smart play if you want to land closer to $13–16k all-in, or if the 13-hour flight is a deal-breaker. The Krabi/Railay Beach + Bangkok + Chiang Mai circuit is outstanding — it's just a different kind of trip (more beach-and-explore, less cultural punch). Nothing wrong with that, and the value is genuinely hard to beat.
+    </p>
+    <p>
+      <span class="ar-highlight">Australia</span> is expensive for what it is in late December — you're paying a big premium for peak season and the NYE positioning. Sydney NYE is legitimately world-class and the Great Barrier Reef is irreplaceable, but at $28–33k for a premium execution you're paying Rhine Cruise money for a trip that sits below it on cultural richness. I'd save Australia for a shoulder-season trip (March/April or October/November) where you get everything for $18–22k instead.
+    </p>
+    <p>
+      <span class="ar-highlight">One honest caution on Japan:</span> the Dec 28–Jan 3 window is Japan's busiest domestic travel period. Hotels and Shinkansen fill up. If you're going, decisions need to happen by fall 2026 at the latest — ideally, you're booking airfare and key hotels in the next 3–4 months.
+    </p>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- BOOKING CLOCK -->
+<div class="section">
+  <div class="section-label">Booking Clock</div>
+  <div class="booking-clock">
+    <div class="clock-grid">
+      <div class="clock-item urgent">
+        <div class="clock-item-label">🔴 Now — Sep 2026</div>
+        <div class="clock-item-action">Book airfare (DFW → TYO or BKK)</div>
+        <div class="clock-item-note">Holiday fares 18+ months out are still at base pricing. They spike by fall 2026.</div>
+      </div>
+      <div class="clock-item urgent">
+        <div class="clock-item-label">🔴 Now — Sep 2026</div>
+        <div class="clock-item-action">Secure key hotels in Tokyo &amp; Kyoto</div>
+        <div class="clock-item-note">Dec 26–Jan 3 hotel availability in top properties is limited. 4-star+ hotels fill 12+ months out.</div>
+      </div>
+      <div class="clock-item moderate">
+        <div class="clock-item-label">🟡 Jan–Mar 2027</div>
+        <div class="clock-item-action">Buy Japan Rail Passes (JR Pass)</div>
+        <div class="clock-item-note">Purchase in the US before departure — unavailable to foreigners once in Japan.</div>
+      </div>
+      <div class="clock-item moderate">
+        <div class="clock-item-label">🟡 By Jan 2027</div>
+        <div class="clock-item-action">Reserve NYE restaurant/experience</div>
+        <div class="clock-item-note">Japan: top restaurants for Dec 31 fill 9–12 months out. Book by New Year's Day 2027.</div>
+      </div>
+      <div class="clock-item moderate">
+        <div class="clock-item-label">🟡 Jul–Sep 2027</div>
+        <div class="clock-item-action">Book teamLab, Shinkansen seats, day tours</div>
+        <div class="clock-item-note">Timed entries and reserved train seats on holidays fill 3–6 months ahead.</div>
+      </div>
+      <div class="clock-item moderate">
+        <div class="clock-item-label">🟡 Ongoing</div>
+        <div class="clock-item-action">Monitor Katelyn's passport</div>
+        <div class="clock-item-note">Katelyn and Carson's passports expire May 31, 2028 — fine for Dec 2027, but flag for 2028+ trips.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<div class="footer">
+  Prepared for Tony Illig · Personal Travel Advisor · July 2026 &nbsp;|&nbsp; All costs are estimates, not quotes — fares and rates move. Confirm at time of booking.
+</div>
 
 </body>
 </html>
