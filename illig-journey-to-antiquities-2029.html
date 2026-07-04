@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Journey to Antiquities — Illig Family · Summer 2029</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16232e; --ink-soft:#45535e; --paper:#f3ede1; --card:#fbf8f1;
+    --line:#e3dac7; --brass:#a9803f; --terra:#b0553a; --sea:#2f6d86;
+    --gold-tint:#efe4cc; --terra-tint:#efd9cf; --sea-tint:#d9e6ec;
+    --shadow:0 1px 2px rgba(22,35,46,.05), 0 6px 22px rgba(22,35,46,.06);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Inter",system-ui,sans-serif;font-size:16px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:760px;margin:0 auto}
+
+  /* header */
+  header{background:radial-gradient(120% 90% at 85% -10%, rgba(169,128,63,.28), transparent 60%), var(--ink);color:var(--paper);padding:34px 20px 26px}
+  .eyebrow{font-family:"Spline Sans Mono",monospace;font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:#d9c9a6;margin:0 0 14px;display:flex;align-items:center;gap:9px}
+  .eyebrow::before{content:"";width:22px;height:1.5px;background:var(--brass);display:inline-block}
+  h1{font-family:"Fraunces",serif;font-weight:500;font-optical-sizing:auto;font-size:clamp(31px,8.5vw,46px);line-height:1.02;letter-spacing:-.01em;margin:0 0 6px}
+  h1 em{font-style:italic;color:#e7c98d;font-weight:400}
+  .lede{margin:10px 0 20px;color:#cdd6dd;font-size:15px;max-width:46ch}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-family:"Spline Sans Mono",monospace;font-size:11.5px;letter-spacing:.04em;padding:6px 11px;border-radius:999px;border:1px solid rgba(231,201,141,.4);color:#f0e7d3;background:rgba(255,255,255,.04);white-space:nowrap}
+
+  /* jump nav */
+  .tabbar{position:sticky;top:0;z-index:30;background:rgba(243,237,225,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;gap:8px;overflow-x:auto;padding:11px 16px;border-bottom:1px solid var(--line);scrollbar-width:none}
+  .tabbar::-webkit-scrollbar{display:none}
+  .tab{flex:0 0 auto;white-space:nowrap;cursor:pointer;text-decoration:none;font-family:"Spline Sans Mono",monospace;font-size:11.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:9px 15px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink-soft);transition:background .18s,color .18s,border-color .18s}
+  .tab.is-active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .tab:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+
+  /* sections — all visible, jump targets */
+  main{padding:24px 20px 8px}
+  .section{scroll-margin-top:72px}
+  .section + .section{margin-top:30px;padding-top:26px;border-top:1px solid var(--line)}
+
+  .sec-head{margin:2px 0 18px}
+  .sec-eyebrow{font-family:"Spline Sans Mono",monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 6px;display:flex;align-items:center;gap:8px}
+  .sec-eyebrow::before{content:"";width:16px;height:1.5px;background:var(--brass)}
+  .sec-title{font-family:"Fraunces",serif;font-weight:500;font-size:26px;line-height:1.1;margin:0;letter-spacing:-.01em}
+  .sec-note{color:var(--ink-soft);font-size:14.5px;margin:8px 0 0}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:18px 18px}
+  .card + .card{margin-top:14px}
+  .card h3{font-family:"Fraunces",serif;font-weight:600;font-size:19px;margin:0 0 10px;letter-spacing:-.01em}
+  .mini-label{font-family:"Spline Sans Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+
+  /* route ribbon */
+  .ribbon-wrap{overflow-x:auto;scrollbar-width:none;margin:0 -20px;padding:2px 20px 6px}
+  .ribbon-wrap::-webkit-scrollbar{display:none}
+  .ribbon{display:flex;align-items:flex-start;min-width:max-content;gap:0}
+  .stop{display:flex;flex-direction:column;align-items:center;width:92px;text-align:center}
+  .stop .pin{width:15px;height:15px;border-radius:50%;background:var(--terra);box-shadow:0 0 0 3px var(--paper),0 0 0 4.5px var(--brass);margin-bottom:9px}
+  .stop.start .pin,.stop.end .pin{background:var(--ink)}
+  .stop .place{font-family:"Fraunces",serif;font-size:15px;font-weight:600;line-height:1.1}
+  .stop .sub{font-family:"Spline Sans Mono",monospace;font-size:10px;color:var(--ink-soft);letter-spacing:.05em;margin-top:3px}
+  .leg{flex:0 0 auto;height:2px;width:26px;margin-top:6.5px;background:var(--brass);opacity:.55;border-radius:2px}
+  .leg.sea{background:repeating-linear-gradient(90deg,var(--sea) 0 5px,transparent 5px 9px);opacity:.8}
+
+  /* timeline */
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin:0 0 16px}
+  .legend span{font-family:"Spline Sans Mono",monospace;font-size:11px;color:var(--ink-soft);display:flex;align-items:center;gap:7px}
+  .key{width:12px;height:12px;border-radius:50%;box-shadow:0 0 0 1px var(--brass)}
+  .key.land{background:var(--terra)}.key.sea{background:var(--sea)}.key.dock{background:var(--ink)}
+  .timeline{position:relative}
+  .timeline::before{content:"";position:absolute;left:19px;top:8px;bottom:10px;width:2px;background:linear-gradient(var(--brass),var(--brass));opacity:.5}
+  .day{position:relative;padding-left:48px;margin-bottom:16px}
+  .day:last-child{margin-bottom:4px}
+  .dot{position:absolute;left:12px;top:20px;width:16px;height:16px;border-radius:50%;background:var(--terra);border:3px solid var(--paper);box-shadow:0 0 0 1.5px var(--brass);z-index:2}
+  .dot.sea{background:var(--sea)}.dot.dock{background:var(--ink)}
+  .day-card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:16px 16px 15px}
+  .day-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:3px}
+  .day-num{font-family:"Spline Sans Mono",monospace;font-size:11px;letter-spacing:.14em;color:var(--ink-soft);text-transform:uppercase}
+  .day-tag{font-family:"Spline Sans Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:999px;white-space:nowrap}
+  .tag-land{background:var(--terra-tint);color:#7a3826}
+  .tag-sea{background:var(--sea-tint);color:#1f4d61}
+  .tag-dock{background:var(--gold-tint);color:#6b4f22}
+  .day-title{font-family:"Fraunces",serif;font-weight:600;font-size:20px;line-height:1.12;margin:2px 0 12px;letter-spacing:-.01em}
+  .slots{display:grid;gap:9px;margin:0 0 13px}
+  .slot{display:grid;grid-template-columns:74px 1fr;gap:10px;align-items:start}
+  .slot .when{font-family:"Spline Sans Mono",monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--brass);padding-top:3px}
+  .slot p{margin:0;font-size:14.5px}
+  .hilite{border-top:1px solid var(--line);padding-top:12px;margin-top:2px}
+  .hilite .mini-label{display:block;margin-bottom:7px}
+  .tags{display:flex;flex-wrap:wrap;gap:6px}
+  .tags b{font-weight:500;font-family:"Spline Sans Mono",monospace;font-size:11.5px;letter-spacing:.02em;background:#fff;border:1px solid var(--line);color:var(--ink);padding:5px 9px;border-radius:8px}
+  .tip{margin:11px 0 0;font-size:13.5px;color:var(--ink-soft)}
+  .tip .mini-label{color:var(--brass)}
+  .addon{margin:9px 0 0;font-size:13px}
+  .addon b{font-family:"Spline Sans Mono",monospace;font-weight:600}
+
+  .inc{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+  .inc li{display:grid;grid-template-columns:16px 1fr;gap:10px;font-size:14.5px;align-items:start}
+  .inc li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--brass);margin-top:9px}
+  .band{background:var(--ink);color:var(--paper);border-radius:14px;padding:18px 18px;box-shadow:var(--shadow)}
+  .band .mini-label{color:#d9c9a6}
+  .band .big{font-family:"Fraunces",serif;font-weight:500;font-size:32px;line-height:1;margin:8px 0 2px}
+  .band .split{display:flex;gap:22px;flex-wrap:wrap;margin-top:14px;padding-top:14px;border-top:1px solid rgba(231,201,141,.25)}
+  .band .split div span{display:block}
+  .band .split .n{font-family:"Spline Sans Mono",monospace;font-size:16px;color:#f0e7d3;margin-top:2px}
+  .band .split .k{font-family:"Spline Sans Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#a9b6be}
+
+  .rows{display:grid;gap:0}
+  .row{display:grid;grid-template-columns:1fr auto;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);align-items:baseline}
+  .row:last-child{border-bottom:0}
+  .row .r-name{font-size:14.5px}
+  .row .r-name small{display:block;color:var(--ink-soft);font-size:12.5px;margin-top:1px}
+  .row .r-val{font-family:"Spline Sans Mono",monospace;font-size:14px;font-weight:600;white-space:nowrap}
+
+  .flag{border:1px solid var(--terra);background:var(--terra-tint);border-radius:14px;padding:16px 16px;margin:0 0 14px}
+  .flag h3{font-family:"Fraunces",serif;font-size:18px;margin:0 0 7px;color:#7a3826}
+  .flag p{margin:0;font-size:14px;color:#5e2f22}
+  .flag p + p{margin-top:8px}
+
+  p.copy{font-size:14.5px}
+  .copy strong{font-weight:600}
+
+  footer{padding:22px 20px 34px;color:var(--ink-soft);font-size:12px;line-height:1.5;border-top:1px solid var(--line);margin-top:8px}
+  footer .fmark{font-family:"Spline Sans Mono",monospace;letter-spacing:.14em;text-transform:uppercase;font-size:10.5px;color:var(--brass);display:block;margin-bottom:6px}
+
+  @media (min-width:560px){ .slot{grid-template-columns:86px 1fr} }
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} *{animation:none!important;transition:none!important} }
+  @media print{
+    .tabbar{display:none}
+    .section + .section{border-top:0}
+    .day,.card,.day-card,.band,.flag{break-inside:avoid}
+    header{background:var(--ink)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    body{font-size:12px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Illig Family · Summer 2029</p>
+    <h1>Journey to <em>Antiquities</em></h1>
+    <p class="lede">Three days in Rome, then an eight-day Viking voyage tracing the classical world — Rome to Athens by way of Pompeii, Sicily, Crete and Ephesus.</p>
+    <div class="chips">
+      <span class="chip">11 days total</span>
+      <span class="chip">Party of 4</span>
+      <span class="chip">Viking Ocean · all-veranda</span>
+      <span class="chip">Rome → Athens</span>
+      <span class="chip">Est. $33–42k all-in</span>
+    </div>
+  </header>
+
+  <nav class="tabbar" aria-label="Jump to section">
+    <a class="tab" href="#overview">Overview</a>
+    <a class="tab" href="#rome">Rome · 3 days</a>
+    <a class="tab" href="#cruise">Cruise · 8 days</a>
+    <a class="tab" href="#costs">Costs</a>
+    <a class="tab" href="#notes">Good to know</a>
+  </nav>
+
+  <main>
+
+    <!-- OVERVIEW -->
+    <section class="section" id="overview">
+      <div class="sec-head">
+        <p class="sec-eyebrow">The route</p>
+        <h2 class="sec-title">One traced voyage, Rome to Athens</h2>
+        <p class="sec-note">Fly overnight from DFW, land in Rome for three days on your own, then board Viking at Civitavecchia and sail east. Swipe the route to see every stop.</p>
+      </div>
+
+      <div class="ribbon-wrap" aria-label="Route from Rome to Athens">
+        <div class="ribbon">
+          <div class="stop start"><span class="pin"></span><span class="place">Rome</span><span class="sub">3 nights + embark</span></div>
+          <span class="leg"></span>
+          <div class="stop"><span class="pin"></span><span class="place">Naples</span><span class="sub">Pompeii</span></div>
+          <span class="leg"></span>
+          <div class="stop"><span class="pin"></span><span class="place">Messina</span><span class="sub">Sicily</span></div>
+          <span class="leg sea"></span>
+          <div class="stop"><span class="pin"></span><span class="place">Crete</span><span class="sub">Souda Bay</span></div>
+          <span class="leg"></span>
+          <div class="stop"><span class="pin"></span><span class="place">Ephesus</span><span class="sub">Kuşadası</span></div>
+          <span class="leg sea"></span>
+          <div class="stop end"><span class="pin"></span><span class="place">Athens</span><span class="sub">disembark</span></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:6px">
+        <h3>The shape of the trip</h3>
+        <p class="copy" style="margin:0 0 10px">Depart DFW late on <strong>Day 0</strong> → land Rome <strong>Day 1</strong>. Three hotel nights in the city, board Viking the afternoon of <strong>Day 4</strong>, and disembark in Athens on <strong>Day 11</strong>. Fly home the same day, or tack on a night or two for the Acropolis.</p>
+        <p class="copy" style="margin:0"><span class="mini-label">Cruise</span> &nbsp;Viking <em>Journey to Antiquities</em> — 8 days / 7 nights, Rome (Civitavecchia) to Athens (Piraeus), calling at Naples, Messina, Crete and Ephesus with two restful days at sea.</p>
+      </div>
+
+      <div class="card">
+        <h3>What Viking includes</h3>
+        <ul class="inc">
+          <li>A private veranda in every stateroom, on a small ~930-guest ship — no kids, no casino</li>
+          <li>All meals, plus beer, wine &amp; soft drinks with lunch and dinner</li>
+          <li>Wi-Fi, and one guided shore excursion in every port</li>
+          <li>Enrichment lectures from a Resident Historian to set up each ancient site</li>
+        </ul>
+        <p class="tip"><span class="mini-label">Not included</span> &nbsp;Airfare, gratuities (~$18/person/day), your Rome days, and any optional excursions beyond the one bundled per port.</p>
+      </div>
+
+      <div class="band" style="margin-top:14px">
+        <span class="mini-label">Estimated all-in · party of 4</span>
+        <div class="big">$33,000 – $42,000</div>
+        <span class="copy" style="color:#cdd6dd;font-size:13.5px">Cruise + open-jaw airfare + 3 Rome nights + gratuities + a few optional tours. A planning estimate, not a quote.</span>
+        <div class="split">
+          <div><span class="k">Per person</span><span class="n">~$8,250–10,500</span></div>
+          <div><span class="k">Per person / day</span><span class="n">~$750–950</span></div>
+          <div><span class="k">To hold today</span><span class="n">$100 · 2 cabins</span></div>
+        </div>
+      </div>
+
+      <div class="flag" style="margin-top:14px">
+        <h3>Two things to handle early</h3>
+        <p><strong>Passports:</strong> Katelyn's and Carson's expire 31 May 2028 — before this trip. They'll each need a renewal (now adult 10-year passports), valid at least 3 months past your return. Yours and Kristin's are good through 2032.</p>
+        <p><strong>Timing:</strong> Viking is 18+, so the sailing must depart on or after 23 June 2029 (Carson's 18th). Aim for a July departure.</p>
+      </div>
+    </section>
+
+    <!-- ROME -->
+    <section class="section" id="rome">
+      <div class="sec-head">
+        <p class="sec-eyebrow">Pre-cruise · Days 1–4</p>
+        <h2 class="sec-title">Three days in Rome</h2>
+        <p class="sec-note">A gentle arrival, then the two great days every first-timer wants — ancient Rome and the Vatican — before you sail.</p>
+      </div>
+
+      <div class="legend">
+        <span><i class="key dock"></i> Arrival / travel</span>
+        <span><i class="key land"></i> On land</span>
+      </div>
+
+      <div class="timeline">
+
+        <article class="day">
+          <span class="dot dock"></span>
+          <div class="day-card">
+            <div class="day-top"><span class="day-num">Day 01</span><span class="day-tag tag-dock">Arrive Rome</span></div>
+            <h3 class="day-title">Land, settle, ease in</h3>
+            <div class="slots">
+              <div class="slot"><span class="when">Morning</span><p>Land at Fiumicino off the overnight flight; private transfer to a central hotel near the Pantheon.</p></div>
+              <div class="slot"><span class="when">Afternoon</span><p>Drop bags, shake off the flight with a slow wander — Piazza Navona, the Pantheon's portico, a first gelato.</p></div>
+              <div class="slot"><span class="when">Evening</span><p>Easy dinner in the old center; the Trevi Fountain lit up after dark.</p></div>
+            </div>
+            <div class="hilite">
+              <span class="mini-label">Highlights</span>
+              <div class="tags"><b>Pantheon at dusk</b><b>Piazza Navona</b><b>Trevi at night</b></div>
+            </div>
+            <p class="tip"><span class="mini-label">Tip</span> &nbsp;Push through to ~9pm and get real sleep — it resets the jet lag fastest.</p>
+          </div>
+        </article>
+
+        <article class="day">
+          <span class="dot"></span>
+          <div class="day-card">
+            <div class="day-top"><span class="day-num">Day 02</span><span class="day-tag tag-land">Ancient Rome</span></div>
+            <h3 class="day-title">Colosseum, Forum &amp; the old city</h3>
+            <div class="slots">
+              <div class="slot"><span class="when">Morning</span><p>Early, skip-the-line guided tour of the Colosseum, Roman Forum and Palatine Hill — the heart of the empire.</p></div>
+              <div class="slot"><span class="when">Afternoon</span><p>Inside the Pantheon, then Campo de' Fiori and an espresso break; a little shopping or a nap.</p></div>
+              <div class="slot"><span class="when">Evening</span><p>Cross the river to Trastevere for dinner in its lantern-lit lanes.</p></div>
+            </div>
+            <div class="hilite">
+              <span class="mini-label">Highlights</span>
+              <div class="tags"><b>Colosseum arena floor</b><b>Roman Forum</b><b>Trastevere</b></div>
+            </div>
+            <p class="tip"><span class="mini-label">Tip</span> &nbsp;Book Colosseum timed entry 2–3 months out and take the earliest slot — cooler, and ahead of the crowds.</p>
+            <p class="addon"><span class="mini-label">Est. tours</span> &nbsp;<b>$260–420</b> for 4 (private/guided)</p>
+          </div>
+        </article>
+
+        <article class="day">
+          <span class="dot"></span>
+          <div class="day-card">
+            <div class="day-top"><span class="day-num">Day 03</span><span class="day-tag tag-land">Vatican City</span></div>
+            <h3 class="day-title">Vatican Museums &amp; St. Peter's</h3>
+            <div class="slots">
+              <div class="slot"><span class="when">Morning</span><p>Early-access guided route through the Vatican Museums to the Sistine Chapel, then into St. Peter's Basilica.</p></div>
+              <div class="slot"><span class="when">Afternoon</span><p>Climb St. Peter's dome for the view (Carson &amp; Tony), or Castel Sant'Angelo; free time near the Spanish Steps.</p></div>
+              <div class="slot"><span class="when">Evening</span><p>A farewell-to-Rome dinner — or an evening food-and-wine walk through the centro storico.</p></div>
+            </div>
+            <div class="hilite">
+              <span class="mini-label">Highlights</span>
+              <div class="tags"><b>Sistine Chapel</b><b>St. Peter's Basilica</b><b>Dome climb</b></div>
+            </div>
+            <p class="tip"><span class="mini-label">Tip</span> &nbsp;Churches enforce a dress code — shoulders and knees covered for everyone, so pack a light layer.</p>
+            <p class="addon"><span class="mini-label">Est. tours</span> &nbsp;<b>$300–460</b> for 4 (private/guided)</p>
+          </div>
+        </article>
+
+        <article class="day">
+          <span class="dot dock"></span>
+          <div class="day-card">
+            <div class="day-top"><span class="day-num">Day 04</span><span class="day-tag tag-dock">Embark</span></div>
+            <h3 class="day-title">One last look, then aboard</h3>
+            <div class="slots">
+              <div class="slot"><span class="when">Morning</span><p>A final Rome moment — the Borghese Gallery (book ahead) or a slow coffee at the Spanish Steps.</p></div>
+              <div class="slot"><span class="when">Midday</span><p>Transfer ~1.5 hrs to the port at Civitavecchia (private car, or train via Roma Termini).</p></div>
+              <div class="slot"><span class="when">Afternoon</span><p>Board Viking, settle into your two verandas, and toast the sailaway at dinner.</p></div>
+            </div>
+            <div class="hilite">
+              <span class="mini-label">Highlights</span>
+              <div class="tags"><b>Embarkation</b><b>First night at sea</b></div>
+            </div>
+            <p class="tip"><span class="mini-label">Tip</span> &nbsp;Viking sells a Rome-to-ship transfer; a private car for four is often similar money and door-to-door.</p>
+            <p class="addon"><span class="mini-label">Est. transfer</span> &nbsp;<b>$150–250</b> for 4</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- CRUISE -->
+    <section class="section" id="cruise">
+      <div class="sec-head">
+        <p class="sec-eyebrow">Viking · Journey to Antiquities · Days 4–11</p>
+        <h2 class="sec-title">Eight days across the ancient sea</h2>
+        <p class="sec-note">One guided tour is included in each port; the options below note the standout choices — including the big one, Pompeii. Ports and order are representative and can shift by departure.</p>
+      </div>
+
+      <div class="legend">
+        <span><i class="key dock"></i> Embark / disembark</span>
+        <span><i class="key land"></i> In port</span>
+        <span><i class="key sea"></i> At sea</span>
+      </div>
+
+      <div class="timeline">
+
+        <article class="day">
+          <span class="dot dock"></span>
+          <div class="day-card">
+            <div class="day-top"><span class="day-num">Day 04</span><span class="day-tag tag-dock">Embark · Rome</span></div>
+            <h3 class="day-title">Civitavecchia (Rome)</h3>
+            <div class="slots">
+              <div class="slot"><span class="when">Afternoon</span><p>Board, explore the ship, and settle in before an evening departure into the Tyrrhenian Sea.</p></div>
+            </div>
+            <div class="hilite"><span class="mini-label">Highlights</span><div class="tags"><b>Sailaway dinner</b><b>Your veranda</b></div></div>
+          </div>
+        </article>
+
+        <article class="day">
+          <span class="dot"></span>
+          <div class="day-card">
+            <div class="day-top"><span class="day-num">Day 05</span><span class="day-tag tag-land">In port · Naples</span></div>
+            <h3 class="day-title">Pompeii &amp; the Bay of Naples</h3>
+            <div class="slots">
+              <div class="slot"><span class="when">Morning</span><p>The marquee stop: walk the excavated streets of Pompeii, frozen by Vesuvius in AD 79.</p></div>
+              <div class="slot"><span class="when">Options</span><p>Pair it with Mt. Vesuvius, or trade for the Amalfi Coast, Sorrento or the island of Capri.</p></div>
+              <div class="slot"><span class="when">Back aboard</span><p>Naples is the birthplace of pizza — worth a slice before you sail.</p></div>
+            </div>
+            <div class="hilite"><span class="mini-label">Highlights</span><div class="tags"><b>Pompeii ruins</b><b>Vesuvius</b><b>Amalfi / Sorrento</b></div></div>
+            <p class="tip"><span class="mini-label">Tip</span> &nbsp;Do Pompeii first thing — the site bakes by midday. Hats, water, real walking shoes, and a guide to bring it alive.</p>
+            <p class="addon"><span class="mini-label">Optional upgrade tour</span> &nbsp;<b>$0–360</b> for 4 (one tour is included)</p>
+          </div>
+        </article>
+
+        <article class="day">
+          <span class="dot"></span>
+          <div class="day-card">
+            <div class="day-top"><span class="day-num">Day 06</span><span class="day-tag tag-land">In port · Sicily</span></div>
+            <h3 class="day-title">Messina — Taormina &amp; Etna</h3>
+            <div class="slots">
+              <div class="slot"><span class="when">Morning</span><p>Up to clifftop Taormina and its Greek theatre, with Mt. Etna smoking on the horizon.</p></div>
+              <div class="slot"><span class="when">Options</span><p>Or ascend Mt. Etna itself (one for Tony &amp; Carson), or the hilltop villages made famous by <em>The Godfather</em>.</p></div>
+              <div class="slot"><span class="when">Before sailing</span><p>Sicilian cannoli and a granita, obviously.</p></div>
+            </div>
+            <div class="hilite"><span class="mini-label">Highlights</span><div class="tags"><b>Taormina's Greek theatre</b><b>Mt. Etna</b></div></div>
+            <p class="tip"><span class="mini-label">Tip</span> &nbsp;Taormina is the easy crowd-pleaser; Etna is the active-adventure pick if the weather's clear.</p>
+          </div>
+        </article>
+
+        <article class="day">
+          <span class="dot sea"></span>
+          <div class="day-card">
+            <div class="day-top"><span class="day-num">Day 07</span><span class="day-tag tag-sea">At sea · Ionian</span></div>
+            <h3 class="day-title">A day to do nothing</h3>
+            <div class="slots">
+              <div class="slot"><span class="when">All day</span><p>Cross the Ionian toward Greece. Historian talks to set up Crete and Ephesus, the spa, the pool, a long lunch.</p></div>
+            </div>
+            <div class="hilite"><span class="mini-label">Highlights</span><div class="tags"><b>Enrichment lectures</b><b>Real rest</b></div></div>
+            <p class="tip"><span class="mini-label">Tip</span> &nbsp;A welcome breather between two of the most port-intensive stops.</p>
+          </div>
+        </article>
+
+        <article class="day">
+          <span class="dot"></span>
+          <div class="day-card">
+            <div class="day-top"><span class="day-num">Day 08</span><span class="day-tag tag-land">In port · Crete</span></div>
+            <h3 class="day-title">Souda Bay — Chania &amp; Knossos</h3>
+            <div class="slots">
+              <div class="slot"><span class="when">Morning</span><p>Chania's Venetian harbor and old-town lanes, or the Minoan palace of Knossos — Europe's oldest city.</p></div>
+              <div class="slot"><span class="when">Options</span><p>Cretan food and olive-oil tasting; a beach afternoon on the deepest natural harbor in the Med.</p></div>
+            </div>
+            <div class="hilite"><span class="mini-label">Highlights</span><div class="tags"><b>Palace of Knossos</b><b>Chania harbor</b><b>Cretan food</b></div></div>
+            <p class="tip"><span class="mini-label">Tip</span> &nbsp;Knossos for the deep history; Chania if you'd rather just wander and eat.</p>
+          </div>
+        </article>
+
+        <article class="day">
+          <span class="dot"></span>
+          <div class="day-card">
+            <div class="day-top"><span class="day-num">Day 09</span><span class="day-tag tag-land">In port · Türkiye</span></div>
+            <h3 class="day-title">Kuşadası — Ephesus</h3>
+            <div class="slots">
+              <div class="slot"><span class="when">Morning</span><p>One of antiquity's best-preserved cities: the Library of Celsus, the marble main street, and a theatre that seated 25,000.</p></div>
+              <div class="slot"><span class="when">Options</span><p>Add the Terrace Houses' frescoed interiors, or the House of the Virgin Mary in the hills above.</p></div>
+            </div>
+            <div class="hilite"><span class="mini-label">Highlights</span><div class="tags"><b>Library of Celsus</b><b>Great Theatre</b><b>Terrace Houses</b></div></div>
+            <p class="tip"><span class="mini-label">Tip</span> &nbsp;Another early start — Ephesus offers almost no shade by midday.</p>
+            <p class="addon"><span class="mini-label">Optional upgrade tour</span> &nbsp;<b>$0–320</b> for 4 (one tour is included)</p>
+          </div>
+        </article>
+
+        <article class="day">
+          <span class="dot sea"></span>
+          <div class="day-card">
+            <div class="day-top"><span class="day-num">Day 10</span><span class="day-tag tag-sea">At sea · Aegean</span></div>
+            <h3 class="day-title">Sail for Athens</h3>
+            <div class="slots">
+              <div class="slot"><span class="when">All day</span><p>Aegean cruising, a last farewell dinner, and time to pack as the islands slip past at sunset.</p></div>
+            </div>
+            <div class="hilite"><span class="mini-label">Highlights</span><div class="tags"><b>Aegean sunset</b><b>Farewell dinner</b></div></div>
+          </div>
+        </article>
+
+        <article class="day">
+          <span class="dot dock"></span>
+          <div class="day-card">
+            <div class="day-top"><span class="day-num">Day 11</span><span class="day-tag tag-dock">Disembark · Athens</span></div>
+            <h3 class="day-title">Piraeus (Athens)</h3>
+            <div class="slots">
+              <div class="slot"><span class="when">Morning</span><p>Disembark at Piraeus. With a late flight or an added night: the Acropolis, the Parthenon, and the Plaka.</p></div>
+              <div class="slot"><span class="when">Then</span><p>Fly home from Athens — or stay on to give the birthplace of democracy its due.</p></div>
+            </div>
+            <div class="hilite"><span class="mini-label">Highlights</span><div class="tags"><b>Acropolis</b><b>Parthenon</b><b>Plaka</b></div></div>
+            <p class="tip"><span class="mini-label">Tip</span> &nbsp;Athens rewards 1–2 extra nights; Viking offers a post-cruise extension if you'd rather it be arranged for you.</p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- COSTS -->
+    <section class="section" id="costs">
+      <div class="sec-head">
+        <p class="sec-eyebrow">The money</p>
+        <h2 class="sec-title">Estimated cost, party of 4</h2>
+        <p class="sec-note">2029 planning estimates in today's dollars — fares confirm at booking and peak-summer airfare is the biggest swing. Ranges assume two Deluxe Veranda staterooms.</p>
+      </div>
+
+      <div class="card">
+        <div class="rows">
+          <div class="row"><div class="r-name">Viking cruise · 8 days, 2 verandas<small>Meals, drinks with meals, Wi-Fi, 1 tour per port</small></div><div class="r-val">$22,000–26,000</div></div>
+          <div class="row"><div class="r-name">Airfare · DFW→Rome / Athens→DFW<small>Open-jaw, peak summer (or Viking Air)</small></div><div class="r-val">$5,600–7,600</div></div>
+          <div class="row"><div class="r-name">Rome hotel · 3 nights<small>Two rooms, 4★ central</small></div><div class="r-val">$2,100–3,000</div></div>
+          <div class="row"><div class="r-name">Rome guides &amp; entries<small>Colosseum, Vatican, 1–2 private tours</small></div><div class="r-val">$800–1,400</div></div>
+          <div class="row"><div class="r-name">Rome meals &amp; incidentals<small>~3 days, family of 4</small></div><div class="r-val">$450–750</div></div>
+          <div class="row"><div class="r-name">Rome → ship transfer</div><div class="r-val">$150–250</div></div>
+          <div class="row"><div class="r-name">Cruise gratuities<small>~$18 / person / day</small></div><div class="r-val">~$575</div></div>
+          <div class="row"><div class="r-name">Optional extra excursions<small>Beyond the one included per port</small></div><div class="r-val">$800–1,500</div></div>
+          <div class="row"><div class="r-name">Athens · disembark day<small>Meals + transfer (add a night ≈ +$400)</small></div><div class="r-val">$200–600</div></div>
+        </div>
+      </div>
+
+      <div class="band" style="margin-top:14px">
+        <span class="mini-label">All-in estimate · 4 people</span>
+        <div class="big">$33,000 – $42,000</div>
+        <div class="split">
+          <div><span class="k">Per person</span><span class="n">~$8,250–10,500</span></div>
+          <div><span class="k">Per person / day</span><span class="n">~$750–950</span></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <h3>Where it moves</h3>
+        <p class="copy" style="margin:0 0 9px">Because Viking bundles meals, drinks with meals, Wi-Fi and a tour in every port, your onboard add-ons stay small. The two levers that actually move the total:</p>
+        <ul class="inc">
+          <li><strong>Airfare</strong> — peak-summer, open-jaw seats out of DFW; booking Viking Air or watching AA fares matters most.</li>
+          <li><strong>Optional tours</strong> — the included tour covers each port; upgrades (private Pompeii, Etna, Terrace Houses) are where extra spend lands.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- NOTES -->
+    <section class="section" id="notes">
+      <div class="sec-head">
+        <p class="sec-eyebrow">Before you commit</p>
+        <h2 class="sec-title">Good to know</h2>
+      </div>
+
+      <div class="flag">
+        <h3>Renew two passports</h3>
+        <p>Katelyn's and Carson's passports expire 31 May 2028 — before this trip. Renew both (now as adult 10-year passports), with at least 3 months' validity past your return date, well ahead of summer 2029. Tony's (Jul 2032) and Kristin's (Dec 2032) are fine.</p>
+      </div>
+
+      <div class="card">
+        <h3>Booking &amp; how to hold it</h3>
+        <p class="copy" style="margin:0 0 8px">Viking's 2029 season is open now. A <strong>$25-per-person deposit</strong> holds your two cabins — about <strong>$100 total</strong> — with final payment not due until <strong>13 January 2028</strong>.</p>
+        <p class="copy" style="margin:0"><span class="mini-label">Watch</span> &nbsp;Confirm whether the sale fare is refundable — some Viking promo fares aren't. Given your 2029 school calendar isn't published yet, a refundable hold is worth it. Viking doesn't drop your fare later, so booking early locks the lowest price.</p>
+      </div>
+
+      <div class="card">
+        <h3>Ages &amp; timing</h3>
+        <p class="copy" style="margin:0">Viking is 18+. Carson turns 18 on <strong>23 June 2029</strong>, so the sailing must depart on or after that date — target a July departure. Katelyn will be 21. Once Carson's 18 he can add Global Entry; yours renew in Feb 2030.</p>
+      </div>
+
+      <div class="card">
+        <h3>Entry &amp; on the ground</h3>
+        <p class="copy" style="margin:0 0 8px"><span class="mini-label">EU entry</span> &nbsp;By 2029, expect to need <strong>ETIAS</strong>, the EU's online travel authorization (quick, small fee) — check the current requirement a few months out.</p>
+        <p class="copy" style="margin:0"><span class="mini-label">Heat</span> &nbsp;Mediterranean summer is hot — Pompeii and Ephesus can top 100°F. Do the ruins early, and carry water, hats and real shoes.</p>
+      </div>
+
+      <p class="copy" style="color:var(--ink-soft);margin-top:16px">This is a planning draft — nothing is booked, and every figure is an estimate that confirms at booking.</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <span class="fmark">Illig Travel · Journey to Antiquities</span>
+    Planning draft · Summer 2029 · Viking <em>Journey to Antiquities</em>, Rome→Athens, with a 3-night Rome pre-stay. Itineraries, ports and prices are estimates and subject to change. Open on your phone, or Print → Save as PDF to share with the family.
+  </footer>
+
+</div>
+
+<script>
+  /* Progressive enhancement only: highlight the nav pill for the section in view.
+     Navigation itself is plain anchor links + CSS and works with no JavaScript. */
+  (function(){
+    if(!('IntersectionObserver' in window)) return;
+    var links = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+    var map = {};
+    links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          links.forEach(function(a){ a.classList.remove('is-active'); });
+          if(map[e.target.id]) map[e.target.id].classList.add('is-active');
+        }
+      });
+    }, { rootMargin:'-45% 0px -50% 0px', threshold:0 });
+    document.querySelectorAll('.section').forEach(function(s){ obs.observe(s); });
+  })();
+</script>
+</body>
+</html>
