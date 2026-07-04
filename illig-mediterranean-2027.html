@@ -1,806 +1,522 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<meta name="theme-color" content="#0A2540" />
-<title>Illig Family · Mediterranean 2027</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Summer 2027 — Iceland · Banff · Peru</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --navy:#0A2540; --navy-2:#0E3252;
-    --paper:#FBF9F5; --paper-2:#F4EFE5;
-    --ink:#15242E; --muted:#46535B;
-    --gold:#B0871E; --gold-soft:#D8B65A;
-    --line:#E4DCCE; --line-dark:rgba(255,255,255,.16);
-    --accent:#1E5F8C;
-    --radius:16px;
+    --paper:#FBFAF6; --ink:#1E2A24; --pine:#1F3D34; --pine-2:#2E5A4C; --sea:#2F6F63;
+    --moss:#5B7A70; --brass:#A9761F; --brass-2:#C79A4A; --stone:#6E7B73;
+    --line:#E4E0D4; --card:#FFFFFF; --accent:#2F6F63;
+    --shadow:0 1px 2px rgba(31,61,52,.05),0 6px 22px rgba(31,61,52,.07);
   }
-  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-  html{-webkit-text-size-adjust:100%;}
-  body{
-    margin:0;background:var(--paper);color:var(--ink);overflow-x:hidden;
-    font-family:"Inter",-apple-system,system-ui,"Segoe UI",sans-serif;
-    font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;
-  }
-  h1,h2,h3,h4{font-family:"Fraunces",Georgia,serif;font-weight:600;line-height:1.1;margin:0;}
-  p{margin:0 0 1em;}
-  button{font-family:inherit;}
-  .mono{font-family:"Spline Sans Mono",ui-monospace,"SF Mono",Menlo,monospace;}
-  .wrap{width:100%;max-width:1040px;margin:0 auto;padding:0 16px;}
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;font-size:16px;line-height:1.6;}
+  .wrap{max-width:900px;margin:0 auto;padding:0 18px;}
+  h1,h2,h3,h4{font-family:"Spectral",Georgia,serif;font-weight:500;line-height:1.15;margin:0;}
+  .eyebrow{font-size:11.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--brass-2);}
 
-  /* ---------- sticky brand bar ---------- */
-  .topbar{position:sticky;top:0;z-index:60;background:var(--navy);color:#fff;
-    border-bottom:1px solid var(--line-dark);padding-top:env(safe-area-inset-top);}
-  .topbar-in{display:flex;align-items:center;justify-content:space-between;gap:10px;
-    max-width:1040px;margin:0 auto;padding:11px 16px;}
-  .brand{font-family:"Fraunces",serif;font-weight:600;font-size:15px;line-height:1.15;}
-  .brand b{color:var(--gold-soft);}
-  .brand small{display:block;font-family:"Spline Sans Mono",monospace;font-weight:400;
-    font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:2px;}
+  .tabbar{position:sticky;top:0;z-index:50;background:rgba(251,250,246,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .tabinner{max-width:900px;margin:0 auto;display:flex;gap:5px;padding:8px 10px;}
+  .tab{flex:1;appearance:none;border:1px solid transparent;background:transparent;color:var(--stone);
+    font-family:inherit;font-size:12.5px;font-weight:600;letter-spacing:.01em;padding:11px 4px;border-radius:100px;cursor:pointer;transition:all .15s;min-height:44px;}
+  .tab:hover{color:var(--pine);}
+  .tab.active{background:var(--pine);color:#F4F2EA;box-shadow:var(--shadow);}
+  .tab:focus-visible{outline:2px solid var(--brass);outline-offset:2px;}
 
-  /* ---------- tabs ---------- */
-  .tabs{position:sticky;top:0;z-index:55;background:var(--navy-2);
-    border-bottom:1px solid var(--line-dark);}
-  .tabs-in{display:flex;gap:6px;max-width:1040px;margin:0 auto;padding:8px 12px;
-    overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
-  .tabs-in::-webkit-scrollbar{display:none;}
-  .tab{flex:0 0 auto;border:1px solid rgba(255,255,255,.18);background:transparent;color:rgba(255,255,255,.78);
-    font-family:"Spline Sans Mono",monospace;font-size:12px;letter-spacing:.04em;
-    padding:8px 13px;border-radius:999px;cursor:pointer;white-space:nowrap;min-height:38px;}
-  .tab.on{background:var(--gold-soft);color:var(--navy);border-color:var(--gold-soft);font-weight:600;}
+  .panel{display:none;} .panel.active{display:block;}
 
-  /* the tabs bar sits under the brand bar; stack their sticky offsets */
-  .topbar{top:0;}
-  .tabs{top:0;}
+  .hero{background:var(--pine);color:var(--paper);padding:36px 0 30px;}
+  .hero .eyebrow{color:#9FC1CD;}
+  .hero h1{font-size:clamp(29px,7vw,50px);letter-spacing:-.01em;margin:.28em 0 .16em;color:#F6F4EC;}
+  .hero .lede{font-family:"Spectral",serif;font-style:italic;font-size:clamp(16px,4.2vw,20px);color:#D7E2DA;line-height:1.45;}
+  .route{margin-top:16px;font-size:13px;color:#B7C9BF;}
+  .route strong{color:#E6EDE7;font-weight:600;}
+  .params{margin-top:20px;display:flex;flex-wrap:wrap;gap:10px 0;border-top:1px solid rgba(255,255,255,.16);padding-top:6px;}
+  .params div{flex:1 1 46%;padding:10px 14px 4px 0;}
+  .params .k{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#9FB4A9;}
+  .params .v{font-family:"Spectral",serif;font-size:17px;color:#F1EFE6;}
 
-  /* ---------- panels ---------- */
-  .panel{display:none;}
-  .panel.active{display:block;animation:fade .34s ease;}
-  @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+  section{padding:30px 0;}
+  .section-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px;}
+  .section-head h2{font-size:clamp(21px,5vw,28px);scroll-margin-top:70px;}
+  .rule{flex:1;height:1px;background:var(--line);}
+  .sub{font-size:13.5px;color:var(--stone);margin:0 0 18px;}
 
-  /* ---------- overview head ---------- */
-  .ovhead{background:var(--navy);color:#fff;position:relative;overflow:hidden;}
-  .ovhead::before{content:"";position:absolute;inset:0;
-    background:radial-gradient(120% 90% at 90% -20%,rgba(216,182,90,.18),transparent 55%),
-               radial-gradient(90% 80% at -10% 120%,rgba(46,125,135,.30),transparent 60%);}
-  .ovhead-in{position:relative;max-width:1040px;margin:0 auto;padding:30px 16px 26px;}
-  .eyebrow{font-family:"Spline Sans Mono",monospace;font-size:11px;letter-spacing:.2em;
-    text-transform:uppercase;color:var(--gold-soft);margin-bottom:14px;}
-  .ovhead h1{font-size:clamp(32px,9vw,56px);font-weight:600;letter-spacing:-.01em;}
-  .ovhead h1 em{font-style:italic;color:var(--gold-soft);}
-  .ovhead p{margin:14px 0 0;color:rgba(255,255,255,.84);font-size:16px;max-width:48ch;}
-  .tripchips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;}
-  .tripchips .chip{background:rgba(255,255,255,.08);border:1px solid var(--line-dark);color:#fff;}
+  .subnav{position:sticky;top:60px;z-index:40;display:flex;gap:8px;overflow-x:auto;padding:10px 0;margin-bottom:4px;background:linear-gradient(var(--paper),var(--paper) 70%,rgba(251,250,246,0));-webkit-overflow-scrolling:touch;}
+  .subnav a{flex:none;font-size:12.5px;font-weight:600;color:var(--pine-2);border:1px solid var(--line);background:var(--card);border-radius:100px;padding:7px 14px;white-space:nowrap;text-decoration:none;}
+  .subnav a:active{background:var(--pine);color:#fff;}
 
-  /* ---------- chips ---------- */
-  .chip{display:inline-flex;align-items:center;gap:6px;font-family:"Spline Sans Mono",monospace;
-    font-size:11.5px;letter-spacing:.02em;padding:5px 10px;border-radius:999px;
-    background:var(--paper-2);border:1px solid var(--line);color:var(--ink);white-space:nowrap;}
-  .chip.acc{background:var(--paper-2);border-color:var(--accent);color:var(--ink);font-weight:600;}
+  /* summary cards (overview) */
+  .scards{display:grid;grid-template-columns:1fr;gap:14px;margin-top:6px;}
+  .scard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px;box-shadow:var(--shadow);}
+  .scard.ice{border-top:4px solid #4E6E86;} .scard.ban{border-top:4px solid #2C7A8C;} .scard.per{border-top:4px solid #9E5E33;}
+  .scard .st{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--stone);}
+  .scard h3{font-size:22px;margin:3px 0 6px;}
+  .scard .vibe{font-family:"Spectral",serif;font-style:italic;font-size:15.5px;color:var(--pine-2);line-height:1.4;margin-bottom:12px;}
+  .scard dl{margin:0 0 14px;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:13px;}
+  .scard dt{color:var(--stone);letter-spacing:.04em;text-transform:uppercase;font-size:10.5px;font-weight:600;padding-top:2px;}
+  .scard dd{margin:0;color:var(--ink);}
+  .scard .open{width:100%;appearance:none;cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;background:var(--pine);color:#F4F2EA;border:none;border-radius:8px;padding:13px;min-height:46px;}
+  .scard .open:focus-visible{outline:2px solid var(--brass);outline-offset:2px;}
 
-  /* ---------- tiles ---------- */
-  .tiles{display:grid;grid-template-columns:1fr;gap:14px;padding:22px 0 8px;}
-  .hint{font-family:"Spline Sans Mono",monospace;font-size:11px;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--muted);padding-top:20px;}
-  .tile{display:block;width:100%;text-align:left;cursor:pointer;
-    background:#fff;border:1px solid var(--line);border-left:6px solid var(--accent);
-    border-radius:var(--radius);padding:18px 16px;color:var(--ink);
-    transition:transform .15s ease,box-shadow .15s ease;}
-  .tile:active{transform:scale(.99);}
-  @media(hover:hover){.tile:hover{box-shadow:0 12px 28px rgba(10,37,64,.12);transform:translateY(-2px);}}
-  .tile-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
-  .tile .tier{font-family:"Spline Sans Mono",monospace;font-size:10.5px;letter-spacing:.1em;
-    text-transform:uppercase;color:var(--ink);font-weight:600;}
-  .tile h3{font-size:25px;margin:4px 0 0;}
-  .pick{font-family:"Spline Sans Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
-    font-weight:600;color:var(--navy);background:var(--gold-soft);padding:4px 9px;border-radius:999px;white-space:nowrap;}
-  .tile .hook{font-size:14px;color:var(--muted);margin:9px 0 0;}
-  .budget{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:14px 0 4px;
-    padding:13px 14px;background:var(--paper-2);border-radius:12px;}
-  .budget .b-total{display:flex;flex-direction:column;}
-  .budget .b-pp{display:flex;flex-direction:column;padding-left:14px;border-left:1px solid var(--line);}
-  .budget .lab{font-family:"Spline Sans Mono",monospace;font-size:9.5px;letter-spacing:.12em;
-    text-transform:uppercase;color:var(--muted);}
-  .budget .val{font-family:"Spline Sans Mono",monospace;font-weight:600;color:var(--ink);}
-  .budget .b-total .val{font-size:26px;color:var(--ink);}
-  .budget .b-pp .val{font-size:18px;}
-  .tile-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px;}
-  .tile-cta{display:inline-block;margin-top:14px;font-weight:600;font-size:14px;color:var(--ink);}
-  .tile-cta::after{content:" →";}
+  .twrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .cmp{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;box-shadow:var(--shadow);min-width:360px;}
+  .cmp th,.cmp td{padding:12px 10px;border-bottom:1px solid var(--line);text-align:right;}
+  .cmp th:first-child,.cmp td:first-child{text-align:left;}
+  .cmp thead th{background:var(--pine);color:#F4F2EA;font-family:"Spectral",serif;font-weight:600;font-size:14px;}
+  .cmp td.rl{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--stone);font-weight:600;}
+  .cmp td .big{font-family:"Spectral",serif;font-size:16px;color:var(--pine);font-variant-numeric:tabular-nums;}
+  .cmp tr:last-child td{border-bottom:none;}
 
-  /* ---------- detail panel ---------- */
-  .dbanner{background:var(--navy);color:#fff;position:relative;overflow:hidden;}
-  .dbanner::after{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--accent);}
-  .dbanner-in{position:relative;max-width:1040px;margin:0 auto;padding:14px 16px 26px;}
-  .back{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.10);
-    border:1px solid var(--line-dark);color:#fff;font-family:"Spline Sans Mono",monospace;
-    font-size:11.5px;letter-spacing:.06em;padding:8px 12px;border-radius:999px;cursor:pointer;
-    margin:14px 0 18px;min-height:38px;}
-  .dbanner .de{font-family:"Spline Sans Mono",monospace;font-size:11px;letter-spacing:.16em;
-    text-transform:uppercase;color:var(--gold-soft);}
-  .dbanner h2{font-size:clamp(28px,8vw,46px);font-weight:600;margin-top:8px;}
-  .dbanner .ship{color:rgba(255,255,255,.72);font-size:14px;margin-top:8px;}
-  .dbudget{display:flex;gap:0;margin-top:18px;border:1px solid var(--line-dark);border-radius:12px;overflow:hidden;}
-  .dbudget div{flex:1;padding:12px 14px;}
-  .dbudget div+div{border-left:1px solid var(--line-dark);}
-  .dbudget .lab{font-family:"Spline Sans Mono",monospace;font-size:10px;letter-spacing:.1em;
-    text-transform:uppercase;color:rgba(255,255,255,.6);}
-  .dbudget .val{font-family:"Spline Sans Mono",monospace;font-weight:600;color:#fff;margin-top:3px;}
-  .dbudget .big .val{font-size:24px;color:var(--gold-soft);}
+  .tiers{display:flex;flex-direction:column;gap:12px;}
+  .tier{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px 18px;box-shadow:var(--shadow);display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;}
+  .tier.star{border-color:var(--brass-2);border-left:4px solid var(--brass);}
+  .tier .lab{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);flex:1 1 100%;}
+  .tier .amt{font-family:"Spectral",serif;font-size:24px;color:var(--pine);font-variant-numeric:tabular-nums;}
+  .tier .ppd{font-size:12.5px;color:var(--stone);}
+  .tier .note{font-size:12.5px;color:var(--ink);flex:1 1 100%;padding-top:8px;border-top:1px solid var(--line);}
 
-  .pitch{font-family:"Fraunces",serif;font-size:clamp(19px,4.6vw,25px);font-weight:400;
-    line-height:1.4;margin:26px 0 6px;}
-  .pitch b{font-weight:600;color:var(--ink);}
-  .blockhead{font-family:"Spline Sans Mono",monospace;font-size:11px;letter-spacing:.16em;
-    text-transform:uppercase;color:var(--muted);margin:30px 0 12px;}
+  .days{display:flex;flex-direction:column;}
+  .day{padding:18px 0;border-top:1px solid var(--line);}
+  .day:first-child{border-top:none;}
+  .dhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:6px;}
+  .dhead .n{font-family:"Spectral",serif;font-size:26px;font-weight:600;color:var(--brass);line-height:1;}
+  .dhead .loc{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);}
+  .dhead .drive{margin-left:auto;font-size:11px;color:var(--accent);border:1px solid var(--line);border-radius:100px;padding:3px 9px;white-space:nowrap;}
+  .day h4{font-size:17px;margin:2px 0 5px;}
+  .day p{margin:0 0 8px;font-size:14.5px;}
+  .day .stay{font-size:12.5px;color:var(--stone);}
+  .day .stay b{color:var(--pine-2);font-weight:600;}
 
-  .specs{list-style:none;margin:0;padding:0;}
-  .specs li{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14.5px;}
-  .specs li .sk{color:var(--muted);}
-  .specs li .sv{text-align:right;font-weight:500;}
+  .btable{width:100%;border-collapse:collapse;font-size:13.5px;min-width:340px;}
+  .btable th,.btable td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left;}
+  .btable th{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);font-weight:600;}
+  .btable td.cat{font-weight:500;}
+  .btable td.num,.btable th.num{font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right;}
+  .btable tr.tot td{border-top:2px solid var(--pine);border-bottom:none;font-weight:700;color:var(--pine);padding-top:12px;}
+  .btable tr.tot td.cat{font-family:"Spectral",serif;}
+  .btable .ppd-row td{border-bottom:none;font-size:11.5px;color:var(--stone);padding-top:2px;}
 
-  .incl-box{background:var(--paper-2);border-radius:var(--radius);padding:18px 18px;margin-top:14px;}
-  .incl-box .note{font-size:12.5px;color:var(--muted);margin-bottom:12px;}
-  .incl{list-style:none;margin:0;padding:0;}
-  .incl li{position:relative;padding-left:24px;margin-bottom:9px;font-size:14px;line-height:1.4;}
-  .incl li::before{content:"✓";position:absolute;left:0;top:0;color:var(--ink);font-weight:700;}
+  .lodge{display:grid;grid-template-columns:1fr;gap:12px;}
+  .lcard{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;box-shadow:var(--shadow);}
+  .lcard .lab{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--brass);font-weight:600;margin-bottom:6px;}
+  .lcard ul{margin:0;padding-left:0;list-style:none;font-size:13.5px;}
+  .lcard li{padding:4px 0 4px 14px;position:relative;}
+  .lcard li::before{content:"·";position:absolute;left:2px;color:var(--moss);font-weight:700;}
+  .lcard li em{color:var(--stone);font-style:normal;font-size:12px;}
 
-  /* timeline */
-  .timeline{position:relative;margin:14px 0 0;padding-left:26px;}
-  .timeline::before{content:"";position:absolute;left:5px;top:6px;bottom:8px;width:0;border-left:2px dashed var(--line);}
-  .stop{position:relative;padding:0 0 20px 0;}
-  .stop::before{content:"";position:absolute;left:-26px;top:4px;width:12px;height:12px;border-radius:50%;
-    background:var(--paper);border:2.5px solid var(--accent);}
-  .stop.land::before{background:var(--accent);}
-  .stop .d{font-family:"Spline Sans Mono",monospace;font-size:10.5px;letter-spacing:.1em;
-    text-transform:uppercase;color:var(--ink);font-weight:600;}
-  .stop .port{font-family:"Fraunces",serif;font-size:18px;font-weight:600;margin:2px 0 2px;}
-  .stop .desc{font-size:14px;color:var(--muted);}
-  .stop .ut{display:inline-block;font-family:"Spline Sans Mono",monospace;font-size:9.5px;letter-spacing:.1em;
-    text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:2px 8px;margin-top:6px;}
+  .read{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--brass);border-radius:6px;padding:20px 20px;box-shadow:var(--shadow);}
+  .read .kicker{font-family:"Spectral",serif;font-style:italic;font-size:16px;color:var(--pine-2);margin-bottom:12px;}
+  .read ul,.notes ul{margin:0;padding-left:0;list-style:none;}
+  .read li{position:relative;padding:8px 0 8px 22px;border-top:1px solid var(--line);font-size:14px;}
+  .read li:first-child{border-top:none;}
+  .read li::before{content:"";position:absolute;left:4px;top:15px;width:6px;height:6px;border-radius:50%;background:var(--brass-2);}
+  .read li strong{color:var(--pine);}
+  .read .punch{margin-top:14px;padding-top:14px;border-top:2px solid var(--pine);font-size:15px;}
+  .read .punch strong{color:var(--pine);}
 
-  /* breakdown */
-  .breakdown{margin-top:16px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
-  .breakdown .bh{background:var(--navy);color:#fff;padding:11px 16px;font-family:"Spline Sans Mono",monospace;
-    font-size:11px;letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between;}
-  .brow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 16px;border-bottom:1px solid var(--line);}
-  .brow:last-child{border-bottom:none;}
-  .brow .bl{font-size:14.5px;}
-  .brow .bl small{display:block;color:var(--muted);font-size:12px;}
-  .brow .bv{font-family:"Spline Sans Mono",monospace;font-size:15px;font-weight:500;white-space:nowrap;}
-  .brow.total{background:var(--paper-2);}
-  .brow.total .bl{font-family:"Fraunces",serif;font-size:18px;font-weight:600;}
-  .brow.total .bv{font-size:20px;font-weight:600;color:var(--ink);}
-  .brow.pp{background:var(--paper-2);border-top:1px dashed var(--line);}
-  .brow.pp .bl{color:var(--ink);font-size:13px;}
-  .brow.pp .bv{font-size:15px;color:var(--ink);}
+  .notes{background:var(--pine);color:#EAF0EB;border-radius:8px;padding:22px 22px 18px;}
+  .notes h2{color:#F4F2EA;font-size:21px;margin-bottom:10px;}
+  .notes li{padding:9px 0 9px 24px;position:relative;border-top:1px solid rgba(255,255,255,.13);font-size:14px;}
+  .notes li:first-child{border-top:none;}
+  .notes li::before{content:"→";position:absolute;left:0;top:9px;color:#9FC1CD;font-weight:700;}
+  .notes strong{color:#fff;} .flag{color:#E7C877;}
 
-  /* pros cons */
-  .pc{display:grid;grid-template-columns:1fr;gap:14px;margin-top:16px;}
-  .pc-card{border-radius:var(--radius);padding:18px;border:1px solid var(--line);background:#fff;}
-  .pc-card.love{border-top:4px solid var(--accent);}
-  .pc-card.trade{border-top:4px solid var(--gold);}
-  .pc-card h4{font-size:17px;margin-bottom:12px;}
-  .pc-card ul{list-style:none;margin:0;padding:0;}
-  .pc-card li{position:relative;padding-left:22px;margin-bottom:10px;font-size:14px;line-height:1.45;}
-  .pc-card.love li::before{content:"✦";position:absolute;left:0;color:var(--accent);}
-  .pc-card.trade li::before{content:"▲";position:absolute;left:1px;top:1px;font-size:10px;color:var(--gold);}
-  .bestfor{margin-top:18px;font-size:14.5px;padding:14px 16px;border-left:3px solid var(--accent);
-    background:var(--paper-2);border-radius:0 12px 12px 0;}
-  .bestfor b{font-family:"Spline Sans Mono",monospace;font-size:10.5px;letter-spacing:.12em;
-    text-transform:uppercase;color:var(--ink);display:block;margin-bottom:3px;}
-  .endnav{display:flex;justify-content:space-between;gap:10px;margin:26px 0 8px;}
-  .endnav button{flex:1;background:var(--navy);color:#fff;border:none;border-radius:12px;
-    padding:14px;font-family:"Spline Sans Mono",monospace;font-size:12px;letter-spacing:.04em;cursor:pointer;min-height:46px;}
-  .endnav button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);}
+  footer{padding:24px 0 48px;}
+  .disc{font-size:12px;color:var(--stone);line-height:1.6;border-top:1px solid var(--line);padding-top:16px;}
+  .disc strong{color:var(--pine-2);}
 
-  /* recommendation card on overview */
-  .recblk{margin:26px 0 6px;background:var(--navy);color:#fff;border-radius:var(--radius);padding:22px 18px;position:relative;overflow:hidden;}
-  .recblk::before{content:"";position:absolute;inset:0;background:radial-gradient(90% 80% at 100% 0,rgba(216,182,90,.16),transparent 55%);}
-  .recblk-in{position:relative;}
-  .recblk .eyebrow{margin-bottom:10px;}
-  .recblk h2{font-size:clamp(22px,5.5vw,30px);max-width:20ch;}
-  .recblk h2 em{font-style:italic;color:var(--gold-soft);}
-  .recrow{margin-top:16px;display:grid;grid-template-columns:1fr;gap:10px;}
-  .recitem{border:1px solid var(--line-dark);border-radius:12px;padding:14px 16px;background:rgba(255,255,255,.04);}
-  .recitem .rt{font-family:"Spline Sans Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-soft);}
-  .recitem h4{font-size:18px;color:#fff;margin:5px 0 5px;}
-  .recitem p{font-size:13.5px;color:rgba(255,255,255,.8);margin:0;}
-
-  /* fine print */
-  .fine{margin:26px 0 0;border-top:1px solid var(--line);padding:22px 0 36px;}
-  .fine h4{font-size:16px;margin-bottom:12px;}
-  .fine ul{margin:0;padding:0;list-style:none;}
-  .fine li{font-size:12.5px;color:var(--muted);margin-bottom:9px;line-height:1.45;}
-  .fine li b{color:var(--ink);}
-  .fine .sig{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);
-    font-family:"Spline Sans Mono",monospace;font-size:11px;color:var(--muted);}
-
-  :focus-visible{outline:2.5px solid var(--gold);outline-offset:2px;border-radius:6px;}
-
-  /* ---------- wider screens ---------- */
-  @media(min-width:720px){
-    .wrap,.ovhead-in,.dbanner-in,.topbar-in,.tabs-in{padding-left:24px;padding-right:24px;}
-    .tiles{grid-template-columns:1fr 1fr;gap:18px;}
-    .pc{grid-template-columns:1fr 1fr;}
-    .recrow{grid-template-columns:1fr 1fr;}
-    .detail-cols{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:start;}
-  }
-  @media(prefers-reduced-motion:reduce){
-    .panel.active{animation:none;}
-    html{scroll-behavior:auto;}
+  @media (min-width:680px){
+    .params div{flex:1 1 24%;}
+    .lodge{grid-template-columns:1fr 1fr 1fr;}
+    .scards{grid-template-columns:1fr 1fr 1fr;}
+    .tier{align-items:center;} .tier .lab{flex:0 0 150px;} .tier .note{flex:1 1 100%;}
   }
   @media print{
-    .tabs,.topbar,.back,.endnav{display:none !important;}
-    .panel{display:block !important;animation:none;}
-    .ovhead,.dbanner,.recblk{background:#fff !important;color:#000 !important;}
-    .ovhead h1,.ovhead h1 em,.dbanner h2,.dbanner .de,.recblk h2,.recblk h2 em,.eyebrow{color:#000 !important;-webkit-text-fill-color:#000;}
-    .panel,.tile,.breakdown,.pc-card{break-inside:avoid;}
+    body{background:#fff;} .tabbar,.subnav,.scard .open{display:none!important;}
+    .panel{display:block!important;} .hero,.notes{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .tier,.lcard,.notes,.day,.read,.cmp,.scard{break-inside:avoid;page-break-inside:avoid;}
+    .panel+.panel{page-break-before:always;} section{padding:18px 0;}
   }
 </style>
 </head>
 <body>
 
-<!-- BRAND BAR -->
-<div class="topbar">
-  <div class="topbar-in">
-    <div class="brand">Illig Family · <b>Mediterranean 2027</b>
-      <small>Four voyages · prepared for Tony</small>
-    </div>
-  </div>
-</div>
-
-<!-- TABS -->
-<nav class="tabs" aria-label="Sections">
-  <div class="tabs-in" id="tabs">
-    <button class="tab on" data-target="overview">Overview</button>
-    <button class="tab" data-target="ncl">Norwegian</button>
-    <button class="tab" data-target="star">Star Clippers</button>
-    <button class="tab" data-target="azamara">Azamara ★</button>
-    <button class="tab" data-target="regent">Regent</button>
+<nav class="tabbar">
+  <div class="tabinner">
+    <button class="tab active" data-tab="overview" onclick="showTab('overview')">Compare</button>
+    <button class="tab" data-tab="iceland" onclick="showTab('iceland')">Iceland</button>
+    <button class="tab" data-tab="banff" onclick="showTab('banff')">Banff</button>
+    <button class="tab" data-tab="peru" onclick="showTab('peru')">Peru</button>
   </div>
 </nav>
 
-<main>
-
 <!-- ================= OVERVIEW ================= -->
-<section class="panel active" id="panel-overview" tabindex="-1" aria-label="Overview">
-  <div class="ovhead">
-    <div class="ovhead-in">
-      <div class="eyebrow">A Family Voyage · Summer 2027</div>
-      <h1>The Mediterranean,<br><em>four ways.</em></h1>
-      <p>One sea, four very different ways to sail it — from a value-first big ship to a tall-ship adventure to all-inclusive luxury. Each ends or begins in Rome. Tap a tile for the full plan.</p>
-      <div class="tripchips">
-        <span class="chip">4 travelers</span>
-        <span class="chip">~10–11 days</span>
-        <span class="chip">2 cabins · no interiors</span>
-        <span class="chip">Sail after Jun 24 · Carson turns 16</span>
-      </div>
+<div class="panel active" id="overview">
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Summer 2027 · Trip Finalists · The four of us</div>
+      <h1>Three Finalists</h1>
+      <p class="lede">Cruises are out and Italy/Greece are parked for 2029 — so it's down to these three ~10-day summer trips. Tap a card or a tab for the full plan; here's how they stack up.</p>
     </div>
-  </div>
+  </header>
 
-  <div class="wrap">
-    <div class="tiles">
-
-      <!-- NCL tile -->
-      <button class="tile" data-target="ncl" style="--accent:#C85C3C">
-        <div class="tile-top">
-          <div><div class="tier">Option 01 · Value</div><h3>Norwegian</h3></div>
+  <section>
+    <div class="wrap">
+      <div class="scards">
+        <div class="scard ice">
+          <div class="st">Front-runner</div><h3>Iceland</h3>
+          <div class="vibe">A new landscape every morning — the biggest adventure, and closest to your river-cruise north star.</div>
+          <dl>
+            <dt>Best for</dt><dd>Adventure &amp; discovery</dd>
+            <dt>Flights</dt><dd>~7–9 hr, 1 stop</dd>
+            <dt>When</dt><dd>Jun–Aug, midnight sun</dd>
+          </dl>
+          <button class="open" onclick="showTab('iceland')">See the plan →</button>
         </div>
-        <div class="hook">Most ship for the least money — Rome to Barcelona on a floating resort.</div>
-        <div class="budget">
-          <div class="b-total"><span class="lab">Total · 4</span><span class="val">~$19.5k</span></div>
-          <div class="b-pp"><span class="lab">Per person</span><span class="val">~$4,900</span></div>
+        <div class="scard ban">
+          <div class="st">Value champ</div><h3>Banff</h3>
+          <div class="vibe">Turquoise lakes and glacier peaks — the most spectacle per dollar, and the easiest trip to run.</div>
+          <dl>
+            <dt>Best for</dt><dd>Value &amp; ease</dd>
+            <dt>Flights</dt><dd>~3.5 hr, often nonstop</dd>
+            <dt>When</dt><dd>Jun–Sep</dd>
+          </dl>
+          <button class="open" onclick="showTab('banff')">See the plan →</button>
         </div>
-        <div class="tile-chips">
-          <span class="chip">~4,000 guests</span>
-          <span class="chip">7 nights</span>
-          <span class="chip">Rome→Barcelona</span>
-          <span class="chip">Flight: 1 stop</span>
-        </div>
-        <span class="tile-cta">View full plan</span>
-      </button>
-
-      <!-- Star tile -->
-      <button class="tile" data-target="star" style="--accent:#1C6E78">
-        <div class="tile-top">
-          <div><div class="tier">Option 02 · Adventure</div><h3>Star Clippers</h3></div>
-        </div>
-        <div class="hook">A real tall ship, 166 guests, tiny ports — round-trip Rome, nonstop both ways.</div>
-        <div class="budget">
-          <div class="b-total"><span class="lab">Total · 4</span><span class="val">~$23k</span></div>
-          <div class="b-pp"><span class="lab">Per person</span><span class="val">~$5,750</span></div>
-        </div>
-        <div class="tile-chips">
-          <span class="chip">166 guests</span>
-          <span class="chip">7 nights</span>
-          <span class="chip">Round-trip Rome</span>
-          <span class="chip acc">Nonstop flight</span>
-        </div>
-        <span class="tile-cta">View full plan</span>
-      </button>
-
-      <!-- Azamara tile -->
-      <button class="tile" data-target="azamara" style="--accent:#1E5F8C">
-        <div class="tile-top">
-          <div><div class="tier">Option 03 · Premium</div><h3>Azamara</h3></div>
-          <span class="pick">★ Advisor's pick</span>
-        </div>
-        <div class="hook">Exactly your brief — small ship, late port stays, most extras already included.</div>
-        <div class="budget">
-          <div class="b-total"><span class="lab">Total · 4</span><span class="val">~$25.5k</span></div>
-          <div class="b-pp"><span class="lab">Per person</span><span class="val">~$6,375</span></div>
-        </div>
-        <div class="tile-chips">
-          <span class="chip">~700 guests</span>
-          <span class="chip">7 nights</span>
-          <span class="chip">Rome→Barcelona</span>
-          <span class="chip acc">Drinks + tips incl.</span>
-        </div>
-        <span class="tile-cta">View full plan</span>
-      </button>
-
-      <!-- Regent tile -->
-      <button class="tile" data-target="regent" style="--accent:#B0871E">
-        <div class="tile-top">
-          <div><div class="tier">Option 04 · Luxury</div><h3>Regent</h3></div>
-        </div>
-        <div class="hook">All-inclusive — air, every excursion, drinks &amp; tips. Greek isles, ending in Rome.</div>
-        <div class="budget">
-          <div class="b-total"><span class="lab">Total · 4</span><span class="val">~$41k</span></div>
-          <div class="b-pp"><span class="lab">Per person</span><span class="val">~$10,250</span></div>
-        </div>
-        <div class="tile-chips">
-          <span class="chip">~750 guests</span>
-          <span class="chip">7 nights</span>
-          <span class="chip">Athens→Rome</span>
-          <span class="chip acc">All-inclusive + air</span>
-        </div>
-        <span class="tile-cta">View full plan</span>
-      </button>
-
-    </div>
-
-    <!-- recommendation -->
-    <div class="recblk" style="--accent:#1E5F8C">
-      <div class="recblk-in">
-        <div class="eyebrow">The advisor's read</div>
-        <h2>I'd sail <em>Azamara</em> — with the tall ship a close second.</h2>
-        <div class="recrow">
-          <div class="recitem"><div class="rt">The pick · ~$25.5k</div><h4>Azamara</h4><p>The only one that delivers your exact brief, and it costs about what your 2023 trip would today, for four.</p></div>
-          <div class="recitem"><div class="rt">Wildcard · ~$23k</div><h4>Star Clippers</h4><p>The trip you and Carson will still talk about in ten years — if the family wants adventure over a resort.</p></div>
-          <div class="recitem"><div class="rt">Splurge · ~$41k</div><h4>Regent</h4><p>Your bucket-list version — and not as wild as it looks once you net out air, excursions, drinks and tips.</p></div>
-          <div class="recitem"><div class="rt">Value floor · ~$19.5k</div><h4>Norwegian</h4><p>Cheapest way to get everyone to the Med — but you give up the small-ship feel you wanted.</p></div>
+        <div class="scard per">
+          <div class="st">The trophy</div><h3>Peru</h3>
+          <div class="vibe">Machu Picchu and the Sacred Valley — the bucket-list icon and the richest for culture and history.</div>
+          <dl>
+            <dt>Best for</dt><dd>Culture &amp; the icon</dd>
+            <dt>Flights</dt><dd>~8–9 hr, 1 stop</dd>
+            <dt>When</dt><dd>May–Oct, dry season</dd>
+          </dl>
+          <button class="open" onclick="showTab('peru')">See the plan →</button>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- fine print -->
-    <div class="fine">
-      <h4>The fine print &amp; what I checked</h4>
+  <section style="padding-top:2px;">
+    <div class="wrap">
+      <div class="section-head"><h2>The numbers, side by side</h2><div class="rule"></div></div>
+      <p class="sub">All-in for the four of you, including airfare. For reference, your Costa Rica trip ran ~$491/person/day and Tuscany ~$724.</p>
+      <div class="twrap"><table class="cmp">
+        <thead><tr><th>&nbsp;</th><th>Iceland</th><th>Banff</th><th>Peru</th></tr></thead>
+        <tbody>
+          <tr><td class="rl">Value</td><td><span class="big">$15–16k</span></td><td><span class="big">$11–12k</span></td><td><span class="big">$12–14k</span></td></tr>
+          <tr><td class="rl">Premium</td><td><span class="big">~$23k</span></td><td><span class="big">~$18k</span></td><td><span class="big">~$22k</span></td></tr>
+          <tr><td class="rl">Splurge</td><td><span class="big">$32k+</span></td><td><span class="big">~$26k</span></td><td><span class="big">$35k+</span></td></tr>
+          <tr><td class="rl">Per day (value)</td><td>~$375</td><td>~$288</td><td>~$310</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <section style="padding-top:2px;">
+    <div class="wrap">
+      <div class="read">
+        <div class="kicker">The advisor's read.</div>
+        <ul>
+          <li><strong>Iceland</strong> is my front-runner — it best recreates that daily-discovery feeling you love, and it's the biggest adventure of the three.</li>
+          <li><strong>Banff</strong> is the value champ and the easiest trip you'll ever run: short flights, English, drive-yourself, spectacle per dollar. Cheapest at every tier.</li>
+          <li><strong>Peru</strong> is the bucket-list trophy and the richest culturally — a genuine bargain at the value tier — with more travel friction and altitude to manage. Bonus: the premium tier runs largely on Marriott hotels, so your Bonvoy status pays off.</li>
+        </ul>
+        <div class="punch"><strong>To make any of them real, I need two things:</strong> a decision on <em>tier</em>, and your <em>date window</em> — I still need the 2027–28 UT Austin and Rockwall HS calendars before we lock dates.</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= ICELAND ================= -->
+<div class="panel" id="iceland" style="--accent:#4E6E86;">
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Trip Design · Iceland</div>
+      <h1>The Ring Road</h1>
+      <p class="lede">Ten days, one loop, a new landscape every morning — waterfalls and black-sand coast, a glacier lagoon, the volcanic north, and Snæfellsnes to close, all under 20+ hours of daylight.</p>
+      <div class="route"><strong>Route:</strong> Reykjavík → Golden Circle → Vík → Jökulsárlón &amp; Höfn → Eastfjords → Mývatn → Akureyri → Snæfellsnes → Reykjavík · ~1,400 km</div>
+      <div class="params">
+        <div><div class="k">Length</div><div class="v">10 days / 9 nts</div></div>
+        <div><div class="k">Window</div><div class="v">Jun–Aug</div></div>
+        <div><div class="k">There</div><div class="v">DFW ⇄ KEF</div></div>
+        <div><div class="k">How</div><div class="v">Self-drive AWD</div></div>
+      </div>
+    </div>
+  </header>
+  <div class="wrap"><div class="subnav">
+    <a href="#ice-tiers">Pricing</a><a href="#ice-itin">Day-by-day</a><a href="#ice-budget">Budget</a><a href="#ice-stay">Stays</a><a href="#ice-notes">Notes</a>
+  </div></div>
+
+  <section style="padding-top:6px;"><div class="wrap">
+    <div class="section-head"><h2 id="ice-tiers">Three ways to price it</h2><div class="rule"></div></div>
+    <div class="tiers">
+      <div class="tier star"><div class="lab">Value · sweet spot</div><div class="amt">~$15–16k</div><div class="ppd">≈ $375 pp/day</div><div class="note">Guesthouses &amp; 3-star hotels, kitchens where you can, one restaurant meal a day, the marquee activities.</div></div>
+      <div class="tier"><div class="lab">Premium</div><div class="amt">~$23k</div><div class="ppd">≈ $575 pp/day</div><div class="note">Boutique 4-star stays (Rangá, Búðir), premium 4x4, private glacier &amp; ice-cave guides, more dining out.</div></div>
+      <div class="tier"><div class="lab">Splurge</div><div class="amt">$32k+</div><div class="ppd">$800+ pp/day</div><div class="note">Design hotels (The Retreat at Blue Lagoon, Deplar Farm), private guiding throughout, a helicopter day.</div></div>
+    </div>
+  </div></section>
+
+  <section style="padding-top:6px;"><div class="wrap">
+    <div class="section-head"><h2 id="ice-itin">The day-by-day</h2><div class="rule"></div></div>
+    <p class="sub">Built around a couple of two-night bases so it isn't a new hotel every night. Drive times are with-stops estimates.</p>
+    <div class="days">
+      <div class="day"><div class="dhead"><span class="n">1</span><span class="loc">Reykjavík</span><span class="drive">Airport 45 min</span></div><h4>Land &amp; ease in</h4><p>Pick up the car and shake off the flight with a soak — Sky Lagoon in the city or the Blue Lagoon near the airport. Evening in Reykjavík: Hallgrímskirkja, the old harbor, a good first dinner.</p><div class="stay"><b>Stay:</b> Skuggi Hotel · Sand Hotel · The Retreat at Blue Lagoon</div></div>
+      <div class="day"><div class="dhead"><span class="n">2</span><span class="loc">Golden Circle → South</span><span class="drive">~3.5 hr</span></div><h4>The classic trio, then the coast</h4><p>Þingvellir rift valley, the Geysir hot-spring field, and thundering Gullfoss. Drop to the South Coast; optional Secret Lagoon or Kerið crater en route.</p><div class="stay"><b>Stay:</b> Hótel Hella · Hotel Rangá (gourmet + hot tubs)</div></div>
+      <div class="day"><div class="dhead"><span class="n">3</span><span class="loc">South Coast · Vík</span><span class="drive">~2.5 hr</span></div><h4>Waterfalls &amp; black sand</h4><p>Walk behind Seljalandsfoss, stand under Skógafoss, see the Sólheimajökull glacier tongue, then Dyrhólaey and the basalt columns of Reynisfjara black-sand beach.</p><div class="stay"><b>Stay:</b> Black Beach Suites (kitchenette) · Hotel Kría / Hotel Vík í Mýrdal</div></div>
+      <div class="day"><div class="dhead"><span class="n">4</span><span class="loc">Glaciers · Höfn</span><span class="drive">~3 hr</span></div><h4>Ice on every side</h4><p>A guided glacier hike or Svartifoss at Skaftafell, the Fjaðrárgljúfur canyon, then the showstopper: Jökulsárlón glacier lagoon and the ice-strewn Diamond Beach. Vestrahorn at golden hour.</p><div class="stay"><b>Stay:</b> Fosshotel Glacier Lagoon · Arnanes Country Hotel</div></div>
+      <div class="day"><div class="dhead"><span class="n">5</span><span class="loc">Eastfjords</span><span class="drive">~4 hr</span></div><h4>The road less driven</h4><p>A quiet, winding fjord coast most visitors skip — fishing villages, Petra's stone collection, reindeer in the hills — ending at Egilsstaðir or the rainbow street of Seyðisfjörður.</p><div class="stay"><b>Stay:</b> Hótel Eyvindará (log cabins) · Hótel 1001 Nótt</div></div>
+      <div class="day"><div class="dhead"><span class="n">6</span><span class="loc">Lake Mývatn</span><span class="drive">~2.5 hr + explore</span></div><h4>Volcano country</h4><p>Detour to Dettifoss, Europe's most powerful waterfall, then Krafla and the Víti crater, the steaming Hverir mud pots, Dimmuborgir lava — and unwind in the Mývatn Nature Baths.</p><div class="stay"><b>Stay:</b> Vogafjós Farm Resort (working dairy farm) · Hótel Laxá</div></div>
+      <div class="day"><div class="dhead"><span class="n">7</span><span class="loc">Húsavík · Akureyri</span><span class="drive">~2 hr</span></div><h4>Whales &amp; the capital of the north</h4><p>Goðafoss on the way, then whale-watching from Húsavík (sightings near-guaranteed in July). Settle into walkable Akureyri — botanical garden, the landmark church, the Forest Lagoon.</p><div class="stay"><b>Stay:</b> Hótel Kea · Berjaya Akureyri</div></div>
+      <div class="day"><div class="dhead"><span class="n">8</span><span class="loc">West across the north</span><span class="drive">~4.5 hr</span></div><h4>The long, beautiful transfer</h4><p>The biggest driving day — sweeping empty landscapes, the seal-shaped Hvítserkur sea stack, turf-house history. Land near Borgarnes or push onto Snæfellsnes for an early start tomorrow.</p><div class="stay"><b>Stay:</b> The Bookstore Family Apartment · Hótel Búðir (iconic)</div></div>
+      <div class="day"><div class="dhead"><span class="n">9</span><span class="loc">Snæfellsnes</span><span class="drive">Loop day</span></div><h4>"Iceland in miniature"</h4><p>Everything the country does on one peninsula: photogenic Kirkjufell and its waterfall, Snæfellsjökull glacier-volcano, the Arnarstapi–Hellnar coastal walk, Djúpalónssandur beach, the black church at Búðir.</p><div class="stay"><b>Stay:</b> repeat last night's base, or edge toward Reykjavík</div></div>
+      <div class="day"><div class="dhead"><span class="n">10</span><span class="loc">Depart</span><span class="drive">KEF ~2 hr</span></div><h4>Last soak, then home</h4><p>Drive back toward Keflavík (via scenic Hvalfjörður or a final Reykjavík morning). Time it for one last thermal soak or a bakery stop before your flight.</p><div class="stay"><b>Stay:</b> —</div></div>
+    </div>
+  </div></section>
+
+  <section style="padding-top:6px;"><div class="wrap">
+    <div class="section-head"><h2 id="ice-budget">Where the money goes</h2><div class="rule"></div></div>
+    <p class="sub">The four of you, 9 nights. Biggest levers: lodging and how often you eat out.</p>
+    <div class="twrap"><table class="btable">
+      <thead><tr><th>Category</th><th class="num">Value</th><th class="num">Premium</th><th class="num">Splurge</th></tr></thead>
+      <tbody>
+        <tr><td class="cat">Airfare (4)</td><td class="num">$4,400</td><td class="num">$6,000</td><td class="num">$10,000+</td></tr>
+        <tr><td class="cat">Car + fuel</td><td class="num">$1,900</td><td class="num">$2,600</td><td class="num">$3,500+</td></tr>
+        <tr><td class="cat">Lodging (9 nt)</td><td class="num">$3,200</td><td class="num">$6,300</td><td class="num">$12,000+</td></tr>
+        <tr><td class="cat">Food</td><td class="num">$3,300</td><td class="num">$4,400</td><td class="num">$5,500+</td></tr>
+        <tr><td class="cat">Activities</td><td class="num">$1,900</td><td class="num">$3,300</td><td class="num">$5,000+</td></tr>
+        <tr><td class="cat">Misc</td><td class="num">$300</td><td class="num">$400</td><td class="num">$500+</td></tr>
+        <tr class="tot"><td class="cat">All-in</td><td class="num">~$15,000</td><td class="num">~$23,000</td><td class="num">$36,500+</td></tr>
+        <tr class="ppd-row"><td class="cat">Per person/day</td><td class="num">~$375</td><td class="num">~$575</td><td class="num">$900+</td></tr>
+      </tbody>
+    </table></div>
+  </div></section>
+
+  <section style="padding-top:6px;"><div class="wrap">
+    <div class="section-head"><h2 id="ice-stay">Where you'd sleep</h2><div class="rule"></div></div>
+    <p class="sub">Hard rule: book the glacier-lagoon area (Höfn) and Vík <em>first</em> — fewest rooms, fastest sellout.</p>
+    <div class="lodge">
+      <div class="lcard"><div class="lab">Value</div><ul><li>Skuggi Hotel <em>Reykjavík</em></li><li>Black Beach Suites <em>Vík</em></li><li>Fosshotel Glacier Lagoon <em>SE</em></li><li>Vogafjós Farm <em>Mývatn</em></li><li>Hótel Kea <em>Akureyri</em></li></ul></div>
+      <div class="lcard"><div class="lab">Premium</div><ul><li>Hotel Rangá <em>South</em></li><li>Hotel Vík í Mýrdal <em>Vík</em></li><li>Hótel Laxá <em>Mývatn</em></li><li>Hótel Búðir <em>Snæfellsnes</em></li><li>Sand Hotel <em>Reykjavík</em></li></ul></div>
+      <div class="lcard"><div class="lab">Splurge</div><ul><li>The Retreat at Blue Lagoon</li><li>Deplar Farm <em>North, heli</em></li><li>Torfhús Retreat <em>turf suites</em></li><li>+ private guiding</li></ul></div>
+    </div>
+  </div></section>
+
+  <section style="padding-top:6px;"><div class="wrap">
+    <div class="notes">
+      <h2 id="ice-notes">Advisor notes &amp; logistics</h2>
       <ul>
-        <li><b>Estimates, not quotes.</b> All-in = flights + ~3 nights in Rome + onboard spend, for four. Per-person = total ÷ 4. 2027 fares move; final pricing confirmed at booking.</li>
-        <li><b>The age rule that shaped this.</b> Carson turns 16 on Jun 23, 2027, so every sailing departs on/after ~Jun 24. Viking, Oceania, and Windstar are adults-only (18+) — why they're not here.</li>
-        <li><b>Cabins.</b> Two adjacent staterooms throughout, no interiors; the kids' cabin is cross-referenced to yours to satisfy the under-21 rules.</li>
-        <li><b>Passports.</b> All four valid past the trip — yours and Kristin's to 2032, Katelyn's and Carson's to May 2028. No renewals needed.</li>
-        <li><b>Airfare.</b> Summer is peak DFW–Rome; American flies it nonstop, so the round-trip-Rome itineraries (Star Clippers, Regent) save travel time.</li>
-        <li><b>Early-booking savings.</b> Star Clippers and Azamara have early-booking discounts that could lower these; Regent already reflects a 2-for-1 structure.</li>
+        <li><span class="flag">Book early:</span> peak-summer rooms go 6–9 months out; the Höfn/glacier-lagoon area sells first. Lock lodging by fall 2026.</li>
+        <li><strong>Fit:</strong> squarely adventure-forward for you and Carson; the active pace suits Katelyn. No camping — every night is a real bed.</li>
+        <li><strong>Vehicle:</strong> AWD SUV for comfort and gravel side-roads. Skip F-roads unless you want a super-jeep day.</li>
+        <li><strong>Honest catch:</strong> food and fuel are pricey, weather flips fast even in July, and Day 8 is a long haul — the two-night bases offset it.</li>
       </ul>
-      <div class="sig">Prepared for the Illig family · for planning only — nothing booked.</div>
     </div>
-  </div>
-</section>
+  </div></section>
+</div>
 
-<!-- ================= NORWEGIAN ================= -->
-<section class="panel" id="panel-ncl" tabindex="-1" style="--accent:#C85C3C" aria-label="Norwegian Cruise Line">
-  <div class="dbanner">
-    <div class="dbanner-in">
-      <button class="back" data-target="overview">← All options</button>
-      <div class="de">Option 01 · The Value Play</div>
-      <h2>Norwegian Cruise Line</h2>
-      <div class="ship">Norwegian Epic · ~4,000 guests · 7 nights, Rome → Barcelona</div>
-      <div class="dbudget">
-        <div class="big"><div class="lab">All-in · family of 4</div><div class="val">~$19,500</div></div>
-        <div><div class="lab">Per person</div><div class="val">~$4,900</div></div>
+<!-- ================= BANFF ================= -->
+<div class="panel" id="banff" style="--accent:#2C7A8C;">
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Trip Design · Banff</div>
+      <h1>Canadian Rockies</h1>
+      <p class="lede">Turquoise lakes under glacier peaks, one of the world's great scenic drives, and hiking, canoeing, and rafting on tap — the most spectacle per dollar, and a short flight from Dallas.</p>
+      <div class="route"><strong>Route:</strong> Calgary → Banff → Lake Louise &amp; Moraine → Yoho → Icefields Parkway → Kananaskis → Calgary · based in Canmore/Banff</div>
+      <div class="params">
+        <div><div class="k">Length</div><div class="v">10 days / 9 nts</div></div>
+        <div><div class="k">Window</div><div class="v">Jun–Sep</div></div>
+        <div><div class="k">There</div><div class="v">DFW ⇄ YYC</div></div>
+        <div><div class="k">How</div><div class="v">Self-drive SUV</div></div>
       </div>
     </div>
-  </div>
+  </header>
+  <div class="wrap"><div class="subnav">
+    <a href="#ban-tiers">Pricing</a><a href="#ban-itin">Day-by-day</a><a href="#ban-budget">Budget</a><a href="#ban-stay">Stays</a><a href="#ban-notes">Notes</a>
+  </div></div>
+
+  <section style="padding-top:6px;"><div class="wrap">
+    <div class="section-head"><h2 id="ban-tiers">Three ways to price it</h2><div class="rule"></div></div>
+    <p class="sub">The cheapest of your finalists at every tier — the value tier comes in under Costa Rica.</p>
+    <div class="tiers">
+      <div class="tier star"><div class="lab">Value · sweet spot</div><div class="amt">~$11–12k</div><div class="ppd">≈ $290–320 pp/day</div><div class="note">Canmore condo with a kitchen, a couple of nights near Lake Louise, the marquee sights and one big-ticket activity.</div></div>
+      <div class="tier"><div class="lab">Premium</div><div class="amt">~$18k</div><div class="ppd">≈ $450 pp/day</div><div class="note">A few Fairmont nights, guided hikes and a lake cruise, more dining out, a premium SUV.</div></div>
+      <div class="tier"><div class="lab">Splurge</div><div class="amt">~$26k</div><div class="ppd">≈ $650 pp/day</div><div class="note">Fairmont Chateau Lake Louise + Banff Springs throughout, a Rocky Mountaineer rail leg or heli-hiking.</div></div>
+    </div>
+  </div></section>
+
+  <section style="padding-top:6px;"><div class="wrap">
+    <div class="section-head"><h2 id="ban-itin">The day-by-day</h2><div class="rule"></div></div>
+    <p class="sub">Based in Canmore/Banff so you unpack once. The Icefields Parkway runs as a day trip; Jasper is optional (still rebuilding from the 2024 wildfire).</p>
+    <div class="days">
+      <div class="day"><div class="dhead"><span class="n">1</span><span class="loc">Arrive · Canmore</span><span class="drive">YYC 1.5 hr</span></div><h4>Fly in, drive to the mountains</h4><p>Land at Calgary, pick up the SUV, drive to Canmore (peaks within the hour). Settle in, stock the condo kitchen, stroll Canmore's Main Street for a first dinner.</p><div class="stay"><b>Stay:</b> Basecamp Suites Canmore · The Malcolm · Fairmont Banff Springs</div></div>
+      <div class="day"><div class="dhead"><span class="n">2</span><span class="loc">Banff townsite</span><span class="drive">local</span></div><h4>Get your bearings</h4><p>Banff Gondola up Sulphur Mountain, Bow Falls and Surprise Corner, Lake Minnewanka (cruise or Stewart Canyon walk), and the Johnston Canyon falls hike. Banff Upper Hot Springs to close.</p><div class="stay"><b>Stay:</b> same base</div></div>
+      <div class="day"><div class="dhead"><span class="n">3</span><span class="loc">Lake Louise &amp; Moraine</span><span class="drive">~1 hr each way</span></div><h4>The two famous lakes</h4><p>Reserved early shuttle in (you can't drive to Moraine anymore). Canoe on Lake Louise, hike to the Lake Agnes Tea House or Plain of Six Glaciers, then the Rockpile over Moraine and the Valley of the Ten Peaks.</p><div class="stay"><b>Stay:</b> Baker Creek by Basecamp (cabins) · Post Hotel / Fairmont Chateau Lake Louise</div></div>
+      <div class="day"><div class="dhead"><span class="n">4</span><span class="loc">Yoho NP (BC)</span><span class="drive">~1 hr</span></div><h4>Over the divide, fewer crowds</h4><p>Into British Columbia for Emerald Lake (canoe or the easy loop), towering Takakkaw Falls, the Natural Bridge, and the Spiral Tunnels — a quieter counterpoint to Lake Louise.</p><div class="stay"><b>Stay:</b> Lake Louise base, or back to Canmore</div></div>
+      <div class="day"><div class="dhead"><span class="n">5</span><span class="loc">Icefields Parkway</span><span class="drive">~2.5 hr each way</span></div><h4>One of the world's great drives</h4><p>Bow Lake, the wolf-head overlook at Peyto Lake, then the Columbia Icefield — ride the Ice Explorer onto the Athabasca Glacier and walk the glass-floored Skywalk. Turn back, or push to Jasper if adding it.</p><div class="stay"><b>Stay:</b> Canmore/Lake Louise (or Jasper if extending)</div></div>
+      <div class="day"><div class="dhead"><span class="n">6</span><span class="loc">Big hike day</span><span class="drive">local</span></div><h4>Get up into the alpine</h4><p>The Sunshine gondola to the wildflower meadows, or Larch Valley &amp; Sentinel Pass (stunning in late season) or Healy Pass. The day you and Carson will remember — pick the effort level for everyone.</p><div class="stay"><b>Stay:</b> Canmore/Banff base</div></div>
+      <div class="day"><div class="dhead"><span class="n">7</span><span class="loc">Kananaskis</span><span class="drive">~30–60 min</span></div><h4>The locals' backyard</h4><p>South into Kananaskis and Spray Lakes: Grassi Lakes, the Ha Ling Peak climb, big reservoir views, and the best wildlife odds of the trip. Or swap in white-water rafting on the Kicking Horse.</p><div class="stay"><b>Stay:</b> Canmore base</div></div>
+      <div class="day"><div class="dhead"><span class="n">8</span><span class="loc">Choose your adventure</span><span class="drive">flex</span></div><h4>A flex day</h4><p>Options: a via ferrata at Mt Norquay, horseback riding, canoeing the Bow River and Vermilion Lakes, or a full Jasper overnight loop. Or return to a favorite lake at sunrise before the crowds.</p><div class="stay"><b>Stay:</b> Canmore/Banff base</div></div>
+      <div class="day"><div class="dhead"><span class="n">9</span><span class="loc">Slow morning + buffer</span><span class="drive">toward YYC</span></div><h4>Last mountain morning</h4><p>Sunrise at Vermilion Lakes, the Cave &amp; Basin, Banff Avenue shopping, the Bow River trail. Drive toward Calgary in the evening and overnight near the airport.</p><div class="stay"><b>Stay:</b> Calgary airport hotel (or one more Canmore night)</div></div>
+      <div class="day"><div class="dhead"><span class="n">10</span><span class="loc">Depart</span><span class="drive">YYC</span></div><h4>Fly home</h4><p>Depart Calgary. Build in ~2.5 hours — U.S. customs preclearance happens in Calgary, so you clear before you fly.</p><div class="stay"><b>Stay:</b> —</div></div>
+    </div>
+  </div></section>
+
+  <section style="padding-top:6px;"><div class="wrap">
+    <div class="section-head"><h2 id="ban-budget">Where the money goes</h2><div class="rule"></div></div>
+    <p class="sub">The four of you, 9 nights. Flights are the cheapest of any finalist; a Canmore condo with a kitchen is the big value lever.</p>
+    <div class="twrap"><table class="btable">
+      <thead><tr><th>Category</th><th class="num">Value</th><th class="num">Premium</th><th class="num">Splurge</th></tr></thead>
+      <tbody>
+        <tr><td class="cat">Airfare (4)</td><td class="num">$2,400</td><td class="num">$2,900</td><td class="num">$4,000+</td></tr>
+        <tr><td class="cat">SUV + fuel</td><td class="num">$1,100</td><td class="num">$1,400</td><td class="num">$1,800</td></tr>
+        <tr><td class="cat">Lodging (9 nt)</td><td class="num">$2,900</td><td class="num">$6,800</td><td class="num">$13,000+</td></tr>
+        <tr><td class="cat">Food</td><td class="num">$2,800</td><td class="num">$3,600</td><td class="num">$4,500</td></tr>
+        <tr><td class="cat">Activities + pass</td><td class="num">$2,000</td><td class="num">$2,600</td><td class="num">$3,000+</td></tr>
+        <tr><td class="cat">Misc</td><td class="num">$300</td><td class="num">$350</td><td class="num">$400</td></tr>
+        <tr class="tot"><td class="cat">All-in</td><td class="num">~$11,500</td><td class="num">~$17,650</td><td class="num">~$26,700</td></tr>
+        <tr class="ppd-row"><td class="cat">Per person/day</td><td class="num">~$288</td><td class="num">~$441</td><td class="num">~$668</td></tr>
+      </tbody>
+    </table></div>
+  </div></section>
+
+  <section style="padding-top:6px;"><div class="wrap">
+    <div class="section-head"><h2 id="ban-stay">Where you'd sleep</h2><div class="rule"></div></div>
+    <p class="sub">Canmore is the value-smart base; a night or two near Lake Louise buys you the lakes before the crowds. Book the shuttle the minute the window opens.</p>
+    <div class="lodge">
+      <div class="lcard"><div class="lab">Value</div><ul><li>Basecamp Suites <em>Canmore</em></li><li>Grand Rockies Resort <em>Canmore</em></li><li>Baker Creek by Basecamp <em>cabins</em></li><li>Mountaineer Lodge <em>Lake Louise</em></li></ul></div>
+      <div class="lcard"><div class="lab">Premium</div><ul><li>The Malcolm <em>Canmore</em></li><li>Moose Hotel &amp; Suites <em>Banff</em></li><li>Post Hotel &amp; Spa <em>Lake Louise</em></li><li>Fairmont Chateau Lake Louise</li></ul></div>
+      <div class="lcard"><div class="lab">Splurge</div><ul><li>Fairmont Banff Springs</li><li>Fairmont Chateau Lake Louise <em>lakeview</em></li><li>Moraine Lake Lodge <em>free canoe</em></li></ul></div>
+    </div>
+  </div></section>
+
+  <section style="padding-top:6px;"><div class="wrap">
+    <div class="notes">
+      <h2 id="ban-notes">Advisor notes &amp; logistics</h2>
+      <ul>
+        <li><span class="flag">Shuttles sell out:</span> you can't drive to Moraine, and Lake Louise parking fills by ~7:30am. Reserve Parks Canada shuttles the moment the window opens (usually midwinter for the coming summer).</li>
+        <li><strong>Fit:</strong> the most active and easiest of the three — English, drive-yourself, short flights. Right in your and Carson's lane.</li>
+        <li><strong>Best value:</strong> even the premium tier lands near your everyday trip spend; the value tier is under Costa Rica.</li>
+        <li><strong>Jasper:</strong> still rebuilding from the July 2024 wildfire, so it's optional here — Banff, Lake Louise, Yoho, and Kananaskis carry the trip.</li>
+      </ul>
+    </div>
+  </div></section>
+</div>
+
+<!-- ================= PERU ================= -->
+<div class="panel" id="peru" style="--accent:#9E5E33;">
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Trip Design · Peru</div>
+      <h1>Cusco, Sacred Valley &amp; Machu Picchu</h1>
+      <p class="lede">The bucket-list trophy: Inca ruins and Andean markets, a wonder of the world reached by a river-gorge train, and Cusco's living history — in the season the skies run clearest.</p>
+      <div class="route"><strong>Route:</strong> Lima → Sacred Valley (acclimatize) → Machu Picchu → Cusco → optional Rainbow Mountain or Amazon · fly + rail</div>
+      <div class="params">
+        <div><div class="k">Length</div><div class="v">10 days / 9 nts</div></div>
+        <div><div class="k">Window</div><div class="v">May–Oct (dry)</div></div>
+        <div><div class="k">There</div><div class="v">DFW ⇄ LIM ⇄ CUZ</div></div>
+        <div><div class="k">How</div><div class="v">Guided + train</div></div>
+      </div>
+    </div>
+  </header>
+  <div class="wrap"><div class="subnav">
+    <a href="#per-tiers">Pricing</a><a href="#per-itin">Day-by-day</a><a href="#per-budget">Budget</a><a href="#per-stay">Stays</a><a href="#per-notes">Notes</a>
+  </div></div>
+
+  <section style="padding-top:6px;"><div class="wrap">
+    <div class="section-head"><h2 id="per-tiers">Three ways to price it</h2><div class="rule"></div></div>
+    <p class="sub">A genuine bargain at the value tier — the cheapest bucket-list trophy on your list.</p>
+    <div class="tiers">
+      <div class="tier star"><div class="lab">Value · sweet spot</div><div class="amt">~$12–14k</div><div class="ppd">≈ $310 pp/day</div><div class="note">Well-run mid-range hotels, small-group day tours, the Expedition train, and all the key sites and guides.</div></div>
+      <div class="tier"><div class="lab">Premium</div><div class="amt">~$22k</div><div class="ppd">≈ $575 pp/day</div><div class="note">Marriott &amp; Inkaterra properties (Bonvoy-friendly), private guides, the Vistadome train, and a 2-night Amazon add-on.</div></div>
+      <div class="tier"><div class="lab">Splurge</div><div class="amt">$35k+</div><div class="ppd">$900+ pp/day</div><div class="note">Belmond hotels (Rio Sagrado, Sanctuary Lodge, Palacio Nazarenas) and the Hiram Bingham train, private throughout.</div></div>
+    </div>
+  </div></section>
+
+  <section style="padding-top:6px;"><div class="wrap">
+    <div class="section-head"><h2 id="per-itin">The day-by-day</h2><div class="rule"></div></div>
+    <p class="sub">Sequenced for altitude: you sleep in the lower Sacred Valley first and only tackle Cusco (11,150 ft) and the high day-hikes once you're acclimatized.</p>
+    <div class="days">
+      <div class="day"><div class="dhead"><span class="n">1</span><span class="loc">Lima</span><span class="drive">Airport 40 min</span></div><h4>Arrive in the capital</h4><p>Land in Lima (usually evening) and settle into clifftop Miraflores. A relaxed first night — a ceviche dinner if you're up for it.</p><div class="stay"><b>Stay:</b> Casa Andina (Miraflores) · JW Marriott Lima · Belmond Miraflores Park</div></div>
+      <div class="day"><div class="dhead"><span class="n">2</span><span class="loc">Lima → Sacred Valley</span><span class="drive">Fly ~1.5 hr</span></div><h4>Straight down to acclimatize</h4><p>A morning in Lima (Miraflores boardwalk, arty Barranco, the Larco Museum), then fly to Cusco and transfer <em>down</em> into the Sacred Valley — lower and gentler on the lungs than the city.</p><div class="stay"><b>Stay:</b> Tierra Viva Urubamba · Tambo del Inka / Sol y Luna · Belmond Rio Sagrado</div></div>
+      <div class="day"><div class="dhead"><span class="n">3</span><span class="loc">Sacred Valley</span><span class="drive">valley</span></div><h4>Markets, salt pans, terraces</h4><p>The Pisac market and hilltop ruins, the cascading Maras salt pans, and the concentric agricultural terraces of Moray. An easy pace that doubles as altitude prep.</p><div class="stay"><b>Stay:</b> same base</div></div>
+      <div class="day"><div class="dhead"><span class="n">4</span><span class="loc">Ollantaytambo</span><span class="drive">valley</span></div><h4>A living Inca town</h4><p>Climb the great Ollantaytambo fortress, wander streets laid out five centuries ago, visit a weaving cooperative, and keep it relaxed at the hotel before tomorrow's train.</p><div class="stay"><b>Stay:</b> same base, or El Albergue (Ollantaytambo station)</div></div>
+      <div class="day"><div class="dhead"><span class="n">5</span><span class="loc">→ Machu Picchu</span><span class="drive">Train ~1.5 hr</span></div><h4>Into the cloud forest</h4><p>The scenic train down the Urubamba gorge to Aguas Calientes. Settle in, and soak tired legs in the town's hot springs before the big day.</p><div class="stay"><b>Stay:</b> Casa Andina MP · SUMAQ / Inkaterra Machu Picchu Pueblo · Belmond Sanctuary Lodge</div></div>
+      <div class="day"><div class="dhead"><span class="n">6</span><span class="loc">Machu Picchu → Cusco</span><span class="drive">Train + drive</span></div><h4>The wonder itself</h4><p>An early bus up for a guided tour of the citadel (timed entry; Circuit 2 for the classic experience), with the option to climb Huayna Picchu. Afternoon train back and transfer to Cusco.</p><div class="stay"><b>Stay:</b> Tierra Viva Cusco · JW Marriott El Convento / Palacio del Inka · Palacio Nazarenas</div></div>
+      <div class="day"><div class="dhead"><span class="n">7</span><span class="loc">Cusco</span><span class="drive">city</span></div><h4>The Inca capital</h4><p>Now acclimatized: Qorikancha (Temple of the Sun), the Cathedral and Plaza de Armas, the artsy San Blas quarter, bustling San Pedro market, and the massive Sacsayhuamán walls above town.</p><div class="stay"><b>Stay:</b> same base</div></div>
+      <div class="day"><div class="dhead"><span class="n">8</span><span class="loc">Choose your adventure</span><span class="drive">flex</span></div><h4>Go high, or go to the jungle</h4><p>A day hike to turquoise Humantay Lake or the striped Rainbow Mountain (both very high — only now that you're acclimatized), <em>or</em> fly to Puerto Maldonado to begin a 2-night Amazon-lodge extension.</p><div class="stay"><b>Stay:</b> Cusco base (or an Amazon lodge)</div></div>
+      <div class="day"><div class="dhead"><span class="n">9</span><span class="loc">Cusco / Amazon</span><span class="drive">flex</span></div><h4>A final full day</h4><p>More Cusco — Chinchero, a cooking class, the food scene — or a full Amazon day of canopy walks, an oxbow-lake paddle, and wildlife spotting.</p><div class="stay"><b>Stay:</b> Cusco base (or Amazon lodge)</div></div>
+      <div class="day"><div class="dhead"><span class="n">10</span><span class="loc">Depart</span><span class="drive">Fly via Lima</span></div><h4>Fly home</h4><p>Fly Cusco → Lima and connect home (or route out of Puerto Maldonado via Lima if you did the Amazon).</p><div class="stay"><b>Stay:</b> —</div></div>
+    </div>
+  </div></section>
+
+  <section style="padding-top:6px;"><div class="wrap">
+    <div class="section-head"><h2 id="per-budget">Where the money goes</h2><div class="rule"></div></div>
+    <p class="sub">The four of you, 9 nights. Land costs are low — Peru is the value story — so the jump to premium is mostly hotels, the fancier train, and adding the Amazon.</p>
+    <div class="twrap"><table class="btable">
+      <thead><tr><th>Category</th><th class="num">Value</th><th class="num">Premium</th><th class="num">Splurge</th></tr></thead>
+      <tbody>
+        <tr><td class="cat">Airfare (intl + domestic)</td><td class="num">$3,800</td><td class="num">$6,000</td><td class="num">$10,000+</td></tr>
+        <tr><td class="cat">Lodging (9 nt)</td><td class="num">$2,700</td><td class="num">$6,800</td><td class="num">$13,000+</td></tr>
+        <tr><td class="cat">Trains to Machu Picchu</td><td class="num">$650</td><td class="num">$1,100</td><td class="num">$4,000</td></tr>
+        <tr><td class="cat">Guides, tours &amp; entries</td><td class="num">$2,000</td><td class="num">$3,400</td><td class="num">$4,500+</td></tr>
+        <tr><td class="cat">Food</td><td class="num">$1,700</td><td class="num">$2,600</td><td class="num">$2,800+</td></tr>
+        <tr><td class="cat">Transfers + misc</td><td class="num">$1,200</td><td class="num">$1,900</td><td class="num">$2,300+</td></tr>
+        <tr class="tot"><td class="cat">All-in</td><td class="num">~$12,050</td><td class="num">~$21,800</td><td class="num">$36,600+</td></tr>
+        <tr class="ppd-row"><td class="cat">Per person/day</td><td class="num">~$300</td><td class="num">~$545</td><td class="num">$915+</td></tr>
+      </tbody>
+    </table></div>
+  </div></section>
+
+  <section style="padding-top:6px;"><div class="wrap">
+    <div class="section-head"><h2 id="per-stay">Where you'd sleep</h2><div class="rule"></div></div>
+    <p class="sub">Premium leans on Marriott (JW Lima, Tambo del Inka, JW El Convento, Palacio del Inka) so your Bonvoy Lifetime Platinum earns its keep. Sacred-Valley 5-stars keep oxygen on hand for altitude.</p>
+    <div class="lodge">
+      <div class="lcard"><div class="lab">Value</div><ul><li>Casa Andina <em>Lima</em></li><li>Tierra Viva <em>Sacred Valley</em></li><li>Casa Andina MP <em>Aguas Calientes</em></li><li>Tierra Viva <em>Cusco</em></li></ul></div>
+      <div class="lcard"><div class="lab">Premium <em>· Bonvoy</em></div><ul><li>JW Marriott <em>Lima</em></li><li>Tambo del Inka <em>Sacred Valley</em></li><li>Inkaterra / SUMAQ <em>Machu Picchu</em></li><li>JW El Convento / Palacio del Inka <em>Cusco</em></li></ul></div>
+      <div class="lcard"><div class="lab">Splurge</div><ul><li>Belmond Rio Sagrado <em>Valley</em></li><li>Belmond Sanctuary Lodge <em>MP gate</em></li><li>Palacio Nazarenas <em>Cusco</em></li><li>+ Hiram Bingham train</li></ul></div>
+    </div>
+  </div></section>
+
+  <section style="padding-top:6px;"><div class="wrap">
+    <div class="notes">
+      <h2 id="per-notes">Advisor notes &amp; logistics</h2>
+      <ul>
+        <li><span class="flag">Altitude is the real planning item:</span> Cusco sits at ~11,150 ft. Sleeping in the Sacred Valley first (lower) is the whole reason the days are ordered this way — hydrate, take it easy early, and save Rainbow Mountain/Humantay for after you've adjusted.</li>
+        <li><span class="flag">Permits sell out:</span> Machu Picchu is timed-entry and guide-required, and books up 4–6 months ahead; the Inca Trail (if you ever want it) goes even earlier and is capped daily. Lock dates early.</li>
+        <li><strong>Bonvoy payoff:</strong> the premium tier can run largely on Marriott properties, so your Lifetime Platinum status and points genuinely reduce cost here.</li>
+        <li><strong>Fit:</strong> the richest of the three for culture and history, and a true "we did that" trip — adventure and heritage together.</li>
+        <li><strong>Honest catch:</strong> more moving parts than a road trip (flights, trains, transfers) and altitude to respect. Worth it, but it's the least "unpack once and relax" of the three.</li>
+      </ul>
+    </div>
+  </div></section>
+</div>
+
+<footer>
   <div class="wrap">
-    <p class="pitch">The most ship for the least money. Epic is a floating resort — pools, a dozen restaurants, shows every night — and the route hits the greats: <b>Naples, Florence, the French Riviera, Barcelona.</b> The way to get the family to Italy without spending big.</p>
-
-    <div class="detail-cols">
-      <div>
-        <div class="blockhead">The sailing</div>
-        <ul class="specs">
-          <li><span class="sk">Sample date</span><span class="sv">Sat, Jul 10, 2027</span></li>
-          <li><span class="sk">Length</span><span class="sv">7 nights + 3 in Rome</span></li>
-          <li><span class="sk">Route</span><span class="sv">Rome (Civitavecchia) → Barcelona</span></li>
-          <li><span class="sk">Staterooms</span><span class="sv">2 balcony cabins, adjacent</span></li>
-          <li><span class="sk">Carson at 16</span><span class="sv">✓ welcome</span></li>
-          <li><span class="sk">Flight home</span><span class="sv">From Barcelona (1 stop)</span></li>
-        </ul>
-      </div>
-      <div>
-        <div class="blockhead">What's included</div>
-        <div class="incl-box">
-          <div class="note">NCL is mostly à-la-carte — the value move is the "Free at Sea" promo, which bundles the below.</div>
-          <ul class="incl">
-            <li>Unlimited open-bar drink package</li>
-            <li>Specialty dining credits + main dining</li>
-            <li>A shore-excursion credit per cabin</li>
-            <li>Shows, pools &amp; waterslides</li>
-            <li>Wi-Fi minutes package</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="blockhead">The journey, day by day</div>
-    <div class="timeline">
-      <div class="stop land"><div class="d">Days 1–3 · Rome</div><div class="port">The Eternal City</div><div class="desc">Settle in. Colosseum &amp; Forum, the Vatican and Sistine Chapel, carbonara in Trastevere.</div><div class="ut">3 hotel nights</div></div>
-      <div class="stop"><div class="d">Day 4 · Embark</div><div class="port">Civitavecchia → at sea</div><div class="desc">Board Epic by early afternoon and toast the sail-away.</div></div>
-      <div class="stop"><div class="d">Day 5 · Italy</div><div class="port">Naples</div><div class="desc">Pompeii, the Amalfi Coast, Capri — or the best pizza on earth.</div></div>
-      <div class="stop"><div class="d">Day 6 · Italy</div><div class="port">Florence &amp; Pisa (Livorno)</div><div class="desc">Renaissance Florence, or Pisa and a Tuscan wine lunch.</div></div>
-      <div class="stop"><div class="d">Day 7 · France</div><div class="port">Cannes / Riviera</div><div class="desc">The Côte d'Azur — Cannes, Antibes, or a hop to Monaco.</div></div>
-      <div class="stop"><div class="d">Day 8 · At sea</div><div class="port">A day aboard</div><div class="desc">Pools, the ropes course, the spa, a new restaurant for dinner.</div></div>
-      <div class="stop"><div class="d">Day 9 · Spain</div><div class="port">Palma de Mallorca</div><div class="desc">Jewel-box old town, a cathedral on the water, Balearic beaches.</div></div>
-      <div class="stop land"><div class="d">Day 10 · Disembark</div><div class="port">Barcelona</div><div class="desc">Sagrada Família, Las Ramblas, tapas — then home from BCN.</div><div class="ut">Fly home</div></div>
-    </div>
-
-    <div class="blockhead">The numbers</div>
-    <div class="breakdown">
-      <div class="bh"><span>Estimated cost</span><span>USD · 4 travelers</span></div>
-      <div class="brow"><div class="bl">Cruise fare<small>2 balcony staterooms · 7 nights</small></div><div class="bv">~$6,000</div></div>
-      <div class="brow"><div class="bl">Flights<small>4 · DFW round-trip, peak summer</small></div><div class="bv">~$6,000</div></div>
-      <div class="brow"><div class="bl">Rome, 3 nights<small>Hotel, meals, tickets, transfers</small></div><div class="bv">~$4,000</div></div>
-      <div class="brow"><div class="bl">Onboard<small>Free at Sea bundle, tips, excursions</small></div><div class="bv">~$3,500</div></div>
-      <div class="brow total"><div class="bl">All-in estimate</div><div class="bv">~$19,500</div></div>
-      <div class="brow pp"><div class="bl">Per person (÷4)</div><div class="bv">~$4,900</div></div>
-    </div>
-
-    <div class="blockhead">The honest take</div>
-    <div class="pc">
-      <div class="pc-card love"><h4>Why you'll love it</h4><ul>
-        <li>By far the lowest price for the four of you.</li>
-        <li>Endless choice aboard — nobody gets bored.</li>
-        <li>Near-adult kids roam freely on a big ship.</li>
-        <li>Hits the blockbuster Western Med ports in a week.</li>
-      </ul></div>
-      <div class="pc-card trade"><h4>The trade-offs</h4><ul>
-        <li>~4,000 guests — opposite of the "minimalist boat" you wanted.</li>
-        <li>Gangway crowds and tender lines eat into port time.</li>
-        <li>Costs climb fast aboard if you skip the bundle.</li>
-        <li>Ports feel busy when a big ship empties at once.</li>
-      </ul></div>
-    </div>
-    <div class="bestfor"><b>Best for</b> Keeping the budget firmly in "normal trip" territory while still seeing Italy, France, and Spain.</div>
-
-    <div class="endnav">
-      <button class="ghost" data-target="overview">← All options</button>
-      <button data-target="star">Next: Star Clippers →</button>
-    </div>
+    <p class="disc"><strong>Estimates, not quotes.</strong> All figures assume the four of you for 10 days / 9 nights and include airfare; fares and rates move and confirm at booking. Per-day comparisons draw from your own trip tracker (Costa Rica, Hawaii, Tuscany). I research and recommend — I don't book; every final call is yours. Prepared for the 2027 planning cycle · for Tony's eyes.</p>
   </div>
-</section>
-
-<!-- ================= STAR CLIPPERS ================= -->
-<section class="panel" id="panel-star" tabindex="-1" style="--accent:#1C6E78" aria-label="Star Clippers">
-  <div class="dbanner">
-    <div class="dbanner-in">
-      <button class="back" data-target="overview">← All options</button>
-      <div class="de">Option 02 · The Adventure</div>
-      <h2>Star Clippers</h2>
-      <div class="ship">Star Clipper (tall ship) · 166 guests · 7 nights, round-trip Rome</div>
-      <div class="dbudget">
-        <div class="big"><div class="lab">All-in · family of 4</div><div class="val">~$23,000</div></div>
-        <div><div class="lab">Per person</div><div class="val">~$5,750</div></div>
-      </div>
-    </div>
-  </div>
-  <div class="wrap">
-    <p class="pitch">Not a cruise ship — an actual <b>four-masted sailing clipper</b> with just 166 guests. Help haul the sails, climb to the crow's nest, kayak off the back deck. It slips into tiny harbors and sails past the smoking cone of Stromboli. <b>The one built for you and Carson</b> — and it loops back to Rome, so you fly nonstop both ways.</p>
-
-    <div class="detail-cols">
-      <div>
-        <div class="blockhead">The sailing</div>
-        <ul class="specs">
-          <li><span class="sk">Sample date</span><span class="sv">Mid-July 2027</span></li>
-          <li><span class="sk">Length</span><span class="sv">7 nights + 3 in Rome</span></li>
-          <li><span class="sk">Route</span><span class="sv">Round-trip Rome (Civitavecchia)</span></li>
-          <li><span class="sk">Staterooms</span><span class="sv">2 outside cabins, adjacent</span></li>
-          <li><span class="sk">Carson at 16</span><span class="sv">✓ with an adult in-cabin</span></li>
-          <li><span class="sk">Flight</span><span class="sv">Nonstop DFW ⇄ Rome</span></li>
-        </ul>
-      </div>
-      <div>
-        <div class="blockhead">What's included</div>
-        <div class="incl-box">
-          <div class="note">Casual-elegant and unpackaged — drinks à la carte, or add the All-In package (~$99/person/day).</div>
-          <ul class="incl">
-            <li>All meals — open seating, anytime</li>
-            <li>Water sports off the stern: kayaks, paddleboards, snorkeling</li>
-            <li>Tendering ashore where the ship anchors out</li>
-            <li>Sail-handling, knot-tying, mast-climb, navigation talks</li>
-            <li>Local musicians brought aboard in port</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="blockhead">The journey, day by day</div>
-    <div class="timeline">
-      <div class="stop"><div class="d">Day 1 · Embark</div><div class="port">Civitavecchia (Rome)</div><div class="desc">Board, then watch the crew unfurl the sails at golden hour.</div></div>
-      <div class="stop"><div class="d">Day 2 · Italy</div><div class="port">Ponza</div><div class="desc">A sleepy pastel island few reach — swim stops, sea caves, a tiny harbor.</div></div>
-      <div class="stop"><div class="d">Day 3 · Amalfi</div><div class="port">Sorrento</div><div class="desc">Gateway to Positano, Capri, and the cliffside towns.</div></div>
-      <div class="stop"><div class="d">Day 4 · Aeolian Is.</div><div class="port">Stromboli</div><div class="desc">The signature evening — sailing past an active volcano glowing in the dark.</div><div class="ut">Under sail</div></div>
-      <div class="stop"><div class="d">Day 5 · Aeolian Is.</div><div class="port">Lipari</div><div class="desc">Black-sand coves and clifftop villages — snorkel, hike, wander the citadel.</div></div>
-      <div class="stop"><div class="d">Day 6 · Sicily</div><div class="port">Taormina</div><div class="desc">A clifftop Greek theatre with Etna behind it.</div></div>
-      <div class="stop"><div class="d">Day 7 · Under sail</div><div class="port">A day at sea</div><div class="desc">Lie in the bowsprit netting over the water; let the wind carry you back toward Rome.</div></div>
-      <div class="stop land"><div class="d">Days 8–11 · Rome</div><div class="port">Disembark → Rome</div><div class="desc">Step off in Civitavecchia and head into Rome for three nights before the nonstop home.</div><div class="ut">3 hotel nights</div></div>
-    </div>
-
-    <div class="blockhead">The numbers</div>
-    <div class="breakdown">
-      <div class="bh"><span>Estimated cost</span><span>USD · 4 travelers</span></div>
-      <div class="brow"><div class="bl">Cruise fare<small>2 outside cabins · 7 nights · before early-bird</small></div><div class="bv">~$10,800</div></div>
-      <div class="brow"><div class="bl">Flights<small>4 · nonstop DFW ⇄ Rome</small></div><div class="bv">~$6,000</div></div>
-      <div class="brow"><div class="bl">Rome, 3 nights<small>Hotel, meals, tickets, transfers</small></div><div class="bv">~$4,000</div></div>
-      <div class="brow"><div class="bl">Onboard<small>Drinks, tips, an excursion or two</small></div><div class="bv">~$2,500</div></div>
-      <div class="brow total"><div class="bl">All-in estimate</div><div class="bv">~$23,000</div></div>
-      <div class="brow pp"><div class="bl">Per person (÷4) · ~$20k total with early-bird</div><div class="bv">~$5,750</div></div>
-    </div>
-
-    <div class="blockhead">The honest take</div>
-    <div class="pc">
-      <div class="pc-card love"><h4>Why you'll love it</h4><ul>
-        <li>A genuine sailing adventure — yours and Carson's dream, hands-on.</li>
-        <li>166 guests: no crowds, no lines, harbors big ships can't enter.</li>
-        <li>Round-trip Rome = the AA nonstop both directions.</li>
-        <li>Still rich for Kristin and Katelyn — Amalfi, Sicily, hidden isles.</li>
-        <li>Unpack once; wake up somewhere new daily.</li>
-      </ul></div>
-      <div class="pc-card trade"><h4>The trade-offs</h4><ul>
-        <li>Cabins are cozy (12–14 m²) — comfortable, not spacious.</li>
-        <li>You tender ashore most days; no elevators aboard.</li>
-        <li>Few onboard amenities — the ship is the entertainment.</li>
-        <li>Drinks aren't included unless you add the ~$99/day package.</li>
-      </ul></div>
-    </div>
-    <div class="bestfor"><b>Best for</b> The most memorable, most active trip near the value end — if the family is up for sailing.</div>
-
-    <div class="endnav">
-      <button class="ghost" data-target="ncl">← Norwegian</button>
-      <button data-target="azamara">Next: Azamara →</button>
-    </div>
-  </div>
-</section>
-
-<!-- ================= AZAMARA ================= -->
-<section class="panel" id="panel-azamara" tabindex="-1" style="--accent:#1E5F8C" aria-label="Azamara">
-  <div class="dbanner">
-    <div class="dbanner-in">
-      <button class="back" data-target="overview">← All options</button>
-      <div class="de">Option 03 · Premium · ★ Advisor's pick</div>
-      <h2>Azamara</h2>
-      <div class="ship">Azamara Quest · ~700 guests · 7 nights, Rome → Barcelona</div>
-      <div class="dbudget">
-        <div class="big"><div class="lab">All-in · family of 4</div><div class="val">~$25,500</div></div>
-        <div><div class="lab">Per person</div><div class="val">~$6,375</div></div>
-      </div>
-    </div>
-  </div>
-  <div class="wrap">
-    <p class="pitch">The one that matches what you asked for: a <b>small ship that's all about the ports.</b> Azamara stays late — often overnight — so you get dinner ashore and the cities after the crowds leave. Drinks and tips are in the fare, so the price is close to your real spend. It lands right around what your 2023 trip would cost for four today — <b>a like-for-like value match, one tier up in polish.</b></p>
-
-    <div class="detail-cols">
-      <div>
-        <div class="blockhead">The sailing</div>
-        <ul class="specs">
-          <li><span class="sk">Sample date</span><span class="sv">Late June / July 2027</span></li>
-          <li><span class="sk">Length</span><span class="sv">7 nights + 3 in Rome</span></li>
-          <li><span class="sk">Route</span><span class="sv">Rome (Civitavecchia) → Barcelona</span></li>
-          <li><span class="sk">Staterooms</span><span class="sv">2 veranda staterooms, adjacent</span></li>
-          <li><span class="sk">Carson at 16</span><span class="sv">✓ kids' cabin booked adjacent</span></li>
-          <li><span class="sk">Flight home</span><span class="sv">From Barcelona (1 stop)</span></li>
-        </ul>
-      </div>
-      <div>
-        <div class="blockhead">What's included</div>
-        <div class="incl-box">
-          <div class="note">Generously inclusive — your only real add-on is shore excursions.</div>
-          <ul class="incl">
-            <li>Gratuities (no daily service charge)</li>
-            <li>Standard spirits, beer, wine &amp; soft drinks</li>
-            <li>Specialty coffees, teas &amp; bottled water</li>
-            <li>Self-service laundry</li>
-            <li>An "AzAmazing Evening" cultural event ashore</li>
-            <li>Shuttle buses into town</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="blockhead">The journey, day by day</div>
-    <div class="timeline">
-      <div class="stop land"><div class="d">Days 1–3 · Rome</div><div class="port">The Eternal City</div><div class="desc">Three nights to do Rome right before you sail — Vatican, Colosseum, long Roman dinners.</div><div class="ut">3 hotel nights</div></div>
-      <div class="stop"><div class="d">Day 4 · Embark</div><div class="port">Civitavecchia → at sea</div><div class="desc">Board the Quest — small enough to feel like a private yacht.</div></div>
-      <div class="stop"><div class="d">Day 5 · Italy</div><div class="port">Florence &amp; Pisa (Livorno)</div><div class="desc">Renaissance Florence, or a day among Tuscan vineyards.</div></div>
-      <div class="stop"><div class="d">Day 6 · France</div><div class="port">Saint-Tropez</div><div class="desc">Riviera at its most stylish — harbor cafés, old town, Provençal markets.</div></div>
-      <div class="stop"><div class="d">Day 7 · Monaco</div><div class="port">Monte Carlo — overnight</div><div class="desc">Azamara stays into the night: the casino, harbor lights, and the AzAmazing Evening ashore.</div><div class="ut">Late / overnight</div></div>
-      <div class="stop"><div class="d">Day 8 · France</div><div class="port">Marseille / Provence</div><div class="desc">The calanques, Cassis, or a run to Aix-en-Provence.</div></div>
-      <div class="stop"><div class="d">Day 9 · Spain</div><div class="port">Palamós (Costa Brava)</div><div class="desc">A Catalan fishing town and the rugged Costa Brava coves.</div></div>
-      <div class="stop land"><div class="d">Day 10 · Disembark</div><div class="port">Barcelona</div><div class="desc">Gaudí, the Gothic Quarter, tapas — then home from BCN.</div><div class="ut">Fly home</div></div>
-    </div>
-
-    <div class="blockhead">The numbers</div>
-    <div class="breakdown">
-      <div class="bh"><span>Estimated cost</span><span>USD · 4 travelers</span></div>
-      <div class="brow"><div class="bl">Cruise fare<small>2 veranda staterooms · 7 nights</small></div><div class="bv">~$13,200</div></div>
-      <div class="brow"><div class="bl">Flights<small>4 · DFW round-trip, peak summer</small></div><div class="bv">~$6,000</div></div>
-      <div class="brow"><div class="bl">Rome, 3 nights<small>Hotel, meals, tickets, transfers</small></div><div class="bv">~$4,000</div></div>
-      <div class="brow"><div class="bl">Onboard<small>Mostly included — excursions &amp; extras</small></div><div class="bv">~$2,000</div></div>
-      <div class="brow total"><div class="bl">All-in estimate</div><div class="bv">~$25,500</div></div>
-      <div class="brow pp"><div class="bl">Per person (÷4)</div><div class="bv">~$6,375</div></div>
-    </div>
-
-    <div class="blockhead">The honest take</div>
-    <div class="pc">
-      <div class="pc-card love"><h4>Why you'll love it</h4><ul>
-        <li>Exactly your brief — small, port-obsessed, late stays and overnights.</li>
-        <li>So much is included that the quote is close to your real spend.</li>
-        <li>Refined and grown-up without being stuffy.</li>
-        <li>Excellent food, high crew-to-guest ratio.</li>
-        <li>Best value in the premium tier — matches your last big trip.</li>
-      </ul></div>
-      <div class="pc-card trade"><h4>The trade-offs</h4><ul>
-        <li>A clear step up in price from Norwegian and Star Clippers.</li>
-        <li>The ships are older (a fleet refresh is rolling out).</li>
-        <li>Shore excursions are extra and can be pricey.</li>
-        <li>Adult-oriented — no kids' programming (fine for your crew).</li>
-      </ul></div>
-    </div>
-    <div class="bestfor"><b>Best for</b> The sweet spot — the small-ship, port-first experience you described, at a price that mirrors 2023.</div>
-
-    <div class="endnav">
-      <button class="ghost" data-target="star">← Star Clippers</button>
-      <button data-target="regent">Next: Regent →</button>
-    </div>
-  </div>
-</section>
-
-<!-- ================= REGENT ================= -->
-<section class="panel" id="panel-regent" tabindex="-1" style="--accent:#B0871E" aria-label="Regent Seven Seas">
-  <div class="dbanner">
-    <div class="dbanner-in">
-      <button class="back" data-target="overview">← All options</button>
-      <div class="de">Option 04 · The Bucket-List Splurge</div>
-      <h2>Regent Seven Seas</h2>
-      <div class="ship">Seven Seas Grandeur · ~750 guests · 7 nights, Athens → Rome</div>
-      <div class="dbudget">
-        <div class="big"><div class="lab">All-in · family of 4</div><div class="val">~$41,000</div></div>
-        <div><div class="lab">Per person</div><div class="val">~$10,250</div></div>
-      </div>
-    </div>
-  </div>
-  <div class="wrap">
-    <p class="pitch">The "decide once and stop thinking about money" option. Regent's fare is the most all-inclusive at sea: <b>every shore excursion, all dining, premium drinks, gratuities, Wi-Fi, transfers — and your flights.</b> On a port-intensive trip, having every excursion already paid for is the real luxury. This route adds the Greek islands — <b>Mykonos and Santorini</b> — then ends in Rome.</p>
-
-    <div class="detail-cols">
-      <div>
-        <div class="blockhead">The sailing</div>
-        <ul class="specs">
-          <li><span class="sk">Sample date</span><span class="sv">Sun, Jul 4, 2027</span></li>
-          <li><span class="sk">Length</span><span class="sv">7 nights + 3 in Rome</span></li>
-          <li><span class="sk">Route</span><span class="sv">Athens (Piraeus) → Rome</span></li>
-          <li><span class="sk">Suites</span><span class="sv">2 Veranda Suites, adjacent</span></li>
-          <li><span class="sk">Carson at 16</span><span class="sv">✓ shares a suite with an adult</span></li>
-          <li><span class="sk">Flight home</span><span class="sv">Nonstop AA from Rome</span></li>
-        </ul>
-      </div>
-      <div>
-        <div class="blockhead">What's included</div>
-        <div class="incl-box">
-          <div class="note">This is why the number looks big — almost everything is already in it.</div>
-          <ul class="incl">
-            <li>Round-trip airfare (economy; business at Concierge level &amp; up)</li>
-            <li>Every shore excursion, in every port</li>
-            <li>All dining, including specialty restaurants</li>
-            <li>Premium spirits, wine &amp; beverages, ship-wide</li>
-            <li>Gratuities, unlimited Wi-Fi &amp; airport transfers</li>
-            <li>A pre-cruise hotel night in Athens</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="blockhead">The journey, day by day</div>
-    <div class="timeline">
-      <div class="stop land"><div class="d">Pre · Athens</div><div class="port">A night in Athens</div><div class="desc">Regent's included hotel night — the Acropolis, the Plaka. Add a night or two to go deeper.</div></div>
-      <div class="stop"><div class="d">Day 1 · Embark</div><div class="port">Piraeus (Athens)</div><div class="desc">Board the Grandeur — all-suite, all-balcony, butler service in many categories.</div></div>
-      <div class="stop"><div class="d">Day 2 · Greece</div><div class="port">Mykonos</div><div class="desc">Whitewashed lanes, the windmills, a beach afternoon — a late stay for sunset.</div></div>
-      <div class="stop"><div class="d">Day 3 · Greece</div><div class="port">Santorini</div><div class="desc">The caldera, the blue domes of Oia, the most famous sunset in the Med.</div></div>
-      <div class="stop"><div class="d">Day 4 · Greece</div><div class="port">Katakolon (Olympia)</div><div class="desc">Walk the stadium where the first Olympics were run, 2,800 years ago.</div></div>
-      <div class="stop"><div class="d">Day 5 · Sicily</div><div class="port">Taormina</div><div class="desc">The Greek theatre with Etna behind it.</div></div>
-      <div class="stop"><div class="d">Day 6 · Italy</div><div class="port">Sorrento / Amalfi</div><div class="desc">Capri, Positano, the cliffside drive — an included excursion, of course.</div></div>
-      <div class="stop land"><div class="d">Day 7 → Days 7–10 · Rome</div><div class="port">Disembark → Rome</div><div class="desc">Step off in Civitavecchia, then three nights in Rome before the nonstop home.</div><div class="ut">3 hotel nights</div></div>
-    </div>
-
-    <div class="blockhead">The numbers</div>
-    <div class="breakdown">
-      <div class="bh"><span>Estimated cost</span><span>USD · 4 travelers</span></div>
-      <div class="brow"><div class="bl">Cruise fare<small>2 Veranda Suites · 7 nights · all-inclusive</small></div><div class="bv">~$36,000</div></div>
-      <div class="brow"><div class="bl">Flights<small>Included in the fare (economy)</small></div><div class="bv">included</div></div>
-      <div class="brow"><div class="bl">Rome, 3 nights<small>Beyond the included Athens night</small></div><div class="bv">~$4,000</div></div>
-      <div class="brow"><div class="bl">Onboard<small>Excursions, drinks, dining, tips — all included</small></div><div class="bv">~$0</div></div>
-      <div class="brow total"><div class="bl">All-in estimate</div><div class="bv">~$40–44k</div></div>
-      <div class="brow pp"><div class="bl">Per person (÷4)</div><div class="bv">~$10,250</div></div>
-    </div>
-
-    <div class="blockhead">The honest take</div>
-    <div class="pc">
-      <div class="pc-card love"><h4>Why you'll love it</h4><ul>
-        <li>Pay once and think about nothing — every excursion is covered.</li>
-        <li>Adds the Greek islands and still ends in Rome, nonstop home.</li>
-        <li>Business-class air available — a real perk on a 10-hour flight.</li>
-        <li>All-suite, all-balcony, butler service, exceptional dining.</li>
-        <li>The easiest, lowest-friction version of this trip.</li>
-      </ul></div>
-      <div class="pc-card trade"><h4>The trade-offs</h4><ul>
-        <li>Roughly double the premium options, 2× the value ones.</li>
-        <li>Skip some excursions and you've paid for inclusions you won't use.</li>
-        <li>Suites are lovely but smaller than a luxury hotel room.</li>
-        <li>A more formal feel than the other three.</li>
-      </ul></div>
-    </div>
-    <div class="bestfor"><b>Best for</b> A once-in-a-while celebration where "it's all handled" matters more than the price.</div>
-
-    <div class="endnav">
-      <button class="ghost" data-target="azamara">← Azamara</button>
-      <button data-target="overview">Back to overview</button>
-    </div>
-  </div>
-</section>
-
-</main>
+</footer>
 
 <script>
-  (function(){
-    var ids = ['overview','ncl','star','azamara','regent'];
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    function show(id){
-      if(ids.indexOf(id) < 0) id = 'overview';
-      ids.forEach(function(x){
-        var p = document.getElementById('panel-'+x);
-        if(p) p.classList.toggle('active', x===id);
-      });
-      var tabs = document.querySelectorAll('.tab');
-      tabs.forEach(function(t){
-        var on = t.getAttribute('data-target')===id;
-        t.classList.toggle('on', on);
-        t.setAttribute('aria-selected', on ? 'true' : 'false');
-      });
-      window.scrollTo({top:0, behavior: reduce ? 'auto' : 'smooth'});
-      var panel = document.getElementById('panel-'+id);
-      if(panel){ try{ panel.focus({preventScroll:true}); }catch(e){ panel.focus(); } }
-    }
-
-    document.addEventListener('click', function(e){
-      var el = e.target.closest('[data-target]');
-      if(!el) return;
-      var id = el.getAttribute('data-target');
-      if(('#'+id) !== location.hash){ location.hash = id; }
-      else { show(id); }
-    });
-
-    window.addEventListener('hashchange', function(){
-      show(location.hash.replace('#','') || 'overview');
-    });
-
-    show(location.hash.replace('#','') || 'overview');
-  })();
+  function showTab(id){
+    var panels=document.querySelectorAll('.panel');
+    for(var i=0;i<panels.length;i++){panels[i].classList.remove('active');}
+    document.getElementById(id).classList.add('active');
+    var tabs=document.querySelectorAll('.tab');
+    for(var j=0;j<tabs.length;j++){tabs[j].classList.remove('active');}
+    var active=document.querySelector('.tab[data-tab="'+id+'"]');
+    if(active){active.classList.add('active');}
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
 </script>
+
 </body>
 </html>
